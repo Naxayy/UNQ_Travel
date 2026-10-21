@@ -2,6 +2,7 @@ package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class State {
@@ -15,45 +16,52 @@ class State {
 
 	@Test
 	void estadoInicial() {
-		assertEquals(reserva.getEstado(), Pendiente);
+		assertEquals("Pendiente" , reserva.getEstado().getNombreEstado());
 		//todos los pedidos de estados posterior a confirmado son invalidos
 		//solo aca se pueden agregar o quitar servicios
 	}
 	
 	@Test
-	void deInicialAConfirmada{
-		assertEquals(reserva.getEstado(), Pendiente);
+	void deInicialAConfirmada(){
+		assertEquals("Pendiente",reserva.getEstado().getNombreEstado());
 		reserva.confirmar();
 		//todos los pedidos de estados anteriores son invalidos
 		//confirmar decrementa o bloquea el cupo disponible
-		assertEquals(reserva.getEstado(), Confirmada);
+		assertEquals("Confirmada", reserva.getEstado().getNombreEstado());
 	}
+	
 		
 	@Test
 	void deConfirmadaAEnCheckin() {
-		assertEquals(reserva.getEstado(), Confirmada);
-		reserva.checkIn();
+		reserva.confirmar();
+		assertEquals("Confirmada",reserva.getEstado().getNombreEstado());
+		reserva.checkin();
 		//todos los pedidos de estados anteriores son invalidos
 		//todos los pedidos de estados posterior a checkin son invalidos
 		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertEquals(reserva.getEstado(), CheckIn);
+		assertEquals("Checkin", reserva.getEstado().getNombreEstado());
 	}
 	
 	@Test
 	void deCheckinACurso() {
-		assertEquals(reserva.getEstado, CheckIn);
+		reserva.confirmar();
+		reserva.checkin();
+		assertEquals("Checkin",reserva.getEstado().getNombreEstado());
 		reserva.enCurso();
 		//todos los pedidos de estados anteriores son invalidos
 		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertEquals(reserva.getEstado, Curso);
+		assertEquals("En curso",  reserva.getEstado().getNombreEstado());
 	}
 	
 	@Test
 	void deCursoAFinalizada() {
-		assertEquals(reserva.getEstado , Curso);
+		reserva.confirmar();
+		reserva.checkin();
+		reserva.enCurso();
+		assertEquals("En curso", reserva.getEstado().getNombreEstado());
 		reserva.finalizar();
 		//no se puede cancelar ni pasar a otro estado
-		assertEquals(reserva.getEstado, Fianlizada);
+		assertEquals("Finalizada", reserva.getEstado().getNombreEstado());
 	}
 	
 	
@@ -63,35 +71,39 @@ class State {
 	
 	@Test
 	void estadoInicialACancelado() {
-		assertEquals(reserva.getEstado(), Pendiente);
+		assertEquals("Pendiente" , reserva.getEstado().getNombreEstado());
 		reserva.cancelar();
-		assertEquals(reserva.getEstado(), Cancelada);
+		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
 	}
 	
 	@Test
 	void deConfirmadaACancelado(){
 		reserva.confirmar();
-		assertEquals(reserva.getEstado(), Confirmada);
+		assertEquals("Confirmada",reserva.getEstado().getNombreEstado());
 		reserva.cancelar();
 		//confirmar decrementa o bloquea el cupo disponible
-		assertEquals(reserva.getEstado(), Cancelada);
+		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
 	}
 		
 	@Test
 	void deEnCheckinACancelado() {
-		reserva.checkIn();
+		reserva.confirmar();
+		reserva.checkin();
+		assertEquals("Checkin",reserva.getEstado().getNombreEstado());
 		reserva.cancelar();
 		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertEquals(reserva.getEstado(), Cancelada);
+		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
 	}
 	
 	@Test
 	void deCursoACancelado() {
-		assertEquals(reserva.getEstado, CheckIn);
+		reserva.confirmar();
+		reserva.checkin();
 		reserva.enCurso();
+		assertEquals("En curso", reserva.getEstado().getNombreEstado());
 		reserva.cancelar();
 		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertEquals(reserva.getEstado, Cancelada);
+		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
 	}
 	
 	
@@ -103,13 +115,13 @@ class State {
 	void invalidoDesdeInicial() {
 		//todos los pedidos de estados posterior a confirmado son invalidos
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkIn();
+			reserva.checkin();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
 			reserva.enCurso();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizada();
+			reserva.finalizar();
 		});
 	}
 	
@@ -121,7 +133,7 @@ class State {
 			reserva.enCurso();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizada();
+			reserva.finalizar();
 		});
 	}
 		
@@ -129,44 +141,71 @@ class State {
 	void invalidoDesdeCheckin() {
 		//todos los pedidos de estados anteriores son invalidos
 		//todos los pedidos de estados posterior a checkin son invalidos
+		reserva.confirmar();
 		reserva.checkin();
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmada();
+			reserva.confirmar();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizada();
+			reserva.finalizar();
 		});
 	}
 	
 	@Test
 	void invalidoDesdeEnCurso() {
+		reserva.confirmar();
+		reserva.checkin();
+		reserva.enCurso();
 		//todos los pedidos de estados anteriores son invalidos
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkIn();
+			reserva.checkin();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmada();
+			reserva.confirmar();
 		});
 	}
-	
 	@Test
 	void invalidoDesdeFinalizado() {
-		//no se puede cancelar ni pasar a otro estado
+		reserva.confirmar();
+		reserva.checkin();
+		reserva.enCurso();
+		reserva.finalizar();
+
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkIn();
+			reserva.confirmar();
+		});
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.checkin();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
 			reserva.enCurso();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmada();
+			reserva.cancelar();
 		});
 	}
-	
-	//--------------
 
-	
-	
+	@Test
+	void invalidoDesdeCancelado() {
+		reserva.cancelar();
+		
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.confirmar();
+		});
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.checkin();
+		});
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.enCurso();
+		});
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.finalizar();
+		});
+		assertThrows(IllegalStateException.class, ()-> {
+			reserva.cancelar();
+		});
+		
+	}
 	
 
 }
