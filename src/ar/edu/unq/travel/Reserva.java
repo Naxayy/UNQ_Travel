@@ -27,10 +27,10 @@ public class Reserva {
 	public void enCurso() {
 		estado.enCurso(this);
 	}
-	public void finalizada() {
+	public void finalizar() {
 		estado.finalizada(this);
 	}
-	public void cancelada() {
+	public void cancelar() {
 		estado.cancelada(this);
 	}
 	

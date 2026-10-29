@@ -60,55 +60,65 @@ class State {
 		reserva.enCheckin();
 		reserva.enCurso();
 		assertInstanceOf(EnCurso.class, reserva.getEstado());
-		reserva.finalizada();
+		reserva.finalizar();
 		//no se puede cancelar ni pasar a otro estado
 		assertInstanceOf(Finalizada.class, reserva.getEstado());
 	}
 	
 	
-}
-/*
+
 	
 	//------cancelados
 	
 	@Test
 	void estadoInicialACancelado() {
-		assertEquals("Pendiente" , reserva.getEstado());
+		Reserva reserva = new Reserva();
+		assertInstanceOf(Pendiente.class , reserva.getEstado());
 		reserva.cancelar();
-		assertEquals("Cancelada", reserva.getEstado());
+		assertInstanceOf(Cancelada.class, reserva.getEstado());
 	}
 	
+
+
 	@Test
 	void deConfirmadaACancelado(){
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		assertEquals("Confirmada",reserva.getEstado());
+		assertInstanceOf(Confirmada.class,reserva.getEstado());
 		reserva.cancelar();
 		//confirmar decrementa o bloquea el cupo disponible
-		assertEquals("Cancelada", reserva.getEstado());
+		assertInstanceOf(Cancelada.class, reserva.getEstado());
 	}
 		
+
+	
 	@Test
 	void deEnCheckinACancelado() {
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		reserva.checkin();
-		assertEquals("Checkin",reserva.getEstado());
+		reserva.enCheckin();
+		assertInstanceOf(EnCheckin.class,reserva.getEstado());
 		reserva.cancelar();
 		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertEquals("Cancelada", reserva.getEstado());
+		assertInstanceOf(Cancelada.class, reserva.getEstado());
 	}
+	
+
 	
 	@Test
 	void deCursoACancelado() {
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		reserva.checkin();
+		reserva.enCheckin();
 		reserva.enCurso();
-		assertEquals("En curso", reserva.getEstado());
+		assertInstanceOf(EnCurso.class, reserva.getEstado());
 		reserva.cancelar();
 		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertEquals("Cancelada", reserva.getEstado());
+		assertInstanceOf(Cancelada.class, reserva.getEstado());
 	}
 	
-	
+}
+/*	
 	//---------estados invalidos-----
 	//Para todo esto hay que crear una clase para las excepciones y
 	//cambiar el illegalStateException por la apropiada

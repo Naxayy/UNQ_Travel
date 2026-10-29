@@ -9,7 +9,7 @@ public class EnCheckin extends Estado {
 
 	@Override
 	public void cancelada(Reserva reserva) {
-		// TODO Auto-generated method stub
+		reserva.cambiarAEstado(new Cancelada());
 		
 	}
 

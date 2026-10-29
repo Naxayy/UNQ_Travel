@@ -11,4 +11,8 @@ public class Pendiente extends Estado {
 		
 	}	
 	
+	@Override
+	public void cancelada(Reserva reserva) {
+		reserva.cambiarAEstado(new Cancelada());
+	}
 }

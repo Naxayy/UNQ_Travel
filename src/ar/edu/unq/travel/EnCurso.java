@@ -10,8 +10,7 @@ public class EnCurso extends Estado {
 
 	@Override
 	public void cancelada(Reserva reserva) {
-		// TODO Auto-generated method stub
-		
+		reserva.cambiarAEstado(new Cancelada());
 	}
 
 }
