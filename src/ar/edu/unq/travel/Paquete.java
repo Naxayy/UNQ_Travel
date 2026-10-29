@@ -7,7 +7,6 @@ public class Paquete implements Catalogo {
 	private List<Catalogo> servicios =  new ArrayList<>();
 	private String nombre;
 	private String descripcion;
-	private Double precioBase;
 	private int descuento;
 	
 	public Paquete(String nombre, String descripcion, int descuento) {

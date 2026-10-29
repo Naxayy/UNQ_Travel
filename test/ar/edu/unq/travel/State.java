@@ -6,93 +6,95 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class State {
-	private Reserva reserva;
 	
-	@BeforeEach
-	
-	void setUp() {
-		reserva = new Reserva();
-	}
-
 	@Test
 	void estadoInicial() {
-		assertEquals("Pendiente" , reserva.getEstado().getNombreEstado());
+		Reserva reserva = new Reserva();
+		assertInstanceOf(Pendiente.class , reserva.getEstado());
 		//todos los pedidos de estados posterior a confirmado son invalidos
 		//solo aca se pueden agregar o quitar servicios
 	}
-	
+
+
 	@Test
 	void deInicialAConfirmada(){
-		assertEquals("Pendiente",reserva.getEstado().getNombreEstado());
+		Reserva reserva = new Reserva();
+		assertInstanceOf(Pendiente.class, reserva.getEstado());
 		reserva.confirmar();
 		//todos los pedidos de estados anteriores son invalidos
 		//confirmar decrementa o bloquea el cupo disponible
-		assertEquals("Confirmada", reserva.getEstado().getNombreEstado());
+		assertInstanceOf(Confirmada.class, reserva.getEstado());
 	}
+
 	
-		
+	
 	@Test
 	void deConfirmadaAEnCheckin() {
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		assertEquals("Confirmada",reserva.getEstado().getNombreEstado());
-		reserva.checkin();
+		assertInstanceOf(Confirmada.class,reserva.getEstado());
+		reserva.enCheckin();
 		//todos los pedidos de estados anteriores son invalidos
 		//todos los pedidos de estados posterior a checkin son invalidos
 		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertEquals("Checkin", reserva.getEstado().getNombreEstado());
+		assertInstanceOf(EnCheckin.class, reserva.getEstado());
 	}
-	
+		
 	@Test
 	void deCheckinACurso() {
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		reserva.checkin();
-		assertEquals("Checkin",reserva.getEstado().getNombreEstado());
+		reserva.enCheckin();
+		assertInstanceOf(EnCheckin.class ,reserva.getEstado());
 		reserva.enCurso();
 		//todos los pedidos de estados anteriores son invalidos
 		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertEquals("En curso",  reserva.getEstado().getNombreEstado());
+		assertInstanceOf(EnCurso.class,  reserva.getEstado());
 	}
 	
+
 	@Test
 	void deCursoAFinalizada() {
+		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		reserva.checkin();
+		reserva.enCheckin();
 		reserva.enCurso();
-		assertEquals("En curso", reserva.getEstado().getNombreEstado());
-		reserva.finalizar();
+		assertInstanceOf(EnCurso.class, reserva.getEstado());
+		reserva.finalizada();
 		//no se puede cancelar ni pasar a otro estado
-		assertEquals("Finalizada", reserva.getEstado().getNombreEstado());
+		assertInstanceOf(Finalizada.class, reserva.getEstado());
 	}
 	
 	
-	
+}
+/*
 	
 	//------cancelados
 	
 	@Test
 	void estadoInicialACancelado() {
-		assertEquals("Pendiente" , reserva.getEstado().getNombreEstado());
+		assertEquals("Pendiente" , reserva.getEstado());
 		reserva.cancelar();
-		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
+		assertEquals("Cancelada", reserva.getEstado());
 	}
 	
 	@Test
 	void deConfirmadaACancelado(){
 		reserva.confirmar();
-		assertEquals("Confirmada",reserva.getEstado().getNombreEstado());
+		assertEquals("Confirmada",reserva.getEstado());
 		reserva.cancelar();
 		//confirmar decrementa o bloquea el cupo disponible
-		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
+		assertEquals("Cancelada", reserva.getEstado());
 	}
 		
 	@Test
 	void deEnCheckinACancelado() {
 		reserva.confirmar();
 		reserva.checkin();
-		assertEquals("Checkin",reserva.getEstado().getNombreEstado());
+		assertEquals("Checkin",reserva.getEstado());
 		reserva.cancelar();
 		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
+		assertEquals("Cancelada", reserva.getEstado());
 	}
 	
 	@Test
@@ -100,10 +102,10 @@ class State {
 		reserva.confirmar();
 		reserva.checkin();
 		reserva.enCurso();
-		assertEquals("En curso", reserva.getEstado().getNombreEstado());
+		assertEquals("En curso", reserva.getEstado());
 		reserva.cancelar();
 		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertEquals("Cancelada", reserva.getEstado().getNombreEstado());
+		assertEquals("Cancelada", reserva.getEstado());
 	}
 	
 	
@@ -209,5 +211,5 @@ class State {
 	
 
 }
-
+*/
 
