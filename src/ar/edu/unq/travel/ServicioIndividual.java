@@ -5,16 +5,16 @@ public class ServicioIndividual implements Servicio{
 	private Double precioBase;
 	private String descripcion;
 	
+	//Cambiar atributos metodos:
 	
-	//private Proveedor provedor;
-	private String id;
+	//private Proveedor provedor; 
+	//private String id;
 	//private Categoria categoria;
 	
-	public ServicioIndividual(String nombre, Double precioBase, String descripcion, String id){
+	public ServicioIndividual(String nombre, Double precioBase, String descripcion){
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 		this.descripcion = descripcion;
-		this.id = id;
 	}
 
 	@Override
