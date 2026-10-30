@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
 
-public interface Catalogo {
+public interface Servicio {
 	public String nombre();
 	public String descripcion();
 	public Double precioBase();

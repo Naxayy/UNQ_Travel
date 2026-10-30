@@ -3,8 +3,8 @@ package ar.edu.unq.travel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paquete implements Catalogo {
-	private List<Catalogo> servicios =  new ArrayList<>();
+public class Paquete implements Servicio {
+	private List<Servicio> servicios =  new ArrayList<>();
 	private String nombre;
 	private String descripcion;
 	private int descuento;
@@ -27,15 +27,15 @@ public class Paquete implements Catalogo {
 
 	@Override
 	public Double precioBase() {
-		Double totalSuma = servicios.stream().mapToDouble(Catalogo::precioFinal).sum();
+		Double totalSuma = servicios.stream().mapToDouble(Servicio::precioFinal).sum();
 		return totalSuma;
 	}
 	
-	public void agregarItem(Catalogo item) {
+	public void agregarItem(Servicio item) {
 		servicios.add(item);
 	}
 	
-	public void quitarItem(Catalogo item) {
+	public void quitarItem(Servicio item) {
 		servicios.remove(item);
 	}
 

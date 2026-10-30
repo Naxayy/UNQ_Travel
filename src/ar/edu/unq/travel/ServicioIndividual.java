@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
 
-public class Individual implements Catalogo{
+public class ServicioIndividual implements Servicio{
 	private String nombre;
 	private Double precioBase;
 	private String descripcion;
@@ -10,7 +10,7 @@ public class Individual implements Catalogo{
 	private String id;
 	//private Categoria categoria;
 	
-	public Individual(String nombre, Double precioBase, String descripcion, String id){
+	public ServicioIndividual(String nombre, Double precioBase, String descripcion, String id){
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 		this.descripcion = descripcion;
