@@ -12,13 +12,20 @@ public class ServicioIndividualTest {
 	
 	@BeforeEach
 	void setUp() {
-		noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion");
-		excursion = new ServicioIndividual("Excursion guiada museo " , 4000.00,"Descripcion");
-		trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion");
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion");
+		this.excursion = new ServicioIndividual("Excursion guiada muse " , 4000.00,"Descripcion");
+		this.trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion");
+	}
+	
+	@Test
+	void testNombres() {
+		assertEquals("Noche de hotel central", noche.getNombre());
+		assertEquals("Excursion guiada museo", excursion.getNombre());
+		assertEquals("Traslado Aeropuerto-Hotel", trasladoAH.getNombre());
 	}
 
 	@Test
-	void valoresDeServicioSimple() {
+	void testPrecioFinal() {
 		assertEquals(15000 , noche.precioFinal());
 		assertEquals(4000 , excursion.precioFinal());
 		assertEquals(2000, trasladoAH.precioFinal());

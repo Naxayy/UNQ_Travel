@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
 
-public class ServicioIndividual implements Servicio{
+public class ServicioIndividual extends Servicio{
 	private String nombre;
 	private Double precioBase;
 	private String descripcion;
@@ -35,6 +35,11 @@ public class ServicioIndividual implements Servicio{
 	@Override
 	public Double precioFinal() {
 		return this.precioBase;
+	}
+
+	public Object getNombre() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
