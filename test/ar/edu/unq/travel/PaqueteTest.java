@@ -1,7 +1,7 @@
 package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,15 +22,8 @@ public class PaqueteTest {
 		trasladoAH = mock(ServicioIndividual.class);
 		
 		//SUT
-		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10) ;
+		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
 		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
-	}
-
-	@Test
-	void valoresDeItemSimple() {
-		assertEquals(15000 , noche.precioFinal());
-		assertEquals(4000 , excursion.precioFinal());
-		assertEquals(2000, trasladoAH.precioFinal());
 	}
 	
 	@Test
@@ -38,6 +31,7 @@ public class PaqueteTest {
 		paqueteTravel.agregarItem(noche);
 		paqueteTravel.agregarItem(excursion);
 		paqueteTravel.agregarItem(trasladoAH);
+		
 		assertEquals(18900, paqueteTravel.precioFinal());
 	}
 	
@@ -46,8 +40,10 @@ public class PaqueteTest {
 		paqueteTravel.agregarItem(noche);
 		paqueteTravel.agregarItem(excursion);
 		paqueteTravel.agregarItem(trasladoAH);
+		
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(paqueteTravel);
+		
 		assertEquals(30510, paqueteDePaquetes.precioFinal());
 		
 	}

@@ -8,7 +8,7 @@ public class ServicioIndividual extends Servicio{
 	//private Proveedor provedor; 
 	//private Categoria categoria;
 	
-	public ServicioIndividual(String nombre, Double precioBase, String descripcion, int codigo){
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo){
 		super(nombre, descripcion);
 		this.codigo = codigo;
 		this.precioBase = precioBase;

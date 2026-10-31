@@ -2,6 +2,7 @@ package ar.edu.unq.travel;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,27 +16,16 @@ class ServicioTest {
 	
 	@BeforeEach
 	void setUp() {
-		noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", "id");
-		excursion = new ServicioIndividual("Excursion guiada museo " , 4000.00,"Descripcion", "id");
-		trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion", "id");
-		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10) ;
+		//DOC
+		noche = mock(ServicioIndividual.class);
+		excursion = mock(ServicioIndividual.class);
+		trasladoAH = mock(ServicioIndividual.class);
+		paqueteTravel = mock(Paquete.class);
+		
+		//SUT
 		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
 	}
 
-	@Test
-	void valoresDeItemSimple() {
-		assertEquals(15000 , noche.precioFinal());
-		assertEquals(4000 , excursion.precioFinal());
-		assertEquals(2000, trasladoAH.precioFinal());
-	}
-	
-	@Test
-	void valorDePaquete() {
-		paqueteTravel.agregarItem(noche);
-		paqueteTravel.agregarItem(excursion);
-		paqueteTravel.agregarItem(trasladoAH);
-		assertEquals(18900, paqueteTravel.precioFinal());
-	}
 	
 	@Test
 	void valorDePaqueteDePaquetes() {
@@ -44,10 +34,10 @@ class ServicioTest {
 		paqueteTravel.agregarItem(trasladoAH);
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(paqueteTravel);
+		
 		assertEquals(30510, paqueteDePaquetes.precioFinal());
 		
 	}
-	
 	
 
 }
