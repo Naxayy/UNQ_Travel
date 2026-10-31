@@ -1,9 +1,9 @@
 package ar.edu.unq.travel;
 
 public class ServicioIndividual extends Servicio{
-	private Double precioBase;
+	private double precioBase;
 	
-	//Cambiar atributos metodos:
+	//Cambiar atributos metodos ??
 	
 	//private Proveedor provedor; 
 	//private Categoria categoria;
@@ -13,7 +13,7 @@ public class ServicioIndividual extends Servicio{
 		this.precioBase = precioBase;
 	}
 	
-	public Double getPrecioBase() {
+	public double getPrecioBase() {
 		return precioBase;
 	}
 
@@ -22,28 +22,9 @@ public class ServicioIndividual extends Servicio{
 	}
 
 	@Override
-	public String nombre() {
-		return nombre;
-	}
-
-	@Override
-	public String descripcion() {
-		return descripcion;
-	}
-
-	@Override
-	public Double precioBase() {
+	public double precioFinal() { 
+		//decidimos tomar precio final igual que el precio base
 		return this.precioBase;
-	}
-
-	@Override
-	public Double precioFinal() {
-		return this.precioBase;
-	}
-
-	public Object getNombre() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

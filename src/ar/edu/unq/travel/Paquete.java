@@ -3,32 +3,18 @@ package ar.edu.unq.travel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paquete implements Servicio {
+public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<>();
-	private String nombre;
-	private String descripcion;
 	private int descuento;
 	
 	public Paquete(String nombre, String descripcion, int descuento) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
+		super(nombre, descripcion);
 		this.descuento = descuento;
 	}
-	
-	@Override
-	public String nombre() {
-		return nombre;
-	}
 
-	@Override
-	public String descripcion() {
-		return descripcion;
-	}
-
-	@Override
+	//decidimos tomar precio base como la suma de todos los precio base de los servicios
 	public Double precioBase() {
-		Double totalSuma = servicios.stream().mapToDouble(Servicio::precioFinal).sum();
-		return totalSuma;
+		return servicios.stream().mapToDouble(Servicio::precioFinal).sum();;
 	}
 	
 	public void agregarItem(Servicio item) {

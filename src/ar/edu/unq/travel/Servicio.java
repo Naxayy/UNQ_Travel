@@ -10,7 +10,7 @@ public abstract class Servicio {
         this.descripcion = descripcion;
     }
 	
-	public abstract Double precioFinal();
+	public abstract double precioFinal();
 
 	public String getNombre() {
 		return nombre;
@@ -22,6 +22,18 @@ public abstract class Servicio {
 	
 	public int getCodigo() {
 		return codigo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	public void getCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 }
 
