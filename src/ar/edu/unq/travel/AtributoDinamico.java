@@ -10,12 +10,4 @@ public abstract class AtributoDinamico {
         this.nombre = nombre;
         this.obligatoriedad = obligatorio;
     }
-	
-	public void validar() {
-		Tipo at = crearTipo();
-		// at.validar(valor)
-	}
-	
-	public abstract Tipo crearTipo();
-
 }
