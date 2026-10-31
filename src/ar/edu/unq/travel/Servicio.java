@@ -5,6 +5,11 @@ public abstract class Servicio {
 	private String descripcion;
 	private int codigo;
 	
+	public Servicio(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+	
 	public abstract Double precioFinal();
 
 	public String getNombre() {

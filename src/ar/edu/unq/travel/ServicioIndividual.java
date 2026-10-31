@@ -1,20 +1,24 @@
 package ar.edu.unq.travel;
 
 public class ServicioIndividual extends Servicio{
-	private String nombre;
 	private Double precioBase;
-	private String descripcion;
 	
 	//Cambiar atributos metodos:
 	
 	//private Proveedor provedor; 
-	//private String id;
 	//private Categoria categoria;
 	
 	public ServicioIndividual(String nombre, Double precioBase, String descripcion){
-		this.nombre = nombre;
+		super(nombre, descripcion);
 		this.precioBase = precioBase;
-		this.descripcion = descripcion;
+	}
+	
+	public Double getPrecioBase() {
+		return precioBase;
+	}
+
+	public void setPrecioBase(Double precioBase) {
+		this.precioBase = precioBase;
 	}
 
 	@Override
