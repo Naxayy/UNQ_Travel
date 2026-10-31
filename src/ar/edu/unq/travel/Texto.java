@@ -1,6 +1,12 @@
 package ar.edu.unq.travel;
 
 public class Texto implements Tipo {
+	
+	@Override
+    public int getTipo() {
+        return 2;
+    }
+
 
 	@Override
 	public void validar() {

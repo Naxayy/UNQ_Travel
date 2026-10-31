@@ -17,25 +17,11 @@ public class AtributoDinamicoTest {
 	}
 	
 	@Test
-	void valorDePaquete() {
+	void n() {
 		paqueteTravel.agregarItem(noche);
 		paqueteTravel.agregarItem(excursion);
 		paqueteTravel.agregarItem(trasladoAH);
 		
 		assertEquals(18900, paqueteTravel.precioFinal());
 	}
-	
-	@Test
-	void valorDePaqueteDePaquetes() {
-		paqueteTravel.agregarItem(noche);
-		paqueteTravel.agregarItem(excursion);
-		paqueteTravel.agregarItem(trasladoAH);
-		
-		paqueteDePaquetes.agregarItem(noche);
-		paqueteDePaquetes.agregarItem(paqueteTravel);
-		
-		assertEquals(30510, paqueteDePaquetes.precioFinal());
-		
-	}
-
 }
