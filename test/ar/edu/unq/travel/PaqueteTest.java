@@ -1,7 +1,7 @@
 package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +10,18 @@ public class PaqueteTest {
 	private ServicioIndividual noche;
 	private ServicioIndividual excursion;
 	private ServicioIndividual trasladoAH;
+	
 	private Paquete paqueteTravel;
 	private Paquete paqueteDePaquetes;
 	
 	@BeforeEach
 	void setUp() {
-		noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", "id");
-		excursion = new ServicioIndividual("Excursion guiada museo " , 4000.00,"Descripcion", "id");
-		trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion", "id");
+		//DOC
+		this.noche = mock(ServicioIndividual.class);
+		excursion = mock(ServicioIndividual.class);
+		trasladoAH = mock(ServicioIndividual.class);
+		
+		//SUT
 		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10) ;
 		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
 	}

@@ -12,9 +12,9 @@ public class ServicioIndividualTest {
 	
 	@BeforeEach
 	void setUp() {
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion");
-		this.excursion = new ServicioIndividual("Excursion guiada muse " , 4000.00,"Descripcion");
-		this.trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion");
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1);
+		this.excursion = new ServicioIndividual("Excursion guiada muse " , 4000.00,"Descripcion", 2);
+		this.trasladoAH = new ServicioIndividual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion", 3);
 	}
 	
 	@Test
