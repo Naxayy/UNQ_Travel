@@ -18,12 +18,12 @@ public class PaqueteTest {
 	void setUp() {
 		//DOC
 		this.noche = mock(ServicioIndividual.class);
-		excursion = mock(ServicioIndividual.class);
-		trasladoAH = mock(ServicioIndividual.class);
+		this.excursion = mock(ServicioIndividual.class);
+		this.trasladoAH = mock(ServicioIndividual.class);
 		
 		//SUT
-		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
-		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
+		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
+		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
 	}
 	
 	@Test

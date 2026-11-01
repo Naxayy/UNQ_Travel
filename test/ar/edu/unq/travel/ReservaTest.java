@@ -1,15 +1,26 @@
 package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class State {
+class ReservaTest {
+
+	Reserva reserva;
+
+	@BeforeEach
+	void setUp() {
+		//DOC
+		
+	
+		//SUT
+		this.reserva = new Reserva();
+	}
 	
 	@Test
 	void estadoInicial() {
-		Reserva reserva = new Reserva();
 		assertInstanceOf(Pendiente.class , reserva.getEstado());
 		//todos los pedidos de estados posterior a confirmado son invalidos
 		//solo aca se pueden agregar o quitar servicios
