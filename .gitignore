@@ -1,6 +1,7 @@
 # Archivos compilados de Java
 bin/
 *.class
+*.project
 
 # Archivos de metadatos de Eclipse (opcional si todos usan distintas versiones/configuraciones)
 .metadata/
