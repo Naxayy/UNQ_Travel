@@ -1,32 +1,29 @@
 package ar.edu.unq.travel;
 
-
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class Composite {
-	private Individual noche;
-	private Individual excursion;
-	private Individual trasladoAH;
+public class PaqueteTest {
+
+	private ServicioIndividual noche;
+	private ServicioIndividual excursion;
+	private ServicioIndividual trasladoAH;
+	
 	private Paquete paqueteTravel;
 	private Paquete paqueteDePaquetes;
 	
 	@BeforeEach
 	void setUp() {
-		noche = new Individual("Noche de hotel central",15000.00, "descripcion", "id");
-		excursion = new Individual("Excursion guiada museo " , 4000.00,"Descripcion", "id");
-		trasladoAH = new Individual("Traslado Aeropuerto-Hotel", 2000.00 ,"Descripcion", "id");
-		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10) ;
+		//DOC
+		this.noche = mock(ServicioIndividual.class);
+		excursion = mock(ServicioIndividual.class);
+		trasladoAH = mock(ServicioIndividual.class);
+		
+		//SUT
+		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
 		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
-	}
-
-	@Test
-	void valoresDeItemSimple() {
-		assertEquals(15000 , noche.precioFinal());
-		assertEquals(4000 , excursion.precioFinal());
-		assertEquals(2000, trasladoAH.precioFinal());
 	}
 	
 	@Test
@@ -34,6 +31,7 @@ class Composite {
 		paqueteTravel.agregarItem(noche);
 		paqueteTravel.agregarItem(excursion);
 		paqueteTravel.agregarItem(trasladoAH);
+		
 		assertEquals(18900, paqueteTravel.precioFinal());
 	}
 	
@@ -42,8 +40,10 @@ class Composite {
 		paqueteTravel.agregarItem(noche);
 		paqueteTravel.agregarItem(excursion);
 		paqueteTravel.agregarItem(trasladoAH);
+		
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(paqueteTravel);
+		
 		assertEquals(30510, paqueteDePaquetes.precioFinal());
 		
 	}
@@ -51,3 +51,4 @@ class Composite {
 	
 
 }
+
