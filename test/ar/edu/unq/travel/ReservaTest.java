@@ -81,3 +81,4 @@ class ReservaTest {
 		reserva.cancelar();
 		assertInstanceOf(Cancelada.class , reserva.getEstado());
 	}
+}
