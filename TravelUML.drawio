@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Página-1" id="BwLLg2YEn714cx1BjC7l">
-        <mxGraphModel dx="2710" dy="1944" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2577" dy="1649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -639,7 +639,7 @@
                     <mxGeometry height="30" width="250" x="25" y="-500" as="geometry"/>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-7" parent="1" style="text;align=center;verticalAlign=middle;rounded=0;fontSize=17;autosizeText=1;labelBackgroundColor=none;labelBorderColor=none;fontStyle=5;fillColor=#fff2cc;strokeColor=#d6b656;whiteSpace=wrap;" value="2.6 Búsqueda en el catálogo" vertex="1">
-                    <mxGeometry height="30" width="250" x="660" y="-490" as="geometry"/>
+                    <mxGeometry height="30" width="250" x="810" y="-290" as="geometry"/>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Catalogo" vertex="1">
                     <mxGeometry height="112" width="210" x="555" y="-245" as="geometry"/>
@@ -672,207 +672,116 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-19" parent="1" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=42;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="&lt;div&gt;&amp;lt;&amp;lt;interfaz&amp;gt;&amp;gt;&lt;/div&gt;CriterioBusqueda" vertex="1">
-                    <mxGeometry height="68" width="160" x="840" y="-427.5" as="geometry"/>
+                    <mxGeometry height="68" width="240" x="840" y="-421" as="geometry"/>
                 </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-22" parent="Tia_a2b92Z58ml95czhl-19" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ method(type): type" vertex="1">
-                    <mxGeometry height="26" width="160" y="42" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-23" parent="1" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=42;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="&lt;div&gt;&amp;lt;&amp;lt;interfaz&amp;gt;&amp;gt;&lt;/div&gt;CriterioSimple" vertex="1">
-                    <mxGeometry height="68" width="220" x="1055" y="-427.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-91" parent="Tia_a2b92Z58ml95czhl-23" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ filtrar(servicios: Servicio[]): Servicio[]" vertex="1">
-                    <mxGeometry height="26" width="220" y="42" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-27" parent="1" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="&lt;div&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;&lt;/div&gt;CriterioComplejo" vertex="1">
-                    <mxGeometry height="66" width="160" x="840" y="-282.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-30" parent="Tia_a2b92Z58ml95czhl-27" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ method(type): type" vertex="1">
-                    <mxGeometry height="26" width="160" y="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-31" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="And" vertex="1">
-                    <mxGeometry height="86" width="160" x="1180" y="-123.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-32" parent="Tia_a2b92Z58ml95czhl-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="160" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-33" parent="Tia_a2b92Z58ml95czhl-31" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="160" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-34" parent="Tia_a2b92Z58ml95czhl-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ method(type): type" vertex="1">
-                    <mxGeometry height="26" width="160" y="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-35" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Or" vertex="1">
-                    <mxGeometry height="86" width="160" x="1010" y="-123.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-36" parent="Tia_a2b92Z58ml95czhl-35" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="160" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-37" parent="Tia_a2b92Z58ml95czhl-35" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="160" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-38" parent="Tia_a2b92Z58ml95czhl-35" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ method(type): type" vertex="1">
-                    <mxGeometry height="26" width="160" y="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-39" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Not" vertex="1">
-                    <mxGeometry height="86" width="160" x="840" y="-123.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-40" parent="Tia_a2b92Z58ml95czhl-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="160" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-41" parent="Tia_a2b92Z58ml95czhl-39" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="160" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-42" parent="Tia_a2b92Z58ml95czhl-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ method(type): type" vertex="1">
-                    <mxGeometry height="26" width="160" y="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-47" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="PrecioMaximo" vertex="1">
-                    <mxGeometry height="86" width="220" x="1120" y="-600" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-48" parent="Tia_a2b92Z58ml95czhl-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="220" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-49" parent="Tia_a2b92Z58ml95czhl-47" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="220" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-88" parent="Tia_a2b92Z58ml95czhl-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ filtrar(servicios: Servicio[]): Servicio[]" vertex="1">
-                    <mxGeometry height="26" width="220" y="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-51" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Disponibilidad" vertex="1">
-                    <mxGeometry height="86" width="230" x="1350" y="-600" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-52" parent="Tia_a2b92Z58ml95czhl-51" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="230" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-53" parent="Tia_a2b92Z58ml95czhl-51" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="230" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-89" parent="Tia_a2b92Z58ml95czhl-51" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ filtrar(servicios: Servicio[]): Servicio[]" vertex="1">
-                    <mxGeometry height="26" width="230" y="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-55" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Categoria" vertex="1">
-                    <mxGeometry height="86" width="230" x="1350" y="-436.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-56" parent="Tia_a2b92Z58ml95czhl-55" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="230" y="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-57" parent="Tia_a2b92Z58ml95czhl-55" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="230" y="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-90" parent="Tia_a2b92Z58ml95czhl-55" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ filtrar(servicios: Servicio[]): Servicio[]" vertex="1">
-                    <mxGeometry height="26" width="230" y="60" as="geometry"/>
+                <mxCell id="Tia_a2b92Z58ml95czhl-22" parent="Tia_a2b92Z58ml95czhl-19" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=2;horizontal=1;" value="+ satisface(item: ItemCatalogo): Boolean" vertex="1">
+                    <mxGeometry height="26" width="240" y="42" as="geometry"/>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-60" parent="1" style="text;align=center;verticalAlign=middle;rounded=0;fontSize=43;autosizeText=1;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="COMPOSITE" vertex="1">
-                    <mxGeometry height="64" width="270" x="570" y="-610" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-61" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-39" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-27" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="1000" y="-182.5" as="sourcePoint"/>
-                        <mxPoint x="1080" y="-182.5" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-62" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-35" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-27" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1090" y="-152.5"/>
-                            <mxPoint x="920" y="-152.5"/>
-                        </Array>
-                        <mxPoint x="1030" y="-123.5" as="sourcePoint"/>
-                        <mxPoint x="1030" y="-182.5" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-63" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-31" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-27" value="">
-                    <mxGeometry relative="1" width="80" x="0.5606" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1260" y="-152.5"/>
-                            <mxPoint x="920" y="-152.5"/>
-                        </Array>
-                        <mxPoint x="1150" y="-123.5" as="sourcePoint"/>
-                        <mxPoint x="1150" y="-182.5" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-64" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-84" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-23" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="990" y="-490" as="sourcePoint"/>
-                        <mxPoint x="1290" y="-280" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-65" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-47" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-23" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="1320" y="-290" as="sourcePoint"/>
-                        <mxPoint x="1455" y="-207" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-66" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-51" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-23" value="">
-                    <mxGeometry relative="1" width="80" x="0.1713" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1420" y="-470"/>
-                            <mxPoint x="1165" y="-470"/>
-                        </Array>
-                        <mxPoint x="1320" y="-270" as="sourcePoint"/>
-                        <mxPoint x="1455" y="-187" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-67" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-55" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;dashed=1;" target="Tia_a2b92Z58ml95czhl-23" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="1240" y="-260" as="sourcePoint"/>
-                        <mxPoint x="1375" y="-177" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-69" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-27" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" target="Tia_a2b92Z58ml95czhl-19" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="1030" y="-260" as="sourcePoint"/>
-                        <mxPoint x="1110" y="-260" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-70" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=open;endFill=0;dashed=1;" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="810" y="-230"/>
-                            <mxPoint x="810" y="-389"/>
-                        </Array>
-                        <mxPoint x="840" y="-230" as="sourcePoint"/>
-                        <mxPoint x="840" y="-389" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-71" connectable="0" parent="Tia_a2b92Z58ml95czhl-70" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=fontFamily,fontSize,fontColor,fontStyle,textOpacity,labelBorderColor,labelBorderWidth,labelBackgroundColor,defaultLabelBackgroundColor;labelPadding=4;" value="criterios[]*" vertex="1">
-                    <mxGeometry relative="1" x="-0.6049" y="2" as="geometry">
-                        <mxPoint y="-13" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-72" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-23" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" target="Tia_a2b92Z58ml95czhl-19" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
-                        <mxPoint x="1070" y="-230" as="sourcePoint"/>
-                        <mxPoint x="1070" y="-290" as="targetPoint"/>
-                    </mxGeometry>
+                    <mxGeometry height="64" width="270" x="875" y="-191" as="geometry"/>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-74" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-12" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" target="Tia_a2b92Z58ml95czhl-19" value="">
-                    <mxGeometry relative="1" width="80" as="geometry">
+                    <mxGeometry relative="1" width="80" x="0.0028" as="geometry">
                         <Array as="points">
-                            <mxPoint x="660" y="-420"/>
+                            <mxPoint x="660" y="-400"/>
                         </Array>
                         <mxPoint x="685" y="-341" as="sourcePoint"/>
-                        <mxPoint x="765" y="-341" as="targetPoint"/>
+                        <mxPoint x="780" y="-380" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-75" connectable="0" parent="Tia_a2b92Z58ml95czhl-74" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=fontFamily,fontSize,fontColor,fontStyle,textOpacity,labelBorderColor,labelBorderWidth,labelBackgroundColor,defaultLabelBackgroundColor;labelPadding=4;" value="condicion[]*" vertex="1">
-                    <mxGeometry relative="1" x="-0.8737" y="1" as="geometry">
+                    <mxGeometry relative="1" x="-0.8687" y="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-83" parent="1" style="text;align=center;verticalAlign=middle;rounded=0;fontSize=47;autosizeText=1;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="STRATEGY" vertex="1">
-                    <mxGeometry height="64" width="270" x="1125" y="-280.5" as="geometry"/>
+                <mxCell id="Tia_a2b92Z58ml95czhl-84" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="CriterioNombre" vertex="1">
+                    <mxGeometry height="112" width="240" x="610" y="-590" as="geometry"/>
                 </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-84" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="Nombre" vertex="1">
-                    <mxGeometry height="86" width="220" x="890" y="-600" as="geometry"/>
-                </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-85" parent="Tia_a2b92Z58ml95czhl-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ field: type" vertex="1">
-                    <mxGeometry height="26" width="220" y="26" as="geometry"/>
+                <mxCell id="Tia_a2b92Z58ml95czhl-85" parent="Tia_a2b92Z58ml95czhl-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="- textoBuscado: String" vertex="1">
+                    <mxGeometry height="26" width="240" y="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="Tia_a2b92Z58ml95czhl-86" parent="Tia_a2b92Z58ml95czhl-84" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
-                    <mxGeometry height="8" width="220" y="52" as="geometry"/>
+                    <mxGeometry height="8" width="240" y="52" as="geometry"/>
                 </mxCell>
-                <mxCell id="Tia_a2b92Z58ml95czhl-87" parent="Tia_a2b92Z58ml95czhl-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ filtrar(servicios: Servicio[]): Servicio[]" vertex="1">
-                    <mxGeometry height="26" width="220" y="60" as="geometry"/>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-3" parent="Tia_a2b92Z58ml95czhl-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ CriterioNombre(textoBuscado: String)&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="26" width="240" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-2" parent="Tia_a2b92Z58ml95czhl-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ satisface(item: ItemCatalogo): Boolean" vertex="1">
+                    <mxGeometry height="26" width="240" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-1" parent="1" style="text;align=center;verticalAlign=middle;rounded=0;fontSize=18;autosizeText=1;labelBackgroundColor=none;labelBorderColor=none;fontStyle=3;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" value="Component" vertex="1">
+                    <mxGeometry height="30" width="120" x="765" y="-344" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-4" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="CriterioPrecioMaximo" vertex="1">
+                    <mxGeometry height="112" width="240" x="860" y="-590" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-5" parent="d_1zx0nHPhdUymViLAd6-4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="- precioMaximo: Real" vertex="1">
+                    <mxGeometry height="26" width="240" y="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-6" parent="d_1zx0nHPhdUymViLAd6-4" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
+                    <mxGeometry height="8" width="240" y="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-7" parent="d_1zx0nHPhdUymViLAd6-4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ CriterioNombre(textoBuscado: String)&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="26" width="240" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-8" parent="d_1zx0nHPhdUymViLAd6-4" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ satisface(item: ItemCatalogo): Boolean" vertex="1">
+                    <mxGeometry height="26" width="240" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-9" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="CriterioCategoria" vertex="1">
+                    <mxGeometry height="112" width="260" x="1110" y="-590" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-10" parent="d_1zx0nHPhdUymViLAd6-9" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="- categoriaEsperada: String" vertex="1">
+                    <mxGeometry height="26" width="260" y="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-11" parent="d_1zx0nHPhdUymViLAd6-9" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
+                    <mxGeometry height="8" width="260" y="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-12" parent="d_1zx0nHPhdUymViLAd6-9" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ CriterioCategoria(categoriaEsperada: String)&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="26" width="260" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-13" parent="d_1zx0nHPhdUymViLAd6-9" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ satisface(item: ItemCatalogo): Boolean" vertex="1">
+                    <mxGeometry height="26" width="260" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-15" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=default;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;gradientColor=none;" value="CriterioDisponibilidad" vertex="1">
+                    <mxGeometry height="60" width="260" x="1380" y="-590" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-17" parent="d_1zx0nHPhdUymViLAd6-15" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;labelPerimeter=1;swimlaneFillColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=1;horizontal=1;" value="" vertex="1">
+                    <mxGeometry height="8" width="260" y="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-19" parent="d_1zx0nHPhdUymViLAd6-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=0;horizontal=1;" value="+ satisface(item: ItemCatalogo): Boolean" vertex="1">
+                    <mxGeometry height="26" width="260" y="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-21" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-19" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" target="Tia_a2b92Z58ml95czhl-84" value="">
+                    <mxGeometry relative="1" width="80" as="geometry">
+                        <mxPoint x="990" y="-329.5" as="sourcePoint"/>
+                        <mxPoint x="1070" y="-329.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-22" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-19" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" target="d_1zx0nHPhdUymViLAd6-4" value="">
+                    <mxGeometry relative="1" width="80" as="geometry">
+                        <mxPoint x="1350" y="-293" as="sourcePoint"/>
+                        <mxPoint x="1120" y="-350" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-23" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-19" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" target="d_1zx0nHPhdUymViLAd6-9" value="">
+                    <mxGeometry relative="1" width="80" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="960" y="-450"/>
+                            <mxPoint x="1240" y="-450"/>
+                        </Array>
+                        <mxPoint x="1150" y="-353" as="sourcePoint"/>
+                        <mxPoint x="1170" y="-410" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="d_1zx0nHPhdUymViLAd6-24" edge="1" parent="1" source="Tia_a2b92Z58ml95czhl-19" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" target="d_1zx0nHPhdUymViLAd6-15" value="">
+                    <mxGeometry relative="1" width="80" x="0.0197" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="960" y="-450"/>
+                            <mxPoint x="1530" y="-450"/>
+                        </Array>
+                        <mxPoint x="1250" y="-343" as="sourcePoint"/>
+                        <mxPoint x="1530" y="-400" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
