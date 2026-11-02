@@ -2,6 +2,7 @@
 bin/
 *.class
 *.project
+target/
 
 # Archivos de metadatos de Eclipse (opcional si todos usan distintas versiones/configuraciones)
 .metadata/
