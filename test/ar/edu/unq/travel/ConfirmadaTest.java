@@ -8,13 +8,17 @@ import org.junit.jupiter.api.Test;
 
 public class ConfirmadaTest {
 
-    //
+    EnCheckin checkin;
+    Reserva reserva;
 
-	
+    @BeforeEach
+    void setUp() {
+        this.checkin = new EnCheckin();
+        this.reserva = mock(Reserva.class);
+    }
 	
 	@Test
 	void deConfirmadaAEnCheckin() {
-		Reserva reserva = new Reserva();
 		reserva.confirmar();
 		assertInstanceOf(Confirmada.class,reserva.getEstado());
 		reserva.enCheckin();

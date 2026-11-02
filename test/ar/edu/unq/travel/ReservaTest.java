@@ -60,18 +60,24 @@ class ReservaTest {
 
 	@Test
 	void estadoEnChekin() {
+		resrva.confirmar();
 		reserva.enCheckin();
 		assertInstanceOf(EnCheckin.class , reserva.getEstado());
 	}
 
 	@Test
 	void estadoEnCurso() {
+		resrva.confirmar();
+		reserva.enCheckin();
 		reserva.enCurso();
 		assertInstanceOf(EnCurso.class , reserva.getEstado());
 	}
 
 	@Test
 	void estadoFinalizada() {
+		resrva.confirmar();
+		reserva.enCheckin();
+		reserva.enCurso();s
 		reserva.finalizar();
 		assertInstanceOf(Finalizada.class , reserva.getEstado());
 	}
