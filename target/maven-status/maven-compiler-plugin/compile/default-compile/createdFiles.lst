@@ -1,0 +1,11 @@
+ar\edu\unq\travel\Estado.class
+ar\edu\unq\travel\Confirmada.class
+ar\edu\unq\travel\Finalizada.class
+ar\edu\unq\travel\Pendiente.class
+ar\edu\unq\travel\EnCurso.class
+ar\edu\unq\travel\Paquete.class
+ar\edu\unq\travel\ServicioIndividual.class
+ar\edu\unq\travel\Servicio.class
+ar\edu\unq\travel\EnCheckin.class
+ar\edu\unq\travel\Reserva.class
+ar\edu\unq\travel\Cancelada.class
