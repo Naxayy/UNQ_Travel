@@ -8,14 +8,11 @@ import org.junit.jupiter.api.Test;
 
 public class SoliccitudPendienteTest {
 
-	SolicitudPendiente pendiente;
 	Reserva reserva;
 
 	@BeforeEach
 	void setUp() {
-		this.pendiente = new SolicitudPendiente();
-
-		this.reserva = mock(Reserva.class);
+		this.reserva = new Reserva();
 	}
 
 	void estadoInicial() {
@@ -33,13 +30,6 @@ public class SoliccitudPendienteTest {
 		reserva.agregarServicio(estadiaCancun);
 		reserva.quitarServicio(estadiaCancun);
 		assertFalse(reserva.getServicios().contains(estadiaCancun));
-	}
-
-	@Test
-	void deInicialAConfirmada(){
-		assertInstanceOf(Pendiente.class, reserva.getEstado());
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
 	}
 
 	@Test

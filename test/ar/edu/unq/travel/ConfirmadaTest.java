@@ -16,6 +16,14 @@ public class ConfirmadaTest {
         this.checkin = new EnCheckin();
         this.reserva = mock(Reserva.class);
     }
+
+	@Test
+	void deInicialAConfirmada(){
+		assertInstanceOf(Pendiente.class, reserva.getEstado());
+		reserva.confirmar();
+		assertInstanceOf(Confirmada.class, reserva.getEstado());
+	}
+	
 	
 	@Test
 	void deConfirmadaAEnCheckin() {
