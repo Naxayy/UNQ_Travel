@@ -1,20 +1,26 @@
 package ar.edu.unq.travel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reserva {
 	//private Estado estadoInicial;
 	//private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
-	private Estado estado;
-	//private List<Observador> observadores;
+	private Estado estado = new Pendiente();
+	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public Reserva() {
 		this.estado = new Pendiente();
 	}
-	
+	public void agregarObserver(Observer observer) {
+		this.observers.add(observer);
+	}
+	public void eliminarObserver(Observer observer) {
+		this.observers.remove(observer);
+	}
 	public Estado getEstado() {
 		return this.estado;
 	}
-	
 	public void cambiarAEstado(Estado estado) {
 		this.estado = estado;
 	}
