@@ -12,12 +12,19 @@ public class Reserva {
 	public Reserva() {
 		this.estado = new Pendiente();
 	}
+	
+	public void notifyObservers() {
+		for (Observer observer : observers) {
+			observer.update(this);
+		}
+	}
 	public void agregarObserver(Observer observer) {
 		this.observers.add(observer);
 	}
 	public void eliminarObserver(Observer observer) {
 		this.observers.remove(observer);
 	}
+
 	public Estado getEstado() {
 		return this.estado;
 	}
