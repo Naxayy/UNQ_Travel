@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 import java.util.ArrayList;
 import java.util.List;

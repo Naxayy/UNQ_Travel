@@ -2,6 +2,10 @@ package ar.edu.unq.travel;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.travel.ciclo.Estado;
+import ar.edu.unq.travel.ciclo.Pendiente;
+import ar.edu.unq.travel.notificaciones.Observer;
+
 public class Reserva {
 	//private Estado estadoInicial;
 	//private Traslado metodoTraslado;

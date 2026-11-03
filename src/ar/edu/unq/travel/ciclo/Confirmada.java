@@ -1,4 +1,6 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.ciclo;
+
+import ar.edu.unq.travel.Reserva;
 
 public class Confirmada extends Estado {
 

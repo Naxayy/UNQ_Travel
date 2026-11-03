@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 public class ServicioIndividual extends Servicio{
 	private double precioBase;

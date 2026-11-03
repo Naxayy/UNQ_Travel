@@ -5,6 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.ciclo.Cancelada;
+import ar.edu.unq.travel.ciclo.Confirmada;
+import ar.edu.unq.travel.ciclo.EnCheckin;
+import ar.edu.unq.travel.ciclo.EnCurso;
+import ar.edu.unq.travel.ciclo.Finalizada;
+import ar.edu.unq.travel.ciclo.Pendiente;
+
 class State {
 	
 	@Test
