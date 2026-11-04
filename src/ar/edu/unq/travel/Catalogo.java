@@ -12,4 +12,12 @@ public class Catalogo {
     public List<Servicio> busqueda() {
         return items.stream().filter(item -> condicion.satisface(item)).toList();
     }
+
+    public void agregarItem(Servicio item) {
+        this.items.add(item);
+    }
+
+    public void setCondicion(CriterioBusqueda condicion) {
+        this.condicion = condicion;
+    }
 }
