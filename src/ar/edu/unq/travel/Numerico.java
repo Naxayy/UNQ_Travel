@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
 
-public class Numerico extends AtributoDinamico{
+public class Numerico extends Tipo{
     private int valor;
 
     public Numerico(String nombre, boolean obligatoriedad, int valor){
@@ -8,7 +8,7 @@ public class Numerico extends AtributoDinamico{
         this.valor = valor;
     }
 
-    //En este caso no hace nada, ya que por mas que sea obligatorio o no siepmre tiene valor
-    @Override 
-    public void validar() {}
+    public int getValor() {
+        return valor;
+    }
 }

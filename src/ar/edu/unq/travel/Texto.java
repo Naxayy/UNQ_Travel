@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
 
-public class Texto extends AtributoDinamico{
+public class Texto extends Tipo{
     private String valor;
 
     public Texto(String nombre, boolean obligatoriedad, String valor){
@@ -8,6 +8,7 @@ public class Texto extends AtributoDinamico{
         this.valor = valor;
     }
 
-    @Override
-    public void validar() {}
+    public String getValor() {
+        return valor;
+    }
 }
