@@ -6,7 +6,6 @@ import java.util.List;
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
-	private List<AtributoDinamico> atributosDinamicos = new ArrayList<AtributoDinamico>();
 	
 	public Servicio(String nombre, String descripcion) {
         this.nombre = nombre;

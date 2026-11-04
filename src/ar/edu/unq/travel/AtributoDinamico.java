@@ -9,11 +9,14 @@ public class AtributoDinamico {
         this.obligatoriedad = obligatoriedad;
     }
 
-    public boolean validar(){
+    public void validar(){
         //(a) que todo atributo obligatorio tenga valor
         //(b) que el valor asignado sea consistente con el tipo
 
-        //como ya lo hace java asumo que el valor siempre es true
+        //si es obligatorio y se instancia desde aca da error, ya que atributoDinamico no tiene valor
+        if(this.getObligatoriedad()){
+            throw new IllegalStateException("Es obligatorio y no tiene valor");
+        }
     }
 
     //en este caso no hay valor asigando

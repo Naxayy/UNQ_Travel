@@ -7,5 +7,9 @@ public class Booleano extends AtributoDinamico {
         super(nombre, obligatoriedad);
         this.valor = valor;
     }
+
+    //En este caso no hace nada, ya que por mas que sea obligatorio o no siepmre tiene valor
+    @Override 
+    public void validar() {}
     
 }

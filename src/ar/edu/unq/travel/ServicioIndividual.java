@@ -1,10 +1,13 @@
 package ar.edu.unq.travel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServicioIndividual extends Servicio{
 	private double precioBase;
 	private int codigo;
-	
-	//Cambiar atributos metodos ??
+	private List<AtributoDinamico> atributosDinamicos = new ArrayList<AtributoDinamico>();
+
 	//private Proveedor provedor; 
 	//private Categoria categoria;
 	
@@ -12,6 +15,24 @@ public class ServicioIndividual extends Servicio{
 		super(nombre, descripcion);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
+	}
+
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, List<AtributoDinamico> atributos){
+		super(nombre, descripcion);
+		this.codigo = codigo;
+		this.precioBase = precioBase;
+		this.atributosDinamicos = atributos;
+	}
+
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, AtributoDinamico atributo){
+		super(nombre, descripcion);
+		this.codigo = codigo;
+		this.precioBase = precioBase;
+		this.agregarAtributo(atributo);
+	}
+
+	public void agregarAtributo(AtributoDinamico atributo){
+		atributosDinamicos.add(atributo);
 	}
 	
 	@Override
