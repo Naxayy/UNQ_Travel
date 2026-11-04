@@ -46,19 +46,20 @@ class ServicioTest {
 
 	@Test 
 	void descripcionDelServicio(){
-		assertNotEquals("descripcion", paqueteTravel.getDescripcion());
+		assertEquals("descripcion", paqueteTravel.getDescripcion());
 	}
 
 	@Test 
 	void cambiarNombreDelServicio(){
 		noche.setNombre("Dia de hotel central");
-		assertNotEquals("Dia de hotel central", noche.getNombre());
+		assertNotEquals("Noche de hotel central", noche.getNombre());
+		assertEquals("Dia de hotel central", noche.getNombre());
 	}
 
 	@Test 
 	void cambiarDescripcionDelServicio(){
 		paqueteTravel.setDescripcion("muy completo");
-		assertNotEquals("muy completo", paqueteTravel.getDescripcion());
+		assertEquals("muy completo", paqueteTravel.getDescripcion());
 	}
 
 
