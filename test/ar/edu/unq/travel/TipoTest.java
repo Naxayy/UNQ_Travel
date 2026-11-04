@@ -2,6 +2,7 @@ package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,16 +34,51 @@ public class TipoTest {
 
     @Test
     void validarFechaSinError(){
-        assertDoesNotThrow(() -> RatingEstrellas.validar());
+        assertDoesNotThrow(() -> fechaDeCreacion.validar());
     } 
 
     @Test
     void validarTextoSinError(){
-        assertDoesNotThrow(() -> RatingEstrellas.validar());
+        assertDoesNotThrow(() -> descripcionDelLugar.validar());
     } 
 
     @Test 
+    void hayValorAsignadoEnBooleano(){
+        assertEquals(true, seAceptanMascotas.hayValorAsignado());
+    }
+
+    @Test 
     void hayValorAsignadoEnNumerico(){
-        assertEquals(true, RatingEstrellas.hayValorAsignado());
+        assertNotEquals(false, RatingEstrellas.hayValorAsignado());
+    }
+
+    @Test 
+    void hayValorAsignadoEnFecha(){
+        assertEquals(true, fechaDeCreacion.hayValorAsignado());
+    }
+
+    @Test 
+    void hayValorAsignadoEnTexto(){
+        assertNotEquals(false, descripcionDelLugar.hayValorAsignado());
+    }
+
+    @Test 
+    void valorAsignadoEnBooleano(){
+        assertNotEquals(false, seAceptanMascotas.getValor());
+    }
+
+    @Test 
+    void valorAsignadoEnNumerico(){
+        assertEquals(2, RatingEstrellas.getValor());
+    }
+
+    @Test 
+    void valorAsignadoEnFecha(){
+        assertNotEquals(1992, fechaDeCreacion.getValor());
+    }
+
+    @Test 
+    void valorAsignadoEnTexto(){
+        assertEquals("muy bonito", descripcionDelLugar.getValor());
     }
 }
