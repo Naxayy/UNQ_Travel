@@ -10,75 +10,75 @@ import org.junit.jupiter.api.Test;
 
 public class TipoTest {
     Booleano seAceptanMascotas;
-    Numerico RatingEstrellas;
+    Numerico ratingEstrellas;
     Fecha fechaDeCreacion;
     Texto descripcionDelLugar;
 
     @BeforeEach 
     void SetUp(){
         this.seAceptanMascotas = new Booleano("politica mascotas", false, true);
-        this.RatingEstrellas = new Numerico("Rating estrellas", true, 2);
+        this.ratingEstrellas = new Numerico("Rating estrellas", true, 2);
         this.fechaDeCreacion = new Fecha("fecha de creacion", false, new Date(10/10/2011));
         this.descripcionDelLugar = new Texto("descripcion del lugar", true, "muy bonito");
     }
 
     @Test 
-    void validarBooleanoSinError(){
+    void validarSeAceptanMascotasSinError(){
         assertDoesNotThrow(() -> seAceptanMascotas.validar());
     }
 
     @Test
-    void validarNumeriucoSinError(){
-        assertDoesNotThrow(() -> RatingEstrellas.validar());
+    void validarRatingEstrellasSinError(){
+        assertDoesNotThrow(() -> ratingEstrellas.validar());
     } 
 
     @Test
-    void validarFechaSinError(){
+    void validarfechaDeCreacionSinError(){
         assertDoesNotThrow(() -> fechaDeCreacion.validar());
     } 
 
     @Test
-    void validarTextoSinError(){
+    void validardescripcionDelLugarSinError(){
         assertDoesNotThrow(() -> descripcionDelLugar.validar());
     } 
 
     @Test 
-    void hayValorAsignadoEnBooleano(){
+    void hayValorAsignadoEnSeAceptanMascotas(){
         assertEquals(true, seAceptanMascotas.hayValorAsignado());
     }
 
     @Test 
-    void hayValorAsignadoEnNumerico(){
-        assertNotEquals(false, RatingEstrellas.hayValorAsignado());
+    void hayValorAsignadoEnRatingEstrellas(){
+        assertNotEquals(false, ratingEstrellas.hayValorAsignado());
     }
 
     @Test 
-    void hayValorAsignadoEnFecha(){
+    void hayValorAsignadoEnFechaDeCreacion(){
         assertEquals(true, fechaDeCreacion.hayValorAsignado());
     }
 
     @Test 
-    void hayValorAsignadoEnTexto(){
+    void hayValorAsignadoEnDescripcionDelLugar(){
         assertNotEquals(false, descripcionDelLugar.hayValorAsignado());
     }
 
     @Test 
-    void valorAsignadoEnBooleano(){
+    void valorAsignadoEnSeAceptanMascotas(){
         assertNotEquals(false, seAceptanMascotas.getValor());
     }
 
     @Test 
-    void valorAsignadoEnNumerico(){
-        assertEquals(2, RatingEstrellas.getValor());
+    void valorAsignadoEnRatingEstrellas(){
+        assertEquals(2, ratingEstrellas.getValor());
     }
 
     @Test 
-    void valorAsignadoEnFecha(){
+    void valorAsignadoEnFechaDeCreacion(){
         assertNotEquals(1992, fechaDeCreacion.getValor());
     }
 
     @Test 
-    void valorAsignadoEnTexto(){
+    void valorAsignadoEnDescripcionDelLugar(){
         assertEquals("muy bonito", descripcionDelLugar.getValor());
     }
 }
