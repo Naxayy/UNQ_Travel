@@ -12,6 +12,6 @@ public class CriterioCategoria implements CriterioBusqueda {
 
     @Override
     public boolean satisface(Servicio item) {
-        return item.getCategoria() == this.categoriaEsperada;
+        return item.contieneCategoria(this.categoriaEsperada);
     }
 }

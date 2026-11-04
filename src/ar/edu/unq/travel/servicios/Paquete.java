@@ -6,13 +6,17 @@ import java.util.List;
 public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<>();
 	private int descuento;
-	private final Categoria categoria = new CategoriaPaquete(); //el servicio paquete siempre tendra CategoriaPaquete()
 	
 	public Paquete(String nombre, String descripcion, int descuento) {
 		super(nombre, descripcion);
 		this.descuento = descuento;
 	}
-	
+	@Override
+	public boolean contieneCategoria(Categoria categoria) {
+		return servicios.stream()
+				.anyMatch(servicio -> servicio.contieneCategoria(categoria));
+	}
+
 	@Override
 	public double precioFinal() {
 		return precioBase() * (1.0 - (this.descuento / 100.0));

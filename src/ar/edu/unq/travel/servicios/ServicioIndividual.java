@@ -14,6 +14,10 @@ public class ServicioIndividual extends Servicio{
 		this.precioBase = precioBase;
 		this.categoria = categoria;
 	}
+
+	public boolean contieneCategoria(Categoria categoria) {
+		return this.categoria == categoria;
+	}
 	
 	@Override
 	public double precioFinal() { 
