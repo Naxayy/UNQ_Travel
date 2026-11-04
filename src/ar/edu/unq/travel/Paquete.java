@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paquete extends Servicio {
-	private List<Servicio> servicios =  new ArrayList<>();
+	private List<Servicio> servicios =  new ArrayList<Servicio>();
 	private int descuento;
 	
 	public Paquete(String nombre, String descripcion, int descuento) {
