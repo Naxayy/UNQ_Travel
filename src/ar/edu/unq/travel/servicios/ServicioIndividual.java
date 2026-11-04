@@ -3,6 +3,7 @@ package ar.edu.unq.travel.servicios;
 public class ServicioIndividual extends Servicio{
 	private double precioBase;
 	private int codigo;
+	private Categoria categoria;
 	
 	//Cambiar atributos metodos ??
 	//private Proveedor provedor; 

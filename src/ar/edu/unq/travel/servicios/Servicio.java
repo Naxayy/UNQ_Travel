@@ -10,6 +10,10 @@ public abstract class Servicio {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
 	
 	public abstract double precioBase();
 	
