@@ -10,6 +10,7 @@ public class Reserva {
 	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public Reserva() {
+		//La reserva tiene que resivir por parametro para ser creada el metodoTraslado y el medioDePago
 		this.estado = new Pendiente();
 	}
 	
@@ -46,5 +47,9 @@ public class Reserva {
 	public void cancelar() {
 		estado.cancelada(this);
 	}
+
+	public void agregarServicio(Servicio servicio){
+		estado.agregarServicio(this);
+	} 
 	
 }
