@@ -1,8 +1,5 @@
 package ar.edu.unq.travel.servicios;
 
-import java.util.Date;
-import java.util.Map;
-
 public class ServicioIndividual extends Servicio{
 	private double precioBase;
 	private int codigo;

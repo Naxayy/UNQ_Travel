@@ -2,8 +2,6 @@ package ar.edu.unq.travel.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
-import java.util.Map;
 
 public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<>();

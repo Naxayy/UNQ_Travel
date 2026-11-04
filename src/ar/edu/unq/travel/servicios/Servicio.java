@@ -7,7 +7,6 @@ public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
 	private int cuposDisponibles;
-	//private Map<Date, Integer> cupoDisponible;
 	//private List<AtributoDinamico> atributoDinamico = new ArrayList<AtributoDinamico>
 	
 	public Servicio(String nombre, String descripcion, int cuposDisponibles) {
