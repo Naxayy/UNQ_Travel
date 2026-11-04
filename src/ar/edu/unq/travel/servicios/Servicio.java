@@ -1,8 +1,5 @@
 package ar.edu.unq.travel.servicios;
 
-import java.util.Date;
-import java.util.Map;
-
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
