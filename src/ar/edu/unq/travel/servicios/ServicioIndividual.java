@@ -1,5 +1,8 @@
 package ar.edu.unq.travel.servicios;
 
+import java.util.Date;
+import java.util.Map;
+
 public class ServicioIndividual extends Servicio{
 	private double precioBase;
 	private int codigo;
@@ -8,8 +11,8 @@ public class ServicioIndividual extends Servicio{
 	//Cambiar atributos metodos ??
 	//private Proveedor provedor; 
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria){
-		super(nombre, descripcion);
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, int cuposDisponibles) {
+		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;
