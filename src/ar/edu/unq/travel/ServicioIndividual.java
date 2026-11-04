@@ -16,14 +16,7 @@ public class ServicioIndividual extends Servicio{
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 	}
-
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, List<AtributoDinamico> atributos){
-		super(nombre, descripcion);
-		this.codigo = codigo;
-		this.precioBase = precioBase;
-		this.atributosDinamicos = atributos;
-	}
-
+	
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, AtributoDinamico atributo){
 		super(nombre, descripcion);
 		this.codigo = codigo;
