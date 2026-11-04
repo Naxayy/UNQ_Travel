@@ -7,7 +7,6 @@ import ar.edu.unq.travel.ciclo.Pendiente;
 import ar.edu.unq.travel.notificaciones.Observer;
 
 public class Reserva {
-	//private Estado estadoInicial;
 	//private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
 	private Estado estado = new Pendiente();
@@ -28,7 +27,6 @@ public class Reserva {
 	public void eliminarObserver(Observer observer) {
 		this.observers.remove(observer);
 	}
-
 	public Estado getEstado() {
 		return this.estado;
 	}

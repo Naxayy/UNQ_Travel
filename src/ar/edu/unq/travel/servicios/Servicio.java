@@ -3,6 +3,7 @@ package ar.edu.unq.travel.servicios;
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
+	private Categoria categoria;
 	//private List<AtributoDinamico> atributoDinamico = new ArrayList<AtributoDinamico>
 	
 	public Servicio(String nombre, String descripcion) {

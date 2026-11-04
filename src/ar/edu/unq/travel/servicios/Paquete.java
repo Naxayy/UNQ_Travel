@@ -6,6 +6,7 @@ import java.util.List;
 public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<>();
 	private int descuento;
+	private final Categoria categoria = new CategoriaPaquete(); //el servicio paquete siempre tendra CategoriaPaquete()
 	
 	public Paquete(String nombre, String descripcion, int descuento) {
 		super(nombre, descripcion);

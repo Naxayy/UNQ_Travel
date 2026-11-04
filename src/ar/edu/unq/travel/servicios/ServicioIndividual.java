@@ -6,12 +6,12 @@ public class ServicioIndividual extends Servicio{
 	
 	//Cambiar atributos metodos ??
 	//private Proveedor provedor; 
-	//private Categoria categoria;
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo){
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria){
 		super(nombre, descripcion);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
+		this.categoria = categoria;
 	}
 	
 	@Override
