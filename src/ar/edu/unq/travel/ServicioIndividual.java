@@ -27,6 +27,10 @@ public class ServicioIndividual extends Servicio{
 	public void agregarAtributo(AtributoDinamico atributo){
 		atributosDinamicos.add(atributo);
 	}
+
+	public List<AtributoDinamico> getAtributosDinamicos() {
+		return atributosDinamicos;
+	}
 	
 	@Override
 	public double precioFinal() { 
@@ -41,10 +45,6 @@ public class ServicioIndividual extends Servicio{
 
 	public void setPrecioBase(double precioBase) {
 		this.precioBase = precioBase;
-	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 	
 	public int getCodigo() {

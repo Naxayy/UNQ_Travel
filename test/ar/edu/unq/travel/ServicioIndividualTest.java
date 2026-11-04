@@ -1,6 +1,9 @@
 package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
@@ -10,7 +13,6 @@ public class ServicioIndividualTest {
 
 	private ServicioIndividual noche;
 	private ServicioIndividual excursion;
-	private ServicioIndividual trasladoAH;
 	
 	@BeforeEach
 	void setUp() {
@@ -26,21 +28,30 @@ public class ServicioIndividualTest {
 	@Test
 	void agregarAtributo() {
 		excursion.agregarAtributo(ratingEstrellas);
-		
-	}
-	
-	@Test
-	void testNombres() {
-		assertEquals("Noche de hotel central", noche.getNombre());
-		assertEquals("Excursion guiada museo", excursion.getNombre());
-		assertEquals("Traslado Aeropuerto-Hotel", trasladoAH.getNombre());
+		assertTrue(excursion.getAtributosDinamicos().contains(ratingEstrellas));
 	}
 
 	@Test
-	void testPrecioFinal() {
+	void esPrecioFinal() {
 		assertEquals(15000 , noche.precioFinal());
-		assertEquals(4000 , excursion.precioFinal());
-		assertEquals(2000, trasladoAH.precioFinal());
+	}
+
+	@Test
+	void esPrecioBase() {
+		assertEquals(4000 , excursion.precioBase());
+	}
+	
+	@Test
+	void cambiarPrecio() {
+		excursion.setPrecioBase(14000);
+		
+		assertNotEquals(4000 , excursion.precioBase());
+		assertEquals(14000 , excursion.precioBase());
+	}
+
+	@Test
+	void getCodigo(){
+		assertEquals(2, excursion.getCodigo());
 	}
 
 }

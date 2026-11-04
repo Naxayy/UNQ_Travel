@@ -18,37 +18,31 @@ public class PaqueteTest {
 	void setUp() {
 		//DOC
 		this.noche = mock(ServicioIndividual.class);
-		excursion = mock(ServicioIndividual.class);
-		trasladoAH = mock(ServicioIndividual.class);
+		this.excursion = mock(ServicioIndividual.class);
+		this.trasladoAH = mock(ServicioIndividual.class);
+		this.paqueteTravel = mock(Paquete.class);
 		
 		//SUT
-		paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
-		paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
+		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
 	}
-	
+
 	@Test
-	void valorDePaquete() {
-		paqueteTravel.agregarItem(noche);
-		paqueteTravel.agregarItem(excursion);
-		paqueteTravel.agregarItem(trasladoAH);
-		
-		assertEquals(18900, paqueteTravel.precioFinal());
-	}
-	
-	@Test
-	void valorDePaqueteDePaquetes() {
-		paqueteTravel.agregarItem(noche);
-		paqueteTravel.agregarItem(excursion);
-		paqueteTravel.agregarItem(trasladoAH);
-		
+	void precioFinal()  {
 		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+
+		paqueteTravel.agregarItem(trasladoAH);
 		paqueteDePaquetes.agregarItem(paqueteTravel);
-		
-		assertEquals(30510, paqueteDePaquetes.precioFinal());
-		
+
+		when(noche.precioBase()).thenReturn(1200.00);
+		when(excursion.precioBase()).thenReturn(400.00);
+		when(paqueteTravel.precioBase()).thenReturn(200.0);
+
+		assertEquals(1620.0, paqueteDePaquetes.precioFinal());
+		verify(noche).precioBase();
 	}
-	
-	
+
+	//holaa
 
 }
 
