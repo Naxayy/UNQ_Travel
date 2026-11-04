@@ -17,5 +17,8 @@ public abstract class Estado {
 	public void cancelada(Reserva reserva) {
 		throw new IllegalStateException("");
 	}
+	public void agregarServicio(Reserva reserva){
+		throw new IllegalStateException("");
+	}
 	
 }
