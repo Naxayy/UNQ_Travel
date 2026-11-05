@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.servicios.ServicioIndividual;
+
 public class ServicioIndividualTest {
 	private AtributoDinamico ratingEstrellas;
 

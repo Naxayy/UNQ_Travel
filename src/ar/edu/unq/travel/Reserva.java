@@ -2,6 +2,11 @@ package ar.edu.unq.travel;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.travel.ciclo.Estado;
+import ar.edu.unq.travel.ciclo.Pendiente;
+import ar.edu.unq.travel.notificaciones.Observer;
+import ar.edu.unq.travel.servicios.Servicio;
+
 public class Reserva {
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;

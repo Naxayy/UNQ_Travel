@@ -1,4 +1,9 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.notificaciones;
+
+import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.ciclo.Confirmada;
+import ar.edu.unq.travel.ciclo.EnCurso;
+import ar.edu.unq.travel.ciclo.Finalizada;
 
 public class NotificadorDeEmail implements Observer {
     private MailSender mail;

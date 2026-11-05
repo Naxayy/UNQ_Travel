@@ -1,26 +1,36 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ar.edu.unq.travel.AtributoDinamico;
+import ar.edu.unq.travel.servicios.Categoria;
 
 public class ServicioIndividual extends Servicio{
 	private double precioBase;
 	private int codigo;
 	private List<AtributoDinamico> atributosDinamicos = new ArrayList<AtributoDinamico>();
-
-	//private Proveedor provedor; 
-	//private Categoria categoria;
+	private Categoria categoria;
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo){
-		super(nombre, descripcion);
+	//Cambiar atributos metodos ??
+	//private Proveedor provedor; 
+	
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, int cuposDisponibles) {
+		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
+		this.categoria = categoria;
+	}
+
+	public boolean contieneCategoria(Categoria categoria) {
+		return this.categoria == categoria;
 	}
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, AtributoDinamico atributo){
-		super(nombre, descripcion);
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, AtributoDinamico atributo, int cuposDisponibles) {
+		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
+		this.categoria = categoria;
 		this.agregarAtributo(atributo);
 	}
 

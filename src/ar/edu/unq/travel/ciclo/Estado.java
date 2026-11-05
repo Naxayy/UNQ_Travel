@@ -1,4 +1,7 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.ciclo;
+
+import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.servicios.Servicio;
 
 public abstract class Estado {
 	

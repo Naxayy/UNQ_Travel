@@ -5,6 +5,9 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.servicios.Paquete;
+import ar.edu.unq.travel.servicios.ServicioIndividual;
+
 public class PaqueteTest {
 
 	private ServicioIndividual noche;

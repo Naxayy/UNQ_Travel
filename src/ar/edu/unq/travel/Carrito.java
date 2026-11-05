@@ -2,6 +2,8 @@ package ar.edu.unq.travel;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.travel.servicios.Servicio;
+
 public class Carrito {
     private List<Servicio> lista = new ArrayList();
 

@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,16 @@ public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<Servicio>();
 	private int descuento;
 	
-	public Paquete(String nombre, String descripcion, int descuento) {
-		super(nombre, descripcion);
+	public Paquete(String nombre, String descripcion, int descuento, int cupoDisponible) {
+		super(nombre, descripcion, cupoDisponible);
 		this.descuento = descuento;
 	}
-	
+	@Override
+	public boolean contieneCategoria(Categoria categoria) {
+		return servicios.stream()
+				.anyMatch(servicio -> servicio.contieneCategoria(categoria));
+	}
+
 	@Override
 	public double precioFinal() {
 		return precioBase() * (1.0 - (this.descuento / 100.0));
