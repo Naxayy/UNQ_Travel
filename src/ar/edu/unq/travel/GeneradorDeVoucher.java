@@ -14,7 +14,7 @@ public class GeneradorDeVoucher implements Observer {
     @Override
     public void update(Reserva observable) {
         if (this.validarEstado(observable)) {
-            cliente.agregarVoucher(new Voucher(this.monto(observable)));
+            //cliente.agregarVoucher(new Voucher(this.monto(observable)));
         }
     }
 
