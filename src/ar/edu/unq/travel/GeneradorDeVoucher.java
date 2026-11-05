@@ -12,4 +12,7 @@ public class GeneradorDeVoucher implements Observer {
     public boolean validarEstado(Reserva observable) {
         return observable.getEstado() instanceof Finalizada;
     }
+    
+
 }
+
