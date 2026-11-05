@@ -17,18 +17,3 @@ public class EnCheckin extends Estado {
 	}
 
 }
-
-/*
-un usuario tiene una lista de vouchers
-*/
-
-
-/*
-opciones: 
-    el cliente de clase Usuario tiene un voucher, 
-        reserva -> Usuario -> Voucher 
-            si yo quiero que un voucher se le sea dado a un usuario por el valor de una reserva particular entonces hago reserva.usuario.voucher
-
-            reserva.generarVoucher()
-
-*/
