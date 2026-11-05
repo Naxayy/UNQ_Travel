@@ -11,6 +11,7 @@ public class EnCurso extends Estado {
 	@Override
 	public void cancelada(Reserva reserva) {
 		reserva.cambiarAEstado(new Cancelada());
+		//tengo que generar el voucher de costos de servicios no disfrutados
 	}
 
 }
