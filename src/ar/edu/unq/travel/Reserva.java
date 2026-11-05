@@ -9,8 +9,19 @@ public class Reserva {
 	private Estado estado;
 	private List<Observer> observers = new ArrayList<Observer>();
 	private Carrito carrito ;
+	private Direccion direccionDestino;
 	//private GeneradorDeVoucher voucher; ??????
 	
+	public int pasajeros(){
+		return 0;
+	}
+
+	//HAY QUE MODELAR PASAJEROS Y DIRECCION
+
+	public Direccion direccionDestino(){
+		return this.direccionDestino;
+	}
+
 	public Reserva() {
 		this.estado = new Pendiente();
 		this.carrito = new Carrito();
