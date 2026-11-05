@@ -7,6 +7,7 @@ public class Pendiente extends Estado {
 
 	@Override
 	public void confirmar(Reserva reserva) {
+		reserva.confirmarCarrito();
 		reserva.cambiarAEstado(new Confirmada());
 		
 	}	
@@ -14,5 +15,10 @@ public class Pendiente extends Estado {
 	@Override
 	public void cancelada(Reserva reserva) {
 		reserva.cambiarAEstado(new Cancelada());
+	}
+
+	@Override
+	public void agregarServicio(Reserva reserva, Servicio servicio){
+		reserva.agregarAlCarrito(servicio);
 	}
 }

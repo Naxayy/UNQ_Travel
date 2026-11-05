@@ -8,10 +8,11 @@ public class Reserva {
 	//private MedioDePago medioDePago;
 	private Estado estado = new Pendiente();
 	private List<Observer> observers = new ArrayList<Observer>();
+	private List<Servicio> carrito = new ArrayList<Servicio>();
 	
 	public Reserva() {
 		//La reserva tiene que resivir por parametro para ser creada el metodoTraslado y el medioDePago
-		this.estado = new Pendiente();
+		//this.estado = new Pendiente();
 	}
 	
 	public void notifyObservers() {
@@ -49,7 +50,21 @@ public class Reserva {
 	}
 
 	public void agregarServicio(Servicio servicio){
-		estado.agregarServicio(this);
+		estado.agregarServicio(this, servicio);
 	} 
-	
+
+	public void agregarAlCarrito(Servicio servicio){
+		carrito.add(servicio);
+	}
+
+	public void confirmarCarrito(){
+		carrito.forEach(producto -> producto.confirmar());
+	}
+
+
+
+//la reserva se conecte a un catalogo
+//el catalogo tiene una lista de servicios 
+// el carrito de la reserva tiene una lista de productos del catalogo
 }
+
