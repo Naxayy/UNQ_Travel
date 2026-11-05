@@ -13,14 +13,19 @@ class ServicioTest {
 	@BeforeEach
 	void setUp() {
 
-		//al ser clase abstracta instancio sus dos clases hijas.
+		//al ser clase abstracta instancio sus dos clases hijas y no repito test.
 		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1);
-		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
+		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10, 2);
 	}
 
 	@Test 
 	void noEsNombreDelServicio(){
 		assertNotEquals("paqueteDePaquetes", noche.getNombre());
+	}
+
+	@Test
+	void esCodigoDelServicio(){
+		assertEquals(2, paqueteTravel.getCodigo());
 	}
 
 	@Test 

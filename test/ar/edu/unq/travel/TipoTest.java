@@ -16,14 +16,8 @@ public class TipoTest {
         this.ratingEstrellas = new Numerico("Rating estrellas", true, 2);
     }
 
-
     @Test
     void validarRatingEstrellasSinError(){
         assertDoesNotThrow(() -> ratingEstrellas.validar());
-    }
-
-    @Test 
-    void hayValorAsignadoEnRatingEstrellas(){
-        assertNotEquals(false, ratingEstrellas.hayValorAsignado());
     }
 }

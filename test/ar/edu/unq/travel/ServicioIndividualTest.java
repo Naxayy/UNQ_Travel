@@ -42,16 +42,11 @@ public class ServicioIndividualTest {
 	}
 	
 	@Test
-	void cambiarPrecio() {
+	void cambiarPrecioBse() {
 		excursion.setPrecioBase(14000);
 		
 		assertNotEquals(4000 , excursion.precioBase());
 		assertEquals(14000 , excursion.precioBase());
-	}
-
-	@Test
-	void getCodigo(){
-		assertEquals(2, excursion.getCodigo());
 	}
 
 }

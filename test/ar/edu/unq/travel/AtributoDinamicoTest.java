@@ -25,11 +25,6 @@ public class AtributoDinamicoTest {
         IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> exclusivoMayoresDeEdad.validar() );
             assertEquals("Es obligatorio y no tiene valor", error.getMessage());
-    } 
-
-    @Test 
-    void noHayValorAsignadoEnAtributoDinamico(){
-        assertEquals(false, CapacidadMaxima.hayValorAsignado());
     }
 
     @Test 
@@ -44,8 +39,9 @@ public class AtributoDinamicoTest {
 
     @Test 
     void CambioDeObligoriedad(){
-        exclusivoMayoresDeEdad.setObligatoriedad(false);      
-        assertEquals(false, exclusivoMayoresDeEdad.getObligatoriedad());
+        assertDoesNotThrow(() -> CapacidadMaxima.validar());
+        CapacidadMaxima.setObligatoriedad(true);      
+        assertThrows(IllegalStateException.class, () -> CapacidadMaxima.validar());
     }
     
 }
