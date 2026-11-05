@@ -14,14 +14,13 @@ public class AtributoDinamico {
         //(b) que el valor asignado sea consistente con el tipo
 
         //si es obligatorio y se instancia desde aca da error, ya que atributoDinamico no tiene valor
-        if(this.getObligatoriedad()){
+        if(this.esObligatorio()){
             throw new IllegalStateException("Es obligatorio y no tiene valor");
         }
     }
 
-    //en este caso no hay valor asigando
-    public boolean hayValorAsignado(){
-        return false;
+    private boolean esObligatorio(){
+        return this.getObligatoriedad();
     }
 
     public String getNombre() {

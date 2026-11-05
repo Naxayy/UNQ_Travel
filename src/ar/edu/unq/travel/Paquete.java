@@ -7,8 +7,8 @@ public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<Servicio>();
 	private int descuento;
 	
-	public Paquete(String nombre, String descripcion, int descuento) {
-		super(nombre, descripcion);
+	public Paquete(String nombre, String descripcion, int descuento, int codigo) {
+		super(nombre, descripcion, codigo);
 		this.descuento = descuento;
 	}
 	
