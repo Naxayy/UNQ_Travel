@@ -11,6 +11,8 @@ public class EnCheckin extends Estado {
 	public void cancelada(Reserva reserva) {
 		reserva.cambiarAEstado(new Cancelada());
 		reserva.cancelarCarrito();
+		//private int monto = reserva.costos() + reserva.tasas()
+		//reserva.nuevoVoucher(monto);
 		//necesito generar el voucher y usar reserva.costoDeServicio y reserva.tasasAdministrativas
 	}
 
