@@ -1,28 +1,31 @@
 package ar.edu.unq.travel;
 
 public class GeneradorDeVoucher implements Observer {
-    /* 
-    private int monto(Reserva reserva){
-        if(reserva.estadoAnterior() instanceof Checkin ){
-            reserva.costo() + reserva.tasas();
+    
+    
+    private double monto(Reserva reserva){
+        if(reserva.getEstadoAnterior() instanceof EnCheckin){
+            return reserva.costoDeServicio();
+        }else{
+            return reserva.costoDeServicio() + reserva.tasasAdministrativas();
         }
-        else
-    }
-    */
+    } 
    
     @Override
     public void update(Reserva observable) {
         if (this.validarEstado(observable)) {
-            System.out.println("Se genero un voucher y comprobante fiscal");
+            cliente.agregarVoucher(new Voucher(this.monto(observable)));
         }
     }
 
     public boolean validarEstado(Reserva observable) {
-        return observable.getEstado() instanceof Finalizada;
+        return observable.getEstado() instanceof Cancelada;
     }
 
 
 }
+
+//cuando ccreo un paquete tengo que ver si tiene cupo dispo
 
 
 /*

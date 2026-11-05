@@ -23,6 +23,10 @@ public class Reserva {
 	//HAY QUE MODELAR PASAJEROS Y DIRECCION
 
 	//-------
+	public Estado getEstadoAnterior(){
+		return this.estadoAnterior;
+	}
+
 	public double costoDeServicio(){
 		return this.carrito.costoDeServicio() ;
 	}
