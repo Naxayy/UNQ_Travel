@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import ar.edu.unq.travel.servicios.Paquete;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
@@ -45,7 +46,43 @@ public class PaqueteTest {
 		verify(noche).precioBase();
 	}
 
-	//holaa
+	@Test 
+	void precioBase(){
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+
+		when(noche.precioBase()).thenReturn(1200.00);
+		when(excursion.precioBase()).thenReturn(400.00);
+
+		assertEquals(1600.00, paqueteDePaquetes.precioBase());
+		verify(noche).precioBase();
+		verify(excursion).precioBase();
+	}
+
+	@Test 
+	void descuentoDelPaquete(){
+		assertEquals(10, paqueteDePaquetes.getDescuento());
+	}
+
+	@Test 
+	void serviciosDelPaquete(){
+		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
+	}
+
+	@Test
+	void listaDeServicios(){
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.quitarItem(excursion);
+
+		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
+	}
+
+	@Test
+	void cambiarDescuento(){
+		paqueteDePaquetes.setDescuento(20);
+
+		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
+	}
 
 }
 
