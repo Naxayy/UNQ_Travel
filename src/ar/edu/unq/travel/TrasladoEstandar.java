@@ -9,6 +9,9 @@ public class TrasladoEstandar extends Traslado {
     
     @Override
     public double calcularCosto(Reserva reserva){
-        return plataforma.estimarTraslado( reserva.pasajeros(), reserva.direccionDestino());
+        int cantPasajeros = reserva.pasajeros();
+        Direccion destino = reserva.direccionDestino();
+        return plataforma.estimarTraslado(cantPasajeros, destino);
     }
+
 }

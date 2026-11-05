@@ -1,7 +1,15 @@
 package ar.edu.unq.travel;
 
 public class GeneradorDeVoucher implements Observer {
-    
+    /* 
+    private int monto(Reserva reserva){
+        if(reserva.estadoAnterior() instanceof Checkin ){
+            reserva.costo() + reserva.tasas();
+        }
+        else
+    }
+    */
+   
     @Override
     public void update(Reserva observable) {
         if (this.validarEstado(observable)) {
@@ -10,7 +18,7 @@ public class GeneradorDeVoucher implements Observer {
     }
 
     public boolean validarEstado(Reserva observable) {
-        return observable.getEstado() instanceof Cancelada;
+        return observable.getEstado() instanceof Finalizada;
     }
 
 

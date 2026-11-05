@@ -4,6 +4,6 @@ public class TrasladoPunto extends Traslado {
 
     @Override
     public double calcularCosto(Reserva reserva){
-        return ;
+        return 0;
     }
 }

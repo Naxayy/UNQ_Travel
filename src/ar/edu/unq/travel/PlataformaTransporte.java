@@ -1,9 +1,7 @@
 package ar.edu.unq.travel;
 
-public class PlataformaTransporte {
+public interface PlataformaTransporte {
     
-    public float estimarTraslado(int cantidadPasajeros, Direccion direccionDestino){
-        return 0;
-    }
+    public float estimarTraslado(int cantidadPasajeros, Direccion direccionDestino);
 
 }

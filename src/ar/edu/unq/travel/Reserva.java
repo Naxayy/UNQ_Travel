@@ -6,20 +6,17 @@ public class Reserva {
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
 	private Estado estado;
-	private Estado estadoAnterior = estado;
+	private Estado estadoAnterior;
 	private List<Observer> observers = new ArrayList<Observer>();
-	private Carrito carrito ;
+	private Carrito carrito;
 	private Direccion direccionDestino;
 	//private Usuario usuario;
 
-	public nuevoVoucher(monto){
-		usuario.nuevoVoucher(monto);
-	}
-
-
-	public Reserva() {
+	public Reserva(Traslado traslado) {
 		this.estado = new Pendiente();
 		this.carrito = new Carrito();
+		this.metodoTraslado = traslado;
+		//preguntar :p
 
 	}
 
@@ -35,7 +32,7 @@ public class Reserva {
 	}
 
 	public int pasajeros(){
-		return 0;
+		return 0; //COMO CALCULO LOS PUTOS PASAJEROS
 	}
 
 	public Direccion direccionDestino(){

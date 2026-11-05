@@ -18,7 +18,7 @@ public class Carrito {
     }
 
     public double tasasAdministrativas(){
-        return 0;  //preguntar de donde saco ta?
+        return 0;  //anotar que asumimos unas tasas
     }
 
     public double costoDeServicio(){
