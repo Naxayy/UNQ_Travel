@@ -74,5 +74,12 @@ public class PaqueteTest {
 		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
 	}
 
+	@Test
+	void cambiarDescuento(){
+		paqueteDePaquetes.setDescuento(20);
+
+		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
+	}
+
 }
 
