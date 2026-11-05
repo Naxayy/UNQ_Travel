@@ -11,6 +11,8 @@ public abstract class Servicio {
         this.descripcion = descripcion;
     }
 	
+	// podria agregar tasas admi a cada servicio y que las sume 
+	
 	public abstract double precioBase();
 	
 	public abstract double precioFinal();
@@ -37,6 +39,10 @@ public abstract class Servicio {
 
 	private void decrementarCupo(int cant){
 		this.cupo = cupo - cant;
+	}
+
+	public void cancelar(){
+		this.cupo = cupo +1;
 	}
 }
 

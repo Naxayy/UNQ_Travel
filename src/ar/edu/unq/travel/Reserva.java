@@ -6,13 +6,15 @@ public class Reserva {
 	//private Estado estadoInicial;
 	//private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
-	private Estado estado = new Pendiente();
+	private Estado estado;
 	private List<Observer> observers = new ArrayList<Observer>();
-	private List<Servicio> carrito = new ArrayList<Servicio>();
+	private Carrito carrito ;
+	//private GeneradorDeVoucher voucher; ??????
 	
 	public Reserva() {
-		//La reserva tiene que resivir por parametro para ser creada el metodoTraslado y el medioDePago
-		//this.estado = new Pendiente();
+		this.estado = new Pendiente();
+		this.carrito = new Carrito();
+
 	}
 	
 	public void notifyObservers() {
@@ -50,15 +52,27 @@ public class Reserva {
 	}
 
 	public void agregarServicio(Servicio servicio){
-		estado.agregarServicio(this, servicio);
+		this.estado.agregarServicio(this,servicio);
 	} 
 
 	public void agregarAlCarrito(Servicio servicio){
-		carrito.add(servicio);
+		this.carrito.addServicio(servicio);
 	}
 
 	public void confirmarCarrito(){
-		carrito.forEach(producto -> producto.confirmar());
+		this.carrito.confirmar();
+	}
+
+	public void cancelarCarrito(){
+		this.carrito.cancelar();
+	}
+
+	public double costoDeServicio(){
+		return this.carrito.costoDeServicio() ;
+	}
+
+	public double tasasAdministrativas(){
+		return this.carrito.tasasAdministrativas();
 	}
 
 

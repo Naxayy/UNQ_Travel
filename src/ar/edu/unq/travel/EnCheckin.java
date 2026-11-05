@@ -10,7 +10,8 @@ public class EnCheckin extends Estado {
 	@Override
 	public void cancelada(Reserva reserva) {
 		reserva.cambiarAEstado(new Cancelada());
-		
+		reserva.cancelarCarrito();
+		//necesito generar el voucher y usar reserva.costoDeServicio y reserva.tasasAdministrativas
 	}
 
 }
