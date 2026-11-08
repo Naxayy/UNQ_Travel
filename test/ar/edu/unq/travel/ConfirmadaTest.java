@@ -5,9 +5,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.ciclo.EnCheckin;
-import ar.edu.unq.travel.ciclo.Pendiente;
-import ar.edu.unq.travel.ciclo.Confirmada;
+import ar.edu.unq.travel.ciclo.*;
 
 
 public class ConfirmadaTest {
