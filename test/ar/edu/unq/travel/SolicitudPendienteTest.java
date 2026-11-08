@@ -6,13 +6,19 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.servicios.*;
+
 public class SolicitudPendienteTest {
 
+	
 	Reserva reserva;
+	ServicioIndividual estadiaCancun;
 
 	@BeforeEach
 	void setUp() {
-		this.reserva = new Reserva();
+		this.reserva = mock(Reserva.class);
+		this.estadiaCancun = mock(ServicioIndividual.class);
 	}
 
 	void estadoInicial() {
@@ -44,7 +50,7 @@ public class SolicitudPendienteTest {
 	void invalidoDesdeInicial() {
 		//todos los pedidos de estados posterior a confirmado son invalidos
 		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkin();
+			reserva.enCheckin();
 		});
 		assertThrows(IllegalStateException.class, ()-> {
 			reserva.enCurso();
