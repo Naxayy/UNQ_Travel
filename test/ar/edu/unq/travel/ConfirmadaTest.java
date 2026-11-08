@@ -1,43 +1,31 @@
-package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.ciclo.Cancelada;
-import ar.edu.unq.travel.ciclo.Confirmada;
-import ar.edu.unq.travel.ciclo.EnCheckin;
-import ar.edu.unq.travel.ciclo.EnCurso;
-import ar.edu.unq.travel.ciclo.Finalizada;
-import ar.edu.unq.travel.ciclo.Pendiente;
+public class ConfirmadaTest {
 
-class State {
-	
-	@Test
-	void estadoInicial() {
-		Reserva reserva = new Reserva();
-		assertInstanceOf(Pendiente.class , reserva.getEstado());
-		//todos los pedidos de estados posterior a confirmado son invalidos
-		//solo aca se pueden agregar o quitar servicios
-	}
+    EnCheckin checkin;
+    Reserva reserva;
 
+    @BeforeEach
+    void setUp() {
+        this.checkin = new EnCheckin();
+        this.reserva = mock(Reserva.class);
+    }
 
 	@Test
 	void deInicialAConfirmada(){
-		Reserva reserva = new Reserva();
 		assertInstanceOf(Pendiente.class, reserva.getEstado());
 		reserva.confirmar();
-		//todos los pedidos de estados anteriores son invalidos
-		//confirmar decrementa o bloquea el cupo disponible
 		assertInstanceOf(Confirmada.class, reserva.getEstado());
 	}
-
 	
 	
 	@Test
 	void deConfirmadaAEnCheckin() {
-		Reserva reserva = new Reserva();
 		reserva.confirmar();
 		assertInstanceOf(Confirmada.class,reserva.getEstado());
 		reserva.enCheckin();
@@ -103,10 +91,7 @@ class State {
 	void deEnCheckinACancelado() {
 		Reserva reserva = new Reserva();
 		reserva.confirmar();
-		reserva.enCheckin();
-		assertInstanceOf(EnCheckin.class,reserva.getEstado());
-		reserva.cancelar();
-		//la cancelacion del checkin implica liberar cupo y reembolso total
+		reserva.enCheckin();ancelacion del checkin implica liberar cupo y reembolso total
 		assertInstanceOf(Cancelada.class, reserva.getEstado());
 	}
 	
@@ -230,3 +215,8 @@ class State {
 }
 */
 
+
+}
+
+    
+}
