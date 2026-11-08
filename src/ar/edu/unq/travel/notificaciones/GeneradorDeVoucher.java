@@ -1,31 +1,30 @@
 package ar.edu.unq.travel.notificaciones;
 
-import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.*;
 
 public class GeneradorDeVoucher implements Observer {
     
     
-    private double monto(Reserva reserva){
-        if(reserva.getEstadoAnterior() instanceof EnCheckin){
-            return reserva.costoDeServicio();
+    private double monto(Observable observable){
+        if(observable.getEstadoAnterior() instanceof EnCheckin){
+            return observable.costoDeServicio();
         }else{
-            return reserva.costoDeServicioConTasas();
+            return observable.costoDeServicioConTasas();
         }
     } 
    
     @Override
-    public void update(Reserva observable) {
+    public void update(Observable observable) {
         if (this.validarEstado(observable)) {
             this.generarVoucher(observable);
         }
     }
 
-    public boolean validarEstado(Reserva observable) {
+    public boolean validarEstado(Observable observable) {
         return observable.getEstado() instanceof Cancelada;
     }
 
-    private void generarVoucher(Reserva observable) {
+    private void generarVoucher(Observable observable) {
         new Voucher(this.monto(observable));
     }
 
