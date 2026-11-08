@@ -9,23 +9,27 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
-import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.servicios.*;
+
 
 public class ServicioIndividualTest {
 	private AtributoDinamico ratingEstrellas;
 
 	private ServicioIndividual noche;
 	private ServicioIndividual excursion;
+
+	private Categoria unaCategoria;
 	
 	@BeforeEach
 	void setUp() {
 		this.ratingEstrellas = mock(AtributoDinamico.class);
+		this.unaCategoria = mock(Categoria.class);
 
 		//servicio individual con un de atributo por parametro
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, this.ratingEstrellas, Alojamiento);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, unaCategoria, this.ratingEstrellas);
 
 		//servicio individual sin atributos
-		this.excursion = new ServicioIndividual("Excursion guiada museo" , 4000.00,"Descripcion", 2,Excursion);
+		this.excursion = new ServicioIndividual("Excursion guiada museo" , 4000.00,"Descripcion", 2, unaCategoria);
 	}
 
 	@Test
