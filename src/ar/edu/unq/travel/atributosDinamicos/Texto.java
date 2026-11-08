@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.atributosDinamicos;
 
 public class Texto extends Tipo{
     private String valor;

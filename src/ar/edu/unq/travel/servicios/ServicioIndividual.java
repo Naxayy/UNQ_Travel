@@ -3,7 +3,7 @@ package ar.edu.unq.travel.servicios;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.unq.travel.AtributoDinamico;
+import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.servicios.Categoria;
 
 public class ServicioIndividual extends Servicio{

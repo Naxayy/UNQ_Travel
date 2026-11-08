@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.atributosDinamicos;
 
 public class Numerico extends Tipo{
     private int valor;

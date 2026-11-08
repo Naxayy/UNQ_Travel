@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
+
 public class AtributoDinamicoTest {
 
     AtributoDinamico CapacidadMaxima;

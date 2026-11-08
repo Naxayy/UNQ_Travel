@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.atributosDinamicos.Numerico;
+
 public class TipoTest {
     Numerico ratingEstrellas;
 

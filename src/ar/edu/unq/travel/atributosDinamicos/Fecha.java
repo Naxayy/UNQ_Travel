@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.atributosDinamicos;
 import java.util.Date;
 
 public class Fecha extends Tipo {
