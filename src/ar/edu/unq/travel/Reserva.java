@@ -5,7 +5,9 @@ import java.util.List;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.Pendiente;
 import ar.edu.unq.travel.notificaciones.Observer;
+import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
+import ar.edu.unq.travel.traslados.Traslado;
 
 public class Reserva {
 	private Traslado metodoTraslado;
@@ -42,6 +44,10 @@ public class Reserva {
 
 	public double tasasAdministrativas(){
 		return this.carrito.tasasAdministrativas();
+	}
+
+	public double costoDeServicioConTasas(){
+		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
 	public int pasajeros(){
