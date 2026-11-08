@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import ar.edu.unq.travel.servicios.Categoria;
 import ar.edu.unq.travel.servicios.Paquete;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
 
@@ -14,6 +15,8 @@ public class PaqueteTest {
 	private ServicioIndividual noche;
 	private ServicioIndividual excursion;
 	private ServicioIndividual trasladoAH;
+	
+	private Categoria unaCategoria;
 	
 	private Paquete paqueteTravel;
 	private Paquete paqueteDePaquetes;
@@ -25,9 +28,10 @@ public class PaqueteTest {
 		this.excursion = mock(ServicioIndividual.class);
 		this.trasladoAH = mock(ServicioIndividual.class);
 		this.paqueteTravel = mock(Paquete.class);
+		this.unaCategoria = mock(Categoria.class);
 		
 		//SUT
-		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10,Excursion);
+		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10,unaCategoria);
 	}
 
 	@Test

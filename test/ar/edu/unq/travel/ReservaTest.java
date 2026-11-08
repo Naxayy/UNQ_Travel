@@ -6,18 +6,23 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.servicios.*; 
+
 class ReservaTest {
 
 	Reserva reserva;
 	ServicioIndividual estadiaCancun;
+	Traslado unTraslado;
 
 	@BeforeEach
 	void setUp() {
 		//DOC
 		this.estadiaCancun = mock(ServicioIndividual.class);
+		this.unTraslado = mock(Traslado.class);
 	
 		//SUT
-		this.reserva = new Reserva();
+		this.reserva = new Reserva(unTraslado);
 	}
 	
 	@Test
@@ -60,14 +65,14 @@ class ReservaTest {
 
 	@Test
 	void estadoEnChekin() {
-		resrva.confirmar();
+		reserva.confirmar();
 		reserva.enCheckin();
 		assertInstanceOf(EnCheckin.class , reserva.getEstado());
 	}
 
 	@Test
 	void estadoEnCurso() {
-		resrva.confirmar();
+		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
 		assertInstanceOf(EnCurso.class , reserva.getEstado());
@@ -75,7 +80,7 @@ class ReservaTest {
 
 	@Test
 	void estadoFinalizada() {
-		resrva.confirmar();
+		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
 		reserva.finalizar();

@@ -15,6 +15,10 @@ public class Carrito {
         this.lista.add(servicio);
     }
 
+    public void removeServicio(Servicio servicio){
+        this.lista.remove(servicio);
+    }
+
     public void confirmar(){
         this.lista.forEach(producto -> producto.confirmar());
     }
@@ -31,5 +35,9 @@ public class Carrito {
         return this.lista.stream()
             .mapToDouble(producto -> producto.precioFinal())
             .sum();
+    }
+
+    public List<Servicio> getServicios(){
+        return this.lista;
     }
 }

@@ -24,4 +24,9 @@ public class Pendiente extends Estado {
 	public void agregarServicio(Reserva reserva, Servicio servicio){
 		reserva.agregarAlCarrito(servicio);
 	}
+
+	@Override
+	public void quitarServicio(Reserva reserva, Servicio servicio){
+		reserva.eliminarDelCarrito(servicio);
+	}
 }

@@ -4,21 +4,22 @@ package ar.edu.unq.travel;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.servicios.Paquete;
-import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.servicios.*;
 
 class ServicioTest {
 	private ServicioIndividual noche;
 	private Paquete paqueteTravel;
+	private Categoria unaCategoria;
 	
 	@BeforeEach
 	void setUp() {
-
+		this.unaCategoria = mock(Categoria.class);
 		//al ser clase abstracta instancio sus dos clases hijas.
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, Alojamiento);
-		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10,Excursion);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, unaCategoria);
+		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10, unaCategoria);
 	}
 
 	@Test 
