@@ -16,4 +16,8 @@ public class ReporteDeCatalogo implements Visitor {
     public ElementoHtml visitHtml(ElementoHtml html) {
         return html;
     }
+
+    private void generarReporte() {
+        
+    }
 }
