@@ -1,7 +1,8 @@
 package ar.edu.unq.travel.servicios;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 import ar.edu.unq.travel.AtributoDinamico;
 
 public abstract class Servicio {
@@ -10,10 +11,9 @@ public abstract class Servicio {
 	private int cuposDisponibles;
 	private List<AtributoDinamico> atributoDinamico;
 	
-	public Servicio(String nombre, String descripcion, int cuposDisponibles) {
+	public Servicio(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cuposDisponibles = cuposDisponibles;
 		this.atributoDinamico = new ArrayList<AtributoDinamico>();
     }
 

@@ -15,8 +15,8 @@ public class ServicioIndividual extends Servicio{
 	//Cambiar atributos metodos ??
 	//private Proveedor provedor; 
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, int cuposDisponibles) {
-		super(nombre, descripcion, cuposDisponibles);
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria) {
+		super(nombre, descripcion);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;
@@ -26,8 +26,8 @@ public class ServicioIndividual extends Servicio{
 		return this.categoria == categoria;
 	}
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, AtributoDinamico atributo, int cuposDisponibles) {
-		super(nombre, descripcion, cuposDisponibles);
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, int codigo, Categoria categoria, AtributoDinamico atributo) {
+		super(nombre, descripcion);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;

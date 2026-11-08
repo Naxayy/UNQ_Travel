@@ -27,7 +27,7 @@ public class PaqueteTest {
 		this.paqueteTravel = mock(Paquete.class);
 		
 		//SUT
-		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10);
+		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10,Excursion);
 	}
 
 	@Test

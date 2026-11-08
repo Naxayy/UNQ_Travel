@@ -17,8 +17,8 @@ class ServicioTest {
 	void setUp() {
 
 		//al ser clase abstracta instancio sus dos clases hijas.
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1);
-		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, Alojamiento);
+		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10,Excursion);
 	}
 
 	@Test 

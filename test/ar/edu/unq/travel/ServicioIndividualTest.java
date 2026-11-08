@@ -21,10 +21,10 @@ public class ServicioIndividualTest {
 		this.ratingEstrellas = mock(AtributoDinamico.class);
 
 		//servicio individual con un de atributo por parametro
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, this.ratingEstrellas);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, this.ratingEstrellas, Alojamiento);
 
 		//servicio individual sin atributos
-		this.excursion = new ServicioIndividual("Excursion guiada museo" , 4000.00,"Descripcion", 2);
+		this.excursion = new ServicioIndividual("Excursion guiada museo" , 4000.00,"Descripcion", 2,Excursion);
 	}
 
 	@Test
