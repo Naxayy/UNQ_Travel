@@ -10,14 +10,14 @@ public class GeneradorDeVoucher implements Observer {
         if(reserva.getEstadoAnterior() instanceof EnCheckin){
             return reserva.costoDeServicio();
         }else{
-            return reserva.costoDeServicio() + reserva.tasasAdministrativas();
+            return reserva.costoDeServicioConTasas();
         }
     } 
    
     @Override
     public void update(Reserva observable) {
         if (this.validarEstado(observable)) {
-            //cliente.agregarVoucher(new Voucher(this.monto(observable)));
+            this.generarVoucher(observable);
         }
     }
 
@@ -25,6 +25,9 @@ public class GeneradorDeVoucher implements Observer {
         return observable.getEstado() instanceof Cancelada;
     }
 
+    private void generarVoucher(Reserva observable) {
+        new Voucher(this.monto(observable));
+    }
 
 }
 

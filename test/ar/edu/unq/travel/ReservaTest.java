@@ -7,7 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
-import ar.edu.unq.travel.servicios.*; 
+import ar.edu.unq.travel.servicios.*;
+import ar.edu.unq.travel.traslados.Traslado; 
 
 class ReservaTest {
 
