@@ -32,6 +32,10 @@ public class Reserva {
 		return this.estadoAnterior;
 	}
 
+	public List<Servicio> getServicios(){
+		return this.carrito.getServicios();
+	}
+
 	public double costoDeServicio(){
 		return this.carrito.costoDeServicio() ;
 	}
@@ -88,10 +92,18 @@ public class Reserva {
 	//-------
 	public void agregarServicio(Servicio servicio){
 		this.estado.agregarServicio(this,servicio);
-	} 
+	}
+
+	public void quitarServicio(Servicio servicio){
+		this.estado.quitarServicio(this,servicio);
+	}
 
 	public void agregarAlCarrito(Servicio servicio){
 		this.carrito.addServicio(servicio);
+	}
+
+	public void eliminarDelCarrito(Servicio servicio){
+		this.carrito.removeServicio(servicio);
 	}
 
 	public void confirmarCarrito(){

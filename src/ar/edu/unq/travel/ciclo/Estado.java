@@ -23,5 +23,8 @@ public abstract class Estado {
 	public void agregarServicio(Reserva reserva, Servicio servicio){
 		throw new IllegalStateException("");
 	}
+	public void quitarServicio(Reserva reserva, Servicio servicio){
+		throw new IllegalStateException("");
+	}
 	
 }
