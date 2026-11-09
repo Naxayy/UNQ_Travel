@@ -1,14 +1,19 @@
 package ar.edu.unq.travel;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
-import ar.edu.unq.travel.ciclo.*;
-import ar.edu.unq.travel.servicios.*;
-import ar.edu.unq.travel.traslados.Traslado; 
+import ar.edu.unq.travel.ciclo.Cancelada;
+import ar.edu.unq.travel.ciclo.Confirmada;
+import ar.edu.unq.travel.ciclo.EnCheckin; 
+import ar.edu.unq.travel.ciclo.EnCurso;
+import ar.edu.unq.travel.ciclo.Finalizada;
+import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.traslados.Traslado;
 
 class ReservaTest {
 
@@ -17,7 +22,7 @@ class ReservaTest {
 	Traslado unTraslado;
 
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		//DOC
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
@@ -28,7 +33,8 @@ class ReservaTest {
 	
 	@Test
 	void estadoInicial() {
-		assertInstanceOf(Pendiente.class , reserva.getEstado());
+		//assertInstanceOf(Pendiente.class , reserva.getEstado());
+		verify(reserva).getEstado(new Pendiente());
 	}
 
 	@Test
