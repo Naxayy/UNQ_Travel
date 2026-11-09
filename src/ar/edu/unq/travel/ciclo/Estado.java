@@ -21,10 +21,10 @@ public abstract class Estado {
 		throw new IllegalStateException("");
 	}
 	public void agregarServicio(Reserva reserva, Servicio servicio){
-		throw new IllegalStateException("");
+		throw new IllegalStateException("solo se pueden agregar servicios al iniciar la reserva");
 	}
 	public void quitarServicio(Reserva reserva, Servicio servicio){
-		throw new IllegalStateException("");
+		throw new IllegalStateException("solo se pueden quitar servicios al iniciar la reserva");
 	}
 	
 }

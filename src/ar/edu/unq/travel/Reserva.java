@@ -10,9 +10,10 @@ import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
 
 public class Reserva {
+	private Estado estado;
+
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
-	private Estado estado;
 	private Estado estadoAnterior;
 	private List<Observer> observers = new ArrayList<Observer>();
 	private Carrito carrito;
@@ -24,7 +25,67 @@ public class Reserva {
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		//preguntar :p
+	}
 
+	//-------
+
+	public void agregarServicio(Servicio servicio){
+		this.getEstado().agregarServicio(this,servicio);
+	}
+
+	public void quitarServicio(Servicio servicio){
+		this.getEstado().quitarServicio(this,servicio);
+	}
+
+	public void confirmar() {
+		estado.confirmar(this);
+	}
+	public void enCheckin() {
+		estado.enCheckin(this);
+	}
+	public void enCurso() {
+		estado.enCurso(this);
+	}
+	public void finalizar() {
+		estado.finalizada(this);
+	}
+	public void cancelar() {
+		estado.cancelada(this);
+	}
+
+	public boolean elCarritoContiene(Servicio servicio){
+		return getCarrito().contiene(servicio);
+	}
+
+	private Carrito getCarrito(){
+		return carrito;
+	}
+
+	//-------
+
+	public void cambiarAEstado(Estado estadoNuevo) {
+		this.estadoAnterior = estado;
+		this.estado = estadoNuevo;
+	}
+	
+	public void agregarAlCarrito(Servicio servicio){
+		this.carrito.addServicio(servicio);
+	}
+
+	public void eliminarDelCarrito(Servicio servicio){
+		this.carrito.removeServicio(servicio);
+	}
+
+	public void confirmarCarrito(){
+		this.carrito.confirmar();
+	}
+
+	public void cancelarCarrito(){
+		this.carrito.cancelar();
+	}
+
+	public Estado getEstado() {
+		return this.estado;
 	}
 
 	//HAY QUE MODELAR PASAJEROS Y DIRECCION
@@ -70,60 +131,6 @@ public class Reserva {
 	public void eliminarObserver(Observer observer) {
 		this.observers.remove(observer);
 	}
-
-	//-------
-	public Estado getEstado() {
-		return this.estado;
-	}
-	public void cambiarAEstado(Estado estadoNuevo) {
-		this.estadoAnterior = estado;
-		this.estado = estadoNuevo;
-	}
-	public void confirmar() {
-		estado.confirmar(this);
-	}
-	public void enCheckin() {
-		estado.enCheckin(this);
-	}
-	public void enCurso() {
-		estado.enCurso(this);
-	}
-	public void finalizar() {
-		estado.finalizada(this);
-	}
-	public void cancelar() {
-		estado.cancelada(this);
-	}
-
-	//-------
-	public void agregarServicio(Servicio servicio){
-		this.estado.agregarServicio(this,servicio);
-	}
-
-	public void quitarServicio(Servicio servicio){
-		this.estado.quitarServicio(this,servicio);
-	}
-
-	public void agregarAlCarrito(Servicio servicio){
-		this.carrito.addServicio(servicio);
-	}
-
-	public void eliminarDelCarrito(Servicio servicio){
-		this.carrito.removeServicio(servicio);
-	}
-
-	public void confirmarCarrito(){
-		this.carrito.confirmar();
-	}
-
-	public void cancelarCarrito(){
-		this.carrito.cancelar();
-	}
-
-	//---------
-
-	
-
 
 
 //la reserva se conecte a un catalogo
