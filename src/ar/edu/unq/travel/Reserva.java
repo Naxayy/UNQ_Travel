@@ -14,11 +14,9 @@ public class Reserva {
 
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
-	private Estado estadoAnterior;
 	private List<Observer> observers = new ArrayList<Observer>();
 	private Carrito carrito;
 	private Direccion direccionDestino;
-	//private Usuario usuario;
 
 	public Reserva(Traslado traslado) {
 		this.estado = new Pendiente();
