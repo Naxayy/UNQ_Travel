@@ -38,7 +38,7 @@ public class Reserva {
 	}
 
 	public void confirmar() {
-		estado.confirmar(this);
+		this.getEstado().confirmar(this);
 	}
 	public void enCheckin() {
 		estado.enCheckin(this);
