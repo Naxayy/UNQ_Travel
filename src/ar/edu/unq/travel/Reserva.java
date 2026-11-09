@@ -5,13 +5,14 @@ import java.util.List;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.Pendiente;
 import ar.edu.unq.travel.notificaciones.Observer;
+import ar.edu.unq.travel.notificaciones.Voucher;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
 
-public class Reserva {
+public class Reserva {	
+	
 	private Estado estado;
-
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
 	private List<Observer> observers = new ArrayList<Observer>();
@@ -51,6 +52,8 @@ public class Reserva {
 		estado.cancelada(this);
 	}
 
+	//-------
+
 	public boolean elCarritoContiene(Servicio servicio){
 		return getCarrito().contiene(servicio);
 	}
@@ -59,10 +62,7 @@ public class Reserva {
 		return carrito;
 	}
 
-	//-------
-
 	public void cambiarAEstado(Estado estadoNuevo) {
-		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
 	}
 	
@@ -87,11 +87,6 @@ public class Reserva {
 	}
 
 	//HAY QUE MODELAR PASAJEROS Y DIRECCION
-
-	//-------
-	public Estado getEstadoAnterior(){
-		return this.estadoAnterior;
-	}
 
 	public List<Servicio> getServicios(){
 		return this.carrito.getServicios();
@@ -126,13 +121,9 @@ public class Reserva {
 	public void agregarObserver(Observer observer) {
 		this.observers.add(observer);
 	}
+	
 	public void eliminarObserver(Observer observer) {
 		this.observers.remove(observer);
 	}
-
-
-//la reserva se conecte a un catalogo
-//el catalogo tiene una lista de servicios 
-// el carrito de la reserva tiene una lista de productos del catalogo
 }
 
