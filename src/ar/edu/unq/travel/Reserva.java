@@ -18,10 +18,11 @@ public class Reserva {
 	private Direccion direccionDestino;
 	//private Usuario usuario;
 
-	public Reserva(Traslado traslado) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
 		this.estado = new Pendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
+		this.metodoDePago = metodoDePago;
 		//preguntar :p
 
 	}
