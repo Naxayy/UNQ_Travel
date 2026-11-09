@@ -7,13 +7,13 @@ import ar.edu.unq.travel.ciclo.Pendiente;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
+import ar.edu.unq.travel.pagos.*;
 
 public class Reserva {
 	private Traslado metodoTraslado;
-	//private MedioDePago medioDePago;
+	private MetodoDePago metodoDePago;
 	private Estado estado;
 	private Estado estadoAnterior;
-
 	private Carrito carrito;
 	private Direccion direccionDestino;
 	//private Usuario usuario;
