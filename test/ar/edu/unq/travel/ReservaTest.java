@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.*;
 import ar.edu.unq.travel.traslados.Traslado; 
 
@@ -15,15 +16,17 @@ class ReservaTest {
 	Reserva reserva;
 	ServicioIndividual estadiaCancun;
 	Traslado unTraslado;
+	MetodoDePago unMetodoDePago;
 
 	@BeforeEach
 	void setUp() {
 		//DOC
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
+		this.unMetodoDePago = mock(MetodoDePago.class);
 	
 		//SUT
-		this.reserva = new Reserva(unTraslado);
+		this.reserva = new Reserva(unTraslado,unMetodoDePago);
 	}
 	
 	@Test
