@@ -61,10 +61,7 @@ public class Reserva {
 		return carrito;
 	}
 
-
-	//son funciones que utiliza el estado pero no quiero que lo llamen de otro lado
-	// HABLAR CON LOS CHICOS 
-	public void cambiarAEstado(Estado estadoNuevo) {
+	private void cambiarAEstado(Estado estadoNuevo) {
 		this.estado = estadoNuevo;
 	}
 	
