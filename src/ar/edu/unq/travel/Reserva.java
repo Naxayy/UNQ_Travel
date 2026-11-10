@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
-import ar.edu.unq.travel.ciclo.Pendiente;
+import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
@@ -19,7 +19,7 @@ public class Reserva {
 	private Direccion direccionDestino;
 
 	public Reserva(Traslado traslado) {
-		this.estado = new Pendiente();
+		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		//preguntar :p

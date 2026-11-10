@@ -27,8 +27,13 @@ class ReservaTest {
 	}
 	
 	@Test
-	void estadoInicial() {
-		assertInstanceOf(Pendiente.class , reserva.getEstado());
+	void elEstadoInicialdeReservaEsPendienteYNoOtro() {
+		assertEquals(Pendiente.class , reserva.getEstado());
+		assertNotEquals(null, null);
+		assertNotEquals
+		assertNotEquals
+		assertNotEquals
+		assertNotEquals
 	}
 
 	@Test

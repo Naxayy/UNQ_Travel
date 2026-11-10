@@ -3,9 +3,9 @@ package ar.edu.unq.travel.ciclo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.servicios.Servicio;
 
-public class Pendiente extends Estado {
+public class SolicitudPendiente extends Estado {
 	
-	public Pendiente() {}
+	public SolicitudPendiente() {}
 
 	@Override
 	public void agregarServicio(Reserva reserva, Servicio servicio){

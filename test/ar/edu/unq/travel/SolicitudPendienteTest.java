@@ -42,15 +42,15 @@ public class SolicitudPendienteTest {
 	void seConfirmaLaReserva() {
 		reserva.confirmar();
 		assertEquals(Confirmada.class, reserva.getEstado().getClass());
-		assertNotEquals(Pendiente.class, reserva.getEstado().getClass());
+		assertNotEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
 	}
 
 	@Test
 	void seCancelaLaReserva() {
-		assertEquals(Pendiente.class, reserva.getEstado().getClass());
+		assertEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
 		reserva.cancelar();
 		assertEquals(Cancelada.class, reserva.getEstado().getClass());
-		assertNotEquals(Pendiente.class, reserva.getEstado().getClass());
+		assertNotEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
 	}
 
 }

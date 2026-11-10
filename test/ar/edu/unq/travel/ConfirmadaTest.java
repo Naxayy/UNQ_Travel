@@ -22,7 +22,7 @@ public class ConfirmadaTest {
 
 	@Test
 	void cofirmarCarritoYRealizarCheckin() {
-		assertEquals(reserva.getEstado().getClass(), Pendiente.class);
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
 		this.reserva.confirmar();
 		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 		reserva.enCheckin();
@@ -31,7 +31,7 @@ public class ConfirmadaTest {
 
 	@Test
 	void cofirmarCarritoYCancelarlo() {
-		assertEquals(reserva.getEstado().getClass(), Pendiente.class);
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
 		this.reserva.confirmar();
 		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 		reserva.cancelar();
