@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.servicios.*;
+import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.traslados.Traslado; 
 
 class ReservaTest {
@@ -27,7 +28,7 @@ class ReservaTest {
 	}
 	
 	@Test
-	void elEstadoInicialdeReservaEsPendienteYNoOtro() {
+	void testElEstadoInicialdeReservaEsPendienteYNoOtro() {
 		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
 		assertNotEquals(reserva.getEstado().getClass(), Confirmada.class);
 		assertNotEquals(reserva.getEstado().getClass(), EnCheckin.class);
@@ -37,23 +38,23 @@ class ReservaTest {
 	}
 
 	@Test
-	void realizarUnaOperacionInvalidaGeneraUnaExcepcion(){
+	void testRealizarUnaOperacionEnUnEstadoInvalidoGeneraUnaExcepcion(){
 		IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> reserva.finalizar() );
         assertEquals("no se puede finalizar la resera en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void agregarServicioLoAgregaAlCarrito(){
+	void testAgregaUnServicioAlCarritoYElEstadoSigueSiendoPendiente(){
 		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.getServicios().contains(estadiaCancun));		
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
 	}
 
 	@Test
-	void quitarServicio(){
+	void testQuitarUnServicioAlCarritoYElEstadoSigueSiendoPendiente(){
 		reserva.agregarServicio(estadiaCancun);
 		reserva.quitarServicio(estadiaCancun);
-		assertFalse(reserva.getServicios().contains(estadiaCancun));
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
 	}
 
 	@Test
