@@ -17,4 +17,8 @@ public class Confirmada extends Estado {
 		reserva.cancelarCarrito();
 	}
 
+	@Override 
+	public void validarEstado(){
+		enviarMail();
+	}
 }

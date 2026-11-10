@@ -26,5 +26,4 @@ public abstract class Estado {
 	public void quitarServicio(Reserva reserva, Servicio servicio){
 		throw new IllegalStateException("solo se pueden quitar servicios al iniciar la reserva");
 	}
-	
 }

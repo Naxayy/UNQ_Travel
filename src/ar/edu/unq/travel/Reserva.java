@@ -4,8 +4,7 @@ import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.Pendiente;
-import ar.edu.unq.travel.notificaciones.Observer;
-import ar.edu.unq.travel.notificaciones.Voucher;
+import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
@@ -13,9 +12,9 @@ import ar.edu.unq.travel.traslados.Traslado;
 public class Reserva {	
 	
 	private Estado estado;
+	private Publicador publicador;
 	private Traslado metodoTraslado;
 	//private MedioDePago medioDePago;
-	private List<Observer> observers = new ArrayList<Observer>();
 	private Carrito carrito;
 	private Direccion direccionDestino;
 
@@ -110,20 +109,6 @@ public class Reserva {
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
-	}
-
-	//-------
-	public void notifyObservers() {
-		for (Observer observer : observers) {
-			observer.update(this);
-		}
-	}
-	public void agregarObserver(Observer observer) {
-		this.observers.add(observer);
-	}
-	
-	public void eliminarObserver(Observer observer) {
-		this.observers.remove(observer);
 	}
 }
 

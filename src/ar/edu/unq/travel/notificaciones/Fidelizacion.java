@@ -3,16 +3,10 @@ package ar.edu.unq.travel.notificaciones;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Cancelada;
 
-public class Fidelizacion implements Observer {
+public class Fidelizacion implements Observador {
 
     @Override
-    public void update(Reserva observable) {
-        if (this.validarEstado(observable)) {
-            System.out.println("Se ha cancelado la reserva, se le otorgara un descuento del 5%");
-        }
-    }
-
-    public boolean validarEstado(Reserva observable) {
-        return observable.getEstado() instanceof Cancelada;
+    public void update() {
+        
     }
 }

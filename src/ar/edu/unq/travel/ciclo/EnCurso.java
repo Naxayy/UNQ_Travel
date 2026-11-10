@@ -7,7 +7,6 @@ public class EnCurso extends Estado {
 	@Override
 	public void finalizada(Reserva reserva) {
 		reserva.cambiarAEstado(new Finalizada());
-		
 	}
 
 	@Override

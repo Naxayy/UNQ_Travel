@@ -1,11 +1,8 @@
 package ar.edu.unq.travel.notificaciones;
 
 import ar.edu.unq.travel.Reserva;
-import ar.edu.unq.travel.ciclo.Confirmada;
-import ar.edu.unq.travel.ciclo.EnCurso;
-import ar.edu.unq.travel.ciclo.Finalizada;
 
-public class NotificadorDeEmail implements Observer {
+public class NotificadorDeEmail implements Observador {
     private MailSender mail;
     private String direccionDestino;
     private Object adjunto;
@@ -16,13 +13,10 @@ public class NotificadorDeEmail implements Observer {
     }
 
     @Override
-    public void update(Reserva observable) {
-        if (this.validarEstado(observable)) {
-            mail.enviarMail(this.direccionDestino, "Actualización de reserva", "Su reserva ha sido actualizada a " + observable.getEstado().toString() + ".", adjunto);
-        }
+    public void update() {
     }
 
-    public boolean validarEstado(Reserva observable) {
-        return observable.getEstado() instanceof Confirmada || observable.getEstado() instanceof EnCurso || observable.getEstado() instanceof Finalizada;
+    public void enviarMail(){
+        //mail.enviarMail(this.direccionDestino, "Actualización de reserva", "Su reserva ha sido actualizada a " + observable.getEstado().toString() + ".", adjunto);
     }
 }
