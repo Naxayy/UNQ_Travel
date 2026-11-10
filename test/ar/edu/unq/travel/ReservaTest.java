@@ -28,22 +28,23 @@ class ReservaTest {
 	
 	@Test
 	void elEstadoInicialdeReservaEsPendienteYNoOtro() {
-		assertEquals(Pendiente.class , reserva.getEstado());
-		assertNotEquals(null, null);
-		assertNotEquals
-		assertNotEquals
-		assertNotEquals
-		assertNotEquals
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
+		assertNotEquals(reserva.getEstado().getClass(), Confirmada.class);
+		assertNotEquals(reserva.getEstado().getClass(), EnCheckin.class);
+		assertNotEquals(reserva.getEstado().getClass(), EnCurso.class);
+		assertNotEquals(reserva.getEstado().getClass(), Finalizada.class);
+		assertNotEquals(reserva.getEstado().getClass(), Cancelada.class);
 	}
 
 	@Test
-	void cambioDeEstado(){
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
+	void realizarUnaOperacionInvalidaGeneraUnaExcepcion(){
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> reserva.finalizar() );
+        assertEquals("no se puede finalizar la resera en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void agregarServicio(){
+	void agregarServicioLoAgregaAlCarrito(){
 		reserva.agregarServicio(estadiaCancun);
 		assertTrue(reserva.getServicios().contains(estadiaCancun));		
 	}
@@ -56,17 +57,9 @@ class ReservaTest {
 	}
 
 	@Test
-	void estadoConfirmada() {
+	void confirmarReserva() {
 		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
-	}
-
-	@Test
-	void estadoEnConfirmadaError() {
-		reserva.confirmar();
-		reserva.agregarServicio(estadiaCancun);
-		assertFalse(reserva.getServicios().contains(estadiaCancun));
-		
+		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 	}
 
 	@Test

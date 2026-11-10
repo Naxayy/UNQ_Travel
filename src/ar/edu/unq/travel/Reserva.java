@@ -39,73 +39,68 @@ public class Reserva {
 		this.getEstado().confirmar(this);
 	}
 	public void enCheckin() {
-		estado.enCheckin(this);
+		this.getEstado().enCheckin(this);
 	}
 	public void enCurso() {
-		estado.enCurso(this);
+		this.getEstado().enCurso(this);
 	}
 	public void finalizar() {
-		estado.finalizada(this);
+		this.getEstado().finalizada(this);
 	}
 	public void cancelar() {
-		estado.cancelada(this);
+		this.getEstado().cancelada(this);
 	}
 
 	//-------
 
-	public boolean elCarritoContiene(Servicio servicio){
-		return getCarrito().contiene(servicio);
+	public Estado getEstado() {
+		return this.estado;
 	}
 
 	private Carrito getCarrito(){
 		return carrito;
 	}
 
+
+	//son funciones que utiliza el estado pero no quiero que lo llamen de otro lado
+	// HABLAR CON LOS CHICOS 
 	public void cambiarAEstado(Estado estadoNuevo) {
 		this.estado = estadoNuevo;
 	}
 	
 	public void agregarAlCarrito(Servicio servicio){
-		this.carrito.addServicio(servicio);
+		this.getCarrito().addServicio(servicio);
 	}
 
 	public void eliminarDelCarrito(Servicio servicio){
-		this.carrito.removeServicio(servicio);
+		this.getCarrito().removeServicio(servicio);
 	}
 
 	public void confirmarCarrito(){
-		this.carrito.confirmar();
+		this.getCarrito().confirmar();
 	}
 
 	public void cancelarCarrito(){
-		this.carrito.cancelar();
-	}
-
-	public Estado getEstado() {
-		return this.estado;
-	}
-
-	//HAY QUE MODELAR PASAJEROS Y DIRECCION
-
-	public List<Servicio> getServicios(){
-		return this.carrito.getServicios();
+		this.getCarrito().cancelar();
 	}
 
 	public double costoDeServicio(){
-		return this.carrito.costoDeServicio() ;
+		return this.getCarrito().costoDeServicio() ;
 	}
 
 	public double tasasAdministrativas(){
-		return this.carrito.tasasAdministrativas();
+		return this.getCarrito().tasasAdministrativas();
 	}
 
 	public double costoDeServicioConTasas(){
-		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
+		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
+	/* Esto no va aca
 	public int pasajeros(){
-		return 0; //COMO CALCULO LOS PUTOS PASAJEROS
+		return 0; 
 	}
+	*/
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
