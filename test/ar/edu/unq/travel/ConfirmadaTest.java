@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.traslados.Traslado;
 
 public class ConfirmadaTest {
@@ -14,12 +15,14 @@ public class ConfirmadaTest {
     EnCheckin checkin;
     Reserva reserva;
 	Traslado unTraslado;
+	MetodoDePago unMetodoDePago;
 
     @BeforeEach
     void setUp() {
         this.checkin = new EnCheckin();
         this.reserva = mock(Reserva.class);
         this.unTraslado = mock(Traslado.class);
+		this.unMetodoDePago = mock(MetodoDePago.class);
     }
 
 	@Test
@@ -43,7 +46,7 @@ public class ConfirmadaTest {
 		
 	@Test
 	void deCheckinACurso() {
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		reserva.confirmar();
 		reserva.enCheckin();
 		assertInstanceOf(EnCheckin.class ,reserva.getEstado());
@@ -56,7 +59,7 @@ public class ConfirmadaTest {
 
 	@Test
 	void deCursoAFinalizada() {
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
@@ -73,7 +76,7 @@ public class ConfirmadaTest {
 	
 	@Test
 	void estadoInicialACancelado() {
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		assertInstanceOf(Pendiente.class , reserva.getEstado());
 		reserva.cancelar();
 		assertInstanceOf(Cancelada.class, reserva.getEstado());
@@ -83,7 +86,7 @@ public class ConfirmadaTest {
 
 	@Test
 	void deConfirmadaACancelado(){
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		reserva.confirmar();
 		assertInstanceOf(Confirmada.class,reserva.getEstado());
 		reserva.cancelar();
@@ -95,7 +98,7 @@ public class ConfirmadaTest {
 	
 	@Test
 	void deEnCheckinACancelado() {
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		reserva.confirmar();
 		reserva.enCheckin();
 		//la cancelacion del checkin implica liberar cupo y reembolso total
@@ -106,7 +109,7 @@ public class ConfirmadaTest {
 	
 	@Test
 	void deCursoACancelado() {
-		Reserva reserva = new Reserva(unTraslado);
+		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
 		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
