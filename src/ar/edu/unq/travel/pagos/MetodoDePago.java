@@ -1,7 +1,6 @@
 package ar.edu.unq.travel.pagos;
 
 public abstract class MetodoDePago {
-    private String codigoTransaccion;
 
     public void procesarPago() {
         this.validarDatos();
