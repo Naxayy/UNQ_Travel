@@ -1,8 +1,23 @@
 package ar.edu.unq.travel.pagos;
 
 public class TransferenciaBancaria extends MetodoDePago {
-    public void validarDatos() {};
-    public void reservarFondos() {};
-    public void ejecutarTransaccion() {};
-    public void notificarResultado() {};
+    private TransferenciaBancariaAPI api;
+    private String cbuCvu;
+    private String alias;
+
+    public void validarDatos() {
+        api.validarDatos(cbuCvu, alias);
+    };
+
+    public void reservarFondos() {
+        //no aplica
+    };
+
+    public void ejecutarTransaccion() {
+        api.transferenciaInmediataOProgramada();
+    };
+
+    public void notificarResultado() {
+
+    };
 }

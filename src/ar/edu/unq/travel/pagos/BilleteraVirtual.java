@@ -1,8 +1,24 @@
 package ar.edu.unq.travel.pagos;
 
 public class BilleteraVirtual extends MetodoDePago {
-    public void validarDatos() {};
-    public void reservarFondos() {};
-    public void ejecutarTransaccion() {};
-    public void notificarResultado() {};
+    private BilleteraVirtualAPI api;
+    private double saldo;
+    private String vendedor;
+
+    public void validarDatos() {
+        api.haySaldoSuficiente(saldo);
+    };
+
+    public void reservarFondos() {
+        api.bloquearSaldoHastaConfirmar();
+    };
+
+    public void ejecutarTransaccion() {
+        api.ejecutarTransaccion(vendedor);
+    };
+
+    @Override
+    public void notificarResultado() {
+        api.notificacionPush();
+    };
 }
