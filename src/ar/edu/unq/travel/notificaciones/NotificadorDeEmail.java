@@ -21,7 +21,7 @@ public class NotificadorDeEmail implements Observer {
         }
     }
 
-    public boolean validarEstado(Observable observable) {
+    private boolean validarEstado(Observable observable) {
         return observable.getEstado() instanceof Confirmada || observable.getEstado() instanceof EnCurso || observable.getEstado() instanceof Finalizada;
     }
 }

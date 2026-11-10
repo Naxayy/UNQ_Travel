@@ -20,7 +20,7 @@ public class GeneradorDeVoucher implements Observer {
         }
     }
 
-    public boolean validarEstado(Observable observable) {
+    private boolean validarEstado(Observable observable) {
         return observable.getEstado() instanceof Cancelada;
     }
 
