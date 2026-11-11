@@ -58,38 +58,38 @@ class ReservaTest {
 	}
 
 	@Test
-	void confirmarReserva() {
+	void testConfirmarReservaYElEstadoCambiaAConfirmada() {
 		reserva.confirmar();
 		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 	}
 
 	@Test
-	void estadoEnChekin() {
+	void testRealizarChekinDeReservaYElEstadoCambiaACheckIn() {
 		reserva.confirmar();
 		reserva.enCheckin();
-		assertInstanceOf(EnCheckin.class , reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), EnCheckin.class);
 	}
 
 	@Test
-	void estadoEnCurso() {
+	void testReservaEnCursoYElEstadoCambiaAEnCurso() {
 		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
-		assertInstanceOf(EnCurso.class , reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), EnCurso.class);
 	}
 
 	@Test
-	void estadoFinalizada() {
+	void testReservaFinalizadaYElEstadoCambiaAFinalizada() {
 		reserva.confirmar();
 		reserva.enCheckin();
 		reserva.enCurso();
 		reserva.finalizar();
-		assertInstanceOf(Finalizada.class , reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), Finalizada.class);
 	}
 
 	@Test
-	void estadoCancelada() {
+	void testCancelarReservaYElEstadoCambiaACancelada() {
 		reserva.cancelar();
-		assertInstanceOf(Cancelada.class , reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), Cancelada.class);
 	}
 }
