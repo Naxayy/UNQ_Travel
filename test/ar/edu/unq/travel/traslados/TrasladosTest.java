@@ -10,7 +10,7 @@ import ar.edu.unq.travel.traslados.TrasladoEstandar;
 import ar.edu.unq.travel.traslados.TrasladoPunto;
 import ar.edu.unq.travel.traslados.TrasladoVip;
 
-class Traslados {
+class TrasladosTest {
 
 	private TrasladoEstandar trasladoEstandar;
 	private TrasladoVip trasladoVip;
