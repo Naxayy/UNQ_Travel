@@ -26,11 +26,9 @@ public class SolicitudPendiente extends Estado {
 
 	@Override
 	public void confirmar() {
-		this.getReserva().confirmarCarrito();
-
 		Confirmada confirmada = new Confirmada(this.getReserva());
-
 		this.getReserva().cambiarAEstado(confirmada);
+		this.getReserva().confirmarCarrito();
 	}	
 	
 	@Override

@@ -15,7 +15,8 @@ public class Confirmada extends Estado {
 
 	@Override
 	public void enCheckin() {
-		this.getReserva().cambiarAEstado(new EnCheckin());
+		Confirmada confirmada = new Confirmada(this.getReserva());
+		this.getReserva().cambiarAEstado(confirmada);
 	}
 
 	@Override

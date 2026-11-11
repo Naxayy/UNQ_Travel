@@ -3,19 +3,26 @@ package ar.edu.unq.travel.ciclo;
 import ar.edu.unq.travel.Reserva;
 
 public class EnCheckin extends Estado {
+	private Reserva reserva;
 
-	public EnCheckin(){}
+	public EnCheckin(Reserva reserva) {
+		this.reserva = reserva;
+	}
 
-	@Override
-	public void enCurso(Reserva reserva) {
-		reserva.cambiarAEstado(new EnCurso());
+	private Reserva getReserva(){
+		return this.reserva;
 	}
 
 	@Override
-	public void cancelada(Reserva reserva) {
-		reserva.cambiarAEstado(new Cancelada());
-		reserva.cancelarCarrito();
-		//devolver costo de los servicios y el de las tasas
+	public void enCurso() {
+		EnCurso enCurso = new EnCurso(this.getReserva());
+		this.getReserva().cambiarAEstado(enCurso);
+	}
+
+	@Override
+	public void cancelada() {
+		this.getReserva().cambiarAEstado(new Cancelada());
+		this.getReserva().cancelarCarrito();
 	}
 
 
