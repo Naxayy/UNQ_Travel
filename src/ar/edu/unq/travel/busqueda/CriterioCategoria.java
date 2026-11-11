@@ -1,7 +1,7 @@
 package ar.edu.unq.travel.busqueda;
 
 import ar.edu.unq.travel.servicios.Servicio;
-import ar.edu.unq.travel.servicios.Categoria;
+import ar.edu.unq.travel.categoria.Categoria;
 
 public class CriterioCategoria implements CriterioBusqueda {
     private Categoria categoriaEsperada;

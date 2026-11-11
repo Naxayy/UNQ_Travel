@@ -3,6 +3,8 @@ package ar.edu.unq.travel.servicios;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.travel.categoria.*;
+
 public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<Servicio>();
 	private int descuento;

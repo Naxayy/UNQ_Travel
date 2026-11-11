@@ -9,6 +9,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
+import ar.edu.unq.travel.categoria.*;
 
 
 public class ServicioIndividualTest {

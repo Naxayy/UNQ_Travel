@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.categoria.*;
+
 class ServicioTest {
 	private ServicioIndividual noche;
 	private Paquete paqueteTravel;

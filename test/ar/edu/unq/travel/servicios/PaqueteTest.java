@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.servicios.Categoria;
+import ar.edu.unq.travel.categoria.*;
 import ar.edu.unq.travel.servicios.Paquete;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
 
