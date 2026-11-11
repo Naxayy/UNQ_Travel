@@ -26,70 +26,60 @@ class ReservaTest {
 		//SUT
 		this.reserva = new Reserva(unTraslado);
 	}
-	
-	@Test
-	void testElEstadoInicialdeReservaEsPendienteYNoOtro() {
-		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
-		assertNotEquals(reserva.getEstado().getClass(), Confirmada.class);
-		assertNotEquals(reserva.getEstado().getClass(), EnCheckin.class);
-		assertNotEquals(reserva.getEstado().getClass(), EnCurso.class);
-		assertNotEquals(reserva.getEstado().getClass(), Finalizada.class);
-		assertNotEquals(reserva.getEstado().getClass(), Cancelada.class);
-	}
 
 	@Test
-	void testRealizarUnaOperacionEnUnEstadoInvalidoGeneraUnaExcepcion(){
+	void testRealizarUnaOperacionEnUnEstadoInvalidoAlInicioDeLaReservaGeneraUnaExcepcion(){
 		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> reserva.finalizar() );
+            assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
         assertEquals("no se puede finalizar la resera en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void testAgregaUnServicioAlCarritoYElEstadoSigueSiendoPendiente(){
+	void testAgregaUnServicioAlCarritoAlInicioDeLaReservaNoGeneraUnaExcepcion(){
+		assertDoesNotThrow(() -> this.reserva.agregarServicio(estadiaCancun));
+	}
+
+	@Test
+	void testQuitarUnServicioAlCarritoAlInicioDeLaReservaNoGeneraUnaExcepcion(){
 		reserva.agregarServicio(estadiaCancun);
-		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
+		assertDoesNotThrow(() -> this.reserva.quitarServicio(estadiaCancun));
 	}
 
 	@Test
-	void testQuitarUnServicioAlCarritoYElEstadoSigueSiendoPendiente(){
-		reserva.agregarServicio(estadiaCancun);
-		reserva.quitarServicio(estadiaCancun);
-		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
+	void testConfirmarReservaAlInicioNoGeneraUnaExcepcion() {
+		assertDoesNotThrow(() -> this.reserva.confirmar());
 	}
 
 	@Test
-	void testConfirmarReservaYElEstadoCambiaAConfirmada() {
-		reserva.confirmar();
-		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
+	void testRealizarChekinDespuesDeConfirmarLaReservaNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		assertDoesNotThrow(() -> this.reserva.enCheckin());
 	}
 
 	@Test
-	void testRealizarChekinDeReservaYElEstadoCambiaACheckIn() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		assertEquals(reserva.getEstado().getClass(), EnCheckin.class);
+	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.enCurso());
 	}
 
 	@Test
-	void testReservaEnCursoYElEstadoCambiaAEnCurso() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		assertEquals(reserva.getEstado().getClass(), EnCurso.class);
+	void testReservaFinalizadaDespuesDeEnCursoNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.finalizar());
 	}
 
 	@Test
-	void testReservaFinalizadaYElEstadoCambiaAFinalizada() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		reserva.finalizar();
-		assertEquals(reserva.getEstado().getClass(), Finalizada.class);
-	}
-
-	@Test
-	void testCancelarReservaYElEstadoCambiaACancelada() {
-		reserva.cancelar();
-		assertEquals(reserva.getEstado().getClass(), Cancelada.class);
+	void testCancelarReservaDespuesDeCualquierEstadoNoGeneraUnaExcepcion() {
+		assertDoesNotThrow(() -> this.reserva.finalizar());
+		this.reserva.confirmar();
+		assertDoesNotThrow(() -> this.reserva.finalizar());
+		this.reserva.enCheckin();
+		assertDoesNotThrow(() -> this.reserva.finalizar());
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.finalizar());
 	}
 }

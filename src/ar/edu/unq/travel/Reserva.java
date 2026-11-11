@@ -97,10 +97,10 @@ public class Reserva {
 	public int pasajeros(){
 		return 0; 
 	}
-	*/
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
 	}
+	*/
 }
 
