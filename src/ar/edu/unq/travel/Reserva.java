@@ -19,7 +19,7 @@ public class Reserva {
 	private Direccion direccionDestino;
 
 	public Reserva(Traslado traslado) {
-		this.estado = new SolicitudPendiente(this);
+		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		//preguntar :p
@@ -28,27 +28,27 @@ public class Reserva {
 	//-------
 
 	public void agregarServicio(Servicio servicio){
-		this.getEstado().agregarServicio(servicio);
+		this.getEstado().agregarServicio(this, servicio);
 	}
 
 	public void quitarServicio(Servicio servicio){
-		this.getEstado().quitarServicio(servicio);
+		this.getEstado().quitarServicio(this, servicio);
 	}
 
 	public void confirmar() {
-		this.getEstado().confirmar();
+		this.getEstado().confirmar(this);
 	}
 	public void enCheckin() {
-		this.getEstado().enCheckin();
+		this.getEstado().enCheckin(this);
 	}
 	public void enCurso() {
-		this.getEstado().enCurso();
+		this.getEstado().enCurso(this);
 	}
 	public void finalizar() {
-		this.getEstado().finalizada();
+		this.getEstado().finalizada(this);
 	}
 	public void cancelar() {
-		this.getEstado().cancelada();
+		this.getEstado().cancelada(this);
 	}
 
 	//-------

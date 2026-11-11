@@ -74,12 +74,12 @@ class ReservaTest {
 
 	@Test
 	void testCancelarReservaDespuesDeCualquierEstadoNoGeneraUnaExcepcion() {
-		assertDoesNotThrow(() -> this.reserva.finalizar());
+		assertDoesNotThrow(() -> this.reserva.cancelar());
 		this.reserva.confirmar();
-		assertDoesNotThrow(() -> this.reserva.finalizar());
+		assertDoesNotThrow(() -> this.reserva.cancelar());
 		this.reserva.enCheckin();
-		assertDoesNotThrow(() -> this.reserva.finalizar());
+		assertDoesNotThrow(() -> this.reserva.cancelar());
 		this.reserva.enCurso();
-		assertDoesNotThrow(() -> this.reserva.finalizar());
+		assertDoesNotThrow(() -> this.reserva.cancelar());
 	}
 }

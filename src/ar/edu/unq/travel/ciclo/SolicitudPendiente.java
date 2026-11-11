@@ -4,35 +4,29 @@ import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class SolicitudPendiente extends Estado {
-	private Reserva reserva;
+	
+	public SolicitudPendiente() {}
 
-	public SolicitudPendiente(Reserva reserva) {
-		this.reserva = reserva;
-	}
-
-	private Reserva getReserva(){
-		return this.reserva;
+	@Override
+	public void agregarServicio(Reserva reserva, Servicio servicio){
+		reserva.agregarAlCarrito(servicio);
 	}
 
 	@Override
-	public void agregarServicio(Servicio servicio){
-		this.getReserva().agregarAlCarrito(servicio);
+	public void quitarServicio(Reserva reserva, Servicio servicio){
+		reserva.eliminarDelCarrito(servicio);
 	}
 
 	@Override
-	public void quitarServicio(Servicio servicio){
-		this.getReserva().eliminarDelCarrito(servicio);
-	}
-
-	@Override
-	public void confirmar() {
-		Confirmada confirmada = new Confirmada(this.getReserva());
-		this.getReserva().cambiarAEstado(confirmada);
-		this.getReserva().confirmarCarrito();
+	public void confirmar(Reserva reserva) {
+		Confirmada confirmada = new Confirmada();
+		reserva.cambiarAEstado(confirmada);
+		reserva.confirmarCarrito();
 	}	
 	
 	@Override
-	public void cancelada() {
-		this.getReserva().cambiarAEstado(new Cancelada());
+	public void cancelada(Reserva reserva) {
+		Cancelada cancelada = new Cancelada();
+		reserva.cambiarAEstado(cancelada);
 	}
 }
