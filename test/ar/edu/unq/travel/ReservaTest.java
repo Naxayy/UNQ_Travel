@@ -3,7 +3,6 @@ package ar.edu.unq.travel;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 import ar.edu.unq.travel.ciclo.*;
@@ -58,9 +57,10 @@ class ReservaTest {
 
 	@Test
 	void estadoEnConfirmadaError() {
-		reserva.confirmar();
-		reserva.agregarServicio(estadiaCancun);
-		assertFalse(reserva.getServicios().contains(estadiaCancun));
+		reserva.confirmar();	
+		assertThrows(IllegalStateException.class, () -> {
+			reserva.agregarServicio(estadiaCancun);
+		});
 		
 	}
 

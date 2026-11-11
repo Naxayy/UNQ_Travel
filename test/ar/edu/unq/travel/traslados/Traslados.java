@@ -18,7 +18,7 @@ class Traslados {
 	private PlataformaTransporte plataformaTraslado = mock(PlataformaTransporte.class);
 	
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		trasladoEstandar = new TrasladoEstandar(plataformaTraslado);
 		trasladoVip = new TrasladoVip(10, 500);
 		trasladoConPuntoDeEncuentro = new TrasladoPunto();
