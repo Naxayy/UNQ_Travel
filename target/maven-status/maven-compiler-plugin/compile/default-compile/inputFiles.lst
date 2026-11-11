@@ -1,11 +1,54 @@
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Cancelada.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Confirmada.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\EnCheckin.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\EnCurso.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Estado.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Finalizada.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Paquete.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Pendiente.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Reserva.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\Servicio.java
-C:\Users\fidelia\Desktop\Cursada 2026 s2\POO2\TP integrador\UNQ_Travel\src\ar\edu\unq\travel\ServicioIndividual.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\AtributoDinamico.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\Booleano.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\Fecha.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\Numerico.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\Texto.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\atributosDinamicos\Tipo.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioBusqueda.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioCategoria.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioComplejo.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioDisponibilidad.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioNombre.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\CriterioPrecioMaximo.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorAND.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorNOT.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorOR.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\Carrito.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\Catalogo.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\categoria\Alojamiento.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\categoria\Categoria.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\categoria\Excursion.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\Cancelada.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\Confirmada.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\EnCheckin.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\EnCurso.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\Estado.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\Finalizada.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\ciclo\Pendiente.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\Fidelizacion.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\GeneradorDeVoucher.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\MailSender.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\NotificadorDeEmail.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\Observable.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\Observer.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\notificaciones\Voucher.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\plataformaTransporte\Direccion.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\plataformaTransporte\PlataformaTransporte.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\Element.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ElementoCsv.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ElementoHtml.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ElementoTxt.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ReporteDeCatalogo.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ReporteDeCupos.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\ServicioMasReservado.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\reportes\Visitor.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\Reserva.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\servicios\Categoria.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\servicios\CategoriaAlojamiento.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\servicios\Paquete.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\servicios\Servicio.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\servicios\ServicioIndividual.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\traslados\Traslado.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\traslados\TrasladoEstandar.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\traslados\TrasladoPunto.java
+C:\Users\Rebeca\Desktop\nico\UNQ_Travel\src\ar\edu\unq\travel\traslados\TrasladoVip.java

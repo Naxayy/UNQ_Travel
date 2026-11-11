@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.traslados;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.plataformaTransporte.PlataformaTransporte;
-import ar.edu.unq.travel.traslados.TrasladoEstandar;
+import ar.edu.unq.travel.Reserva;
 
 public class TrasladoEstandarTest {
     Reserva unaReserva;

@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
-
-import ar.edu.unq.travel.servicios.*;
 
 class ServicioTest {
 	private ServicioIndividual noche;

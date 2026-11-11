@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.atributosDinamicos;
 
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;

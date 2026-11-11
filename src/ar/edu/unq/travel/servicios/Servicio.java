@@ -14,7 +14,7 @@ public abstract class Servicio {
 	public Servicio(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-		this.atributoDinamico = new ArrayList<AtributoDinamico>();
+		this.atributoDinamico = new ArrayList<>();
     }
 
 	public boolean hayDisponibilidad() {

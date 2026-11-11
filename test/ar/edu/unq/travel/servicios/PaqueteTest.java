@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.servicios;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
