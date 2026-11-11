@@ -2,13 +2,12 @@ package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
 
-import static org.mockito.Mockito.mock;
-
+import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 import ar.edu.unq.travel.ciclo.*;
-import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.servicios.*;
 import ar.edu.unq.travel.traslados.Traslado;
 
 class ReservaTest {
@@ -29,7 +28,7 @@ class ReservaTest {
 	
 	@Test
 	void estadoInicial() {
-		assertInstanceOf(Pendiente.class, reserva);
+		assertInstanceOf(Pendiente.class, reserva.getEstado());
 	}
 
 	@Test
