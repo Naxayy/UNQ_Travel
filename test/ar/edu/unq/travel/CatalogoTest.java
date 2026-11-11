@@ -3,11 +3,13 @@ package ar.edu.unq.travel;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.busqueda.CriterioBusqueda;
-import ar.edu.unq.travel.servicios.*;;
+import ar.edu.unq.travel.busqueda.*;
+import ar.edu.unq.travel.servicios.*;
 
 class CatalogoTest {
     
@@ -33,5 +35,19 @@ class CatalogoTest {
         
         assertTrue(miCatalogo.getItems().contains(vuelo));
         assertTrue(miCatalogo.getItems().contains(alojamiento));
+    }
+
+    @Test
+    void busquedaFiltrado() {
+        miCatalogo.agregarItem(vuelo);
+        miCatalogo.agregarItem(alojamiento);
+
+        when(condicion.satisface(vuelo)).thenReturn(true);
+        when(condicion.satisface(alojamiento)).thenReturn(false);
+        
+        assertEquals(
+            List.of(vuelo),
+            miCatalogo.busqueda(condicion)
+        );
     }
 }
