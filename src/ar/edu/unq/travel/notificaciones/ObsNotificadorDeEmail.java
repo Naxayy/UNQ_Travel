@@ -8,7 +8,8 @@ public class ObsNotificadorDeEmail implements Observador {
     private String direccionDestino;
     private Object adjunto;
 
-    public ObsNotificadorDeEmail(MailSender mail, String direccionDestino) {
+    public ObsNotificadorDeEmail(MailSender mail, String direccionDestino,Reserva reserva) {
+        this.reserva= reserva;
         this.mail = mail;
         this.direccionDestino = direccionDestino;
     }
