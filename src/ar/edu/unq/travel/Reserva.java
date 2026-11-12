@@ -89,7 +89,6 @@ public class Reserva {
 		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
-	/* Esto no va aca
 	public int pasajeros(){
 		return 0; 
 	}
@@ -97,6 +96,5 @@ public class Reserva {
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
 	}
-	*/
 }
  
