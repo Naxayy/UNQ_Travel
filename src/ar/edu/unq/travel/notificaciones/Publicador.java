@@ -7,9 +7,11 @@ import java.util.Observer;
 public class Publicador {
     private List<Observador> observadores = new ArrayList<Observador>();
 
+	public Publicador(){}
+
 	public void notificarAObservadores() {
 		for (Observador observador : observadores) {
-			observador.update();
+			observador.actualizar();
 		}
 	}
 	public void agregarObservador(Observador observador) {

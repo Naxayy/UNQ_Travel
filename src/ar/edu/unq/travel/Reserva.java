@@ -37,6 +37,7 @@ public class Reserva {
 
 	public void confirmar() {
 		this.getEstado().confirmar(this);
+		this.getPublicador().actualizar();
 	}
 	public void enCheckin() {
 		this.getEstado().enCheckin(this);

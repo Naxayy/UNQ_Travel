@@ -13,7 +13,7 @@ public class NotificadorDeEmail implements Observador {
     }
 
     @Override
-    public void update() {
+    public void actualizar() {
     }
 
     public void enviarMail(){

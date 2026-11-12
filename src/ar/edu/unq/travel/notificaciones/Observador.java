@@ -4,5 +4,5 @@ import ar.edu.unq.travel.Reserva;
 
 public interface Observador {
 
-    public void update();
+    public void actualizar();
 }

@@ -5,8 +5,10 @@ import ar.edu.unq.travel.ciclo.Cancelada;
 
 public class Fidelizacion implements Observador {
 
+    public Fidelizacion(){}
+
     @Override
-    public void update() {
+    public void actualizar() {
         
     }
 }

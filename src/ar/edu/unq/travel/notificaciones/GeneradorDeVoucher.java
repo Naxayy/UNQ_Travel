@@ -5,11 +5,13 @@ import ar.edu.unq.travel.ciclo.*;
 
 public class GeneradorDeVoucher implements Observador {
 
-    private Voucher generasrVaucher(Double monto){
+    public GeneradorDeVoucher(){}
+
+    private Voucher generarVaucher(Double monto){
         return new Voucher(monto);
     } 
    
     @Override
-    public void update() {
+    public void actualizar() {
     }
 }
