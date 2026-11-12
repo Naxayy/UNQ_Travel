@@ -1,6 +1,9 @@
 package ar.edu.unq.travel.notificaciones;
+import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.ciclo.Estado;
 
 public class ObsNotificadorDeEmail implements Observador {
+    private Reserva reserva;
     private MailSender mail;
     private String direccionDestino;
     private Object adjunto;
@@ -12,6 +15,11 @@ public class ObsNotificadorDeEmail implements Observador {
 
     @Override
     public void actualizar() {
+        Estado estado = reserva.getEstado();
+        if(estado.esGeneradorDeEmail()){
+            this.enviarMail();
+        }
+
     }
 
     public void enviarMail(){
