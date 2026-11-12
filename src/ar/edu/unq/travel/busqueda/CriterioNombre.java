@@ -11,6 +11,6 @@ public class CriterioNombre implements CriterioBusqueda {
 
     @Override
     public boolean satisface(Servicio item) {
-        return item.getNombre().contains(this.textoBuscado);
+        return item.getNombre().toLowerCase().contains(this.textoBuscado.toLowerCase());
     }
 }

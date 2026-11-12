@@ -9,5 +9,6 @@
         ".mvn": true,
         "mvnw": true,
         "mvnw.cmd": true
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }

@@ -1,7 +1,5 @@
 package ar.edu.unq.travel.notificaciones;
 
-import ar.edu.unq.travel.Reserva;
-
 public class NotificadorDeEmail implements Observador {
     private MailSender mail;
     private String direccionDestino;

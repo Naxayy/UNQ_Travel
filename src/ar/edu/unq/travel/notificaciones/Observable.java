@@ -6,19 +6,19 @@ import java.util.List;
 import ar.edu.unq.travel.ciclo.Estado;
 
 public abstract class Observable {
-    private List<Observer> observers = new ArrayList<Observer>();
+    private List<Observador> observers = new ArrayList<Observador>();
 
     public void notifyObservers() {
-		for (Observer observer : observers) {
-			observer.update(this);
+		for (Observador observer : observers) {
+			observer.actualizar();
 		}
 	}
 
-	public void agregarObserver(Observer observer) {
+	public void agregarObserver(Observador observer) {
 		this.observers.add(observer);
 	}
 
-	public void eliminarObserver(Observer observer) {
+	public void eliminarObserver(Observador observer) {
 		this.observers.remove(observer);
 	}
 
