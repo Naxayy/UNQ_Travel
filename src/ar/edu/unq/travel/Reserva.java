@@ -59,7 +59,7 @@ public class Reserva {
 		return this.estado;
 	}
 
-	private Carrito getCarrito(){
+	public Carrito getCarrito(){
 		return carrito;
 	}
 

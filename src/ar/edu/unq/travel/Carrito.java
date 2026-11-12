@@ -42,10 +42,6 @@ public class Carrito {
         return this.lista;
     }
 
-    public boolean contiene(Servicio servicio) {
-       return getLista().contains(servicio);
-    }
-
     private List<Servicio> getLista(){
         return lista;
     }
