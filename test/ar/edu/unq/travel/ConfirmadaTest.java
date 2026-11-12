@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.traslados.Traslado;
 
 public class ConfirmadaTest {
 
     Reserva reserva;
 	Traslado unTraslado;
+	MetodoDePago unMetodoDePago;
 
     @BeforeEach
     void setUp() {

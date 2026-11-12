@@ -1,5 +1,5 @@
 package ar.edu.unq.travel;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
@@ -8,20 +8,22 @@ import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
+import ar.edu.unq.travel.pagos.*;
 
 public class Reserva {	
 	
 	private Estado estado;
 	private Publicador publicador;
 	private Traslado metodoTraslado;
-	//private MedioDePago medioDePago;
+	private MedioDePago medioDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
 
-	public Reserva(Traslado traslado) {
-		this.estado = new SolicitudPendiente();
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
+		this.estado = new Pendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
+		this.metodoDePago = metodoDePago;
 		//preguntar :p
 	}
 
