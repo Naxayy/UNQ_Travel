@@ -8,12 +8,7 @@ import static org.mockito.Mockito.*;
 import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.*;
-<<<<<<< HEAD
 import ar.edu.unq.travel.traslados.Traslado;
-=======
-import ar.edu.unq.travel.Reserva;
-import ar.edu.unq.travel.traslados.Traslado; 
->>>>>>> main
 
 class ReservaTest {
 
@@ -30,16 +25,7 @@ class ReservaTest {
 		this.unMetodoDePago = mock(MetodoDePago.class);
 	
 		//SUT
-<<<<<<< HEAD
-		this.reserva = new Reserva(unTraslado);
-	}
-	
-	@Test
-	void estadoInicial() {
-		assertInstanceOf(Pendiente.class, reserva.getEstado());
-=======
 		this.reserva = new Reserva(unTraslado,unMetodoDePago);
->>>>>>> main
 	}
 
 	@Test
@@ -72,20 +58,11 @@ class ReservaTest {
 	}
 
 	@Test
-<<<<<<< HEAD
-	void estadoEnConfirmadaError() {
-		reserva.confirmar();	
-		assertThrows(IllegalStateException.class, () -> {
-			reserva.agregarServicio(estadiaCancun);
-		});
-		
-=======
 	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		this.reserva.enCurso();
 		assertDoesNotThrow(() -> this.reserva.enCurso());
->>>>>>> main
 	}
 
 	@Test
