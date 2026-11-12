@@ -15,12 +15,12 @@ public class Reserva {
 	private Estado estado;
 	private Publicador publicador;
 	private Traslado metodoTraslado;
-	private MedioDePago medioDePago;
+	private MetodoDePago metodoDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
-		this.estado = new Pendiente();
+		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
