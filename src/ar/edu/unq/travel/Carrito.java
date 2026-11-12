@@ -25,6 +25,7 @@ public class Carrito {
 
     public void cancelar(){
         this.lista.forEach(producto -> producto.cancelar());
+        this.lista.clear();
     }
 
     public double tasasAdministrativas(){

@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.traslados;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,7 @@ import ar.edu.unq.travel.traslados.TrasladoEstandar;
 import ar.edu.unq.travel.traslados.TrasladoPunto;
 import ar.edu.unq.travel.traslados.TrasladoVip;
 
-class Traslados {
+class TrasladosTest {
 
 	private TrasladoEstandar trasladoEstandar;
 	private TrasladoVip trasladoVip;
@@ -18,7 +18,7 @@ class Traslados {
 	private PlataformaTransporte plataformaTraslado = mock(PlataformaTransporte.class);
 	
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		trasladoEstandar = new TrasladoEstandar(plataformaTraslado);
 		trasladoVip = new TrasladoVip(10, 500);
 		trasladoConPuntoDeEncuentro = new TrasladoPunto();

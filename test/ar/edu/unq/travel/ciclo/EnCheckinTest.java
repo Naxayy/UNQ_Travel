@@ -1,4 +1,4 @@
-package ar.edu.unq.travel;
+package ar.edu.unq.travel.ciclo;
 
 public class EnCheckinTest {
     

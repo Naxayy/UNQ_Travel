@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
+import ar.edu.unq.travel.categoria.*;
 
 public class ServicioIndividual extends Servicio{
 	private double precioBase;

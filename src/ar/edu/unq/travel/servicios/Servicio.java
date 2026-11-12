@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
+import ar.edu.unq.travel.categoria.*;
 
 public abstract class Servicio {
 	private String nombre;
@@ -14,7 +15,7 @@ public abstract class Servicio {
 	public Servicio(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-		this.atributoDinamico = new ArrayList<AtributoDinamico>();
+		this.atributoDinamico = new ArrayList<>();
     }
 
 	public boolean hayDisponibilidad() {
