@@ -19,7 +19,7 @@ public class ObsGeneradorDeVoucher implements Observador {
         Estado estado = reserva.getEstado();
         if (estado.esGeneradorDeVoucher()){
         Carrito carrito = reserva.getCarrito();
-        double valor = carrito.costoDeServicio() + carrito.tasasAdministrativas();
+        double valor = reserva.costoDeServicioConTasas();
             this.generarVoucher(valor);
         }
     }
