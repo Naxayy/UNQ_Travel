@@ -1,7 +1,5 @@
 package ar.edu.unq.travel;
 
-import java.util.List;
-
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
@@ -24,10 +22,7 @@ public class Reserva {
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		//preguntar :p
 	}
-
-	//-------
 
 	public void agregarServicio(Servicio servicio){
 		this.getEstado().agregarServicio(this, servicio);
@@ -52,8 +47,6 @@ public class Reserva {
 	public void cancelar() {
 		this.getEstado().cancelada(this);
 	}
-
-	//-------
 
 	public Estado getEstado() {
 		return this.estado;

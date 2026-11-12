@@ -8,8 +8,8 @@ public class Confirmada extends Estado {
 
 	@Override
 	public void enCheckin(Reserva reserva) {
-		Confirmada confirmada = new Confirmada();
-		reserva.cambiarAEstado(confirmada);
+		EnCheckin enCheckin = new EnCheckin();
+		reserva.cambiarAEstado(enCheckin);
 	}
 
 	@Override
