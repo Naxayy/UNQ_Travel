@@ -4,15 +4,18 @@ import ar.edu.unq.travel.Reserva;
 
 public class Confirmada extends Estado {
 
+	public Confirmada() {}
+
 	@Override
 	public void enCheckin(Reserva reserva) {
-		reserva.cambiarAEstado(new EnCheckin());
-		
+		Confirmada confirmada = new Confirmada();
+		reserva.cambiarAEstado(confirmada);
 	}
 
 	@Override
 	public void cancelada(Reserva reserva) {
-		reserva.cambiarAEstado(new Cancelada());
+		Cancelada cancelada = new Cancelada();
+		reserva.cambiarAEstado(cancelada);
+		reserva.cancelarCarrito();
 	}
-
 }

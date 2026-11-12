@@ -4,18 +4,22 @@ import ar.edu.unq.travel.Reserva;
 
 public class EnCheckin extends Estado {
 
+	public EnCheckin(Reserva reserva) {}
+
 	@Override
 	public void enCurso(Reserva reserva) {
-		reserva.cambiarAEstado(new EnCurso());
+		EnCurso enCurso = new EnCurso();
+		reserva.cambiarAEstado(enCurso);
 	}
 
 	@Override
 	public void cancelada(Reserva reserva) {
-		reserva.cambiarAEstado(new Cancelada());
-		reserva.cancelarCarrito();
-		//private int monto = reserva.costos() + reserva.tasas()
-		//reserva.nuevoVoucher(monto);
-		//necesito generar el voucher y usar reserva.costoDeServicio y reserva.tasasAdministrativas
+		Cancelada cancelada = new Cancelada();
+		reserva.cambiarAEstado(cancelada);
 	}
+
+	
+
+
 
 }

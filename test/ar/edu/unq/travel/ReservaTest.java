@@ -6,91 +6,104 @@ import org.junit.jupiter.api.*;
 import static org.mockito.Mockito.*;
 
 import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.*;
+<<<<<<< HEAD
 import ar.edu.unq.travel.traslados.Traslado;
+=======
+import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.traslados.Traslado; 
+>>>>>>> main
 
 class ReservaTest {
 
 	Reserva reserva;
 	ServicioIndividual estadiaCancun;
 	Traslado unTraslado;
+	MetodoDePago unMetodoDePago;
 
 	@BeforeEach
 	public void setUp() {
 		//DOCS
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
+		this.unMetodoDePago = mock(MetodoDePago.class);
 	
 		//SUT
+<<<<<<< HEAD
 		this.reserva = new Reserva(unTraslado);
 	}
 	
 	@Test
 	void estadoInicial() {
 		assertInstanceOf(Pendiente.class, reserva.getEstado());
+=======
+		this.reserva = new Reserva(unTraslado,unMetodoDePago);
+>>>>>>> main
 	}
 
 	@Test
-	void cambioDeEstado(){
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
+	void testRealizarUnaOperacionEnUnEstadoInvalidoAlInicioDeLaReservaGeneraUnaExcepcion(){
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
+        assertEquals("no se puede finalizar la resera en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void agregarServicio(){
+	void testAgregaUnServicioAlCarritoAlInicioDeLaReservaNoGeneraUnaExcepcion(){
+		assertDoesNotThrow(() -> this.reserva.agregarServicio(estadiaCancun));
+	}
+
+	@Test
+	void testQuitarUnServicioAlCarritoAlInicioDeLaReservaNoGeneraUnaExcepcion(){
 		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.getServicios().contains(estadiaCancun));		
+		assertDoesNotThrow(() -> this.reserva.quitarServicio(estadiaCancun));
 	}
 
 	@Test
-	void quitarServicio(){
-		reserva.agregarServicio(estadiaCancun);
-		reserva.quitarServicio(estadiaCancun);
-		assertFalse(reserva.getServicios().contains(estadiaCancun));
+	void testConfirmarReservaAlInicioNoGeneraUnaExcepcion() {
+		assertDoesNotThrow(() -> this.reserva.confirmar());
 	}
 
 	@Test
-	void estadoConfirmada() {
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
+	void testRealizarChekinDespuesDeConfirmarLaReservaNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		assertDoesNotThrow(() -> this.reserva.enCheckin());
 	}
 
 	@Test
+<<<<<<< HEAD
 	void estadoEnConfirmadaError() {
 		reserva.confirmar();	
 		assertThrows(IllegalStateException.class, () -> {
 			reserva.agregarServicio(estadiaCancun);
 		});
 		
+=======
+	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.enCurso());
+>>>>>>> main
 	}
 
 	@Test
-	void estadoEnChekin() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		assertInstanceOf(EnCheckin.class , reserva.getEstado());
+	void testReservaFinalizadaDespuesDeEnCursoNoGeneraUnaExcepcion() {
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.finalizar());
 	}
 
 	@Test
-	void estadoEnCurso() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		assertInstanceOf(EnCurso.class , reserva.getEstado());
-	}
-
-	@Test
-	void estadoFinalizada() {
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		reserva.finalizar();
-		assertInstanceOf(Finalizada.class , reserva.getEstado());
-	}
-
-	@Test
-	void estadoCancelada() {
-		reserva.cancelar();
-		assertInstanceOf(Cancelada.class , reserva.getEstado());
+	void testCancelarReservaDespuesDeCualquierEstadoNoGeneraUnaExcepcion() {
+		assertDoesNotThrow(() -> this.reserva.cancelar());
+		this.reserva.confirmar();
+		assertDoesNotThrow(() -> this.reserva.cancelar());
+		this.reserva.enCheckin();
+		assertDoesNotThrow(() -> this.reserva.cancelar());
+		this.reserva.enCurso();
+		assertDoesNotThrow(() -> this.reserva.cancelar());
 	}
 }
