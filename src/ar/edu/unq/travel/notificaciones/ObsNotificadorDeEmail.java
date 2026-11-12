@@ -1,13 +1,11 @@
 package ar.edu.unq.travel.notificaciones;
 
-import ar.edu.unq.travel.Reserva;
-
-public class NotificadorDeEmail implements Observador {
+public class ObsNotificadorDeEmail implements Observador {
     private MailSender mail;
     private String direccionDestino;
     private Object adjunto;
 
-    public NotificadorDeEmail(MailSender mail, String direccionDestino) {
+    public ObsNotificadorDeEmail(MailSender mail, String direccionDestino) {
         this.mail = mail;
         this.direccionDestino = direccionDestino;
     }

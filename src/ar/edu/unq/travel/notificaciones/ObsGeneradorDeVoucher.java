@@ -1,10 +1,8 @@
 package ar.edu.unq.travel.notificaciones;
 
-import ar.edu.unq.travel.ciclo.*;
+public class ObsGeneradorDeVoucher implements Observador {
 
-public class GeneradorDeVoucher implements Observador {
-
-    public GeneradorDeVoucher(){}
+    public ObsGeneradorDeVoucher(){}
 
     private Voucher generarVaucher(Double monto){
         return new Voucher(monto);
