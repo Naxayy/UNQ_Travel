@@ -1,13 +1,12 @@
 package ar.edu.unq.travel;
 
-import java.util.List;
-
-import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.ciclo.Estado;
+import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
-import ar.edu.unq.travel.pagos.*;
 
 public class Reserva {	
 	
@@ -58,7 +57,7 @@ public class Reserva {
 		return this.estado;
 	}
 
-	private Carrito getCarrito(){
+	public Carrito getCarrito(){
 		return carrito;
 	}
 
