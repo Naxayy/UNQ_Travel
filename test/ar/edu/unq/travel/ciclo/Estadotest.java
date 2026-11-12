@@ -1,10 +1,10 @@
-package ar.edu.unq;
+package ciclo;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class Estadotest {
+class Estadotest {
    /* @Test
 	void invalidoDesdeInicial() {
 		//todos los pedidos de estados posterior a confirmado son invalidos
