@@ -3,20 +3,21 @@ package ar.edu.unq.travel;
 import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
-import ar.edu.unq.travel.ciclo.Pendiente;
+import ar.edu.unq.travel.ciclo.SolicitudPendiente;
+import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
 import ar.edu.unq.travel.pagos.*;
 
-public class Reserva {
-	private Traslado metodoTraslado;
-	private MetodoDePago metodoDePago;
+public class Reserva {	
+	
 	private Estado estado;
-	private Estado estadoAnterior;
+	private Publicador publicador;
+	private Traslado metodoTraslado;
+	private MedioDePago medioDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
-	//private Usuario usuario;
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
 		this.estado = new Pendiente();
@@ -24,97 +25,85 @@ public class Reserva {
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
 		//preguntar :p
-
 	}
-
-	//HAY QUE MODELAR PASAJEROS Y DIRECCION
 
 	//-------
-	public Estado getEstadoAnterior(){
-		return this.estadoAnterior;
+
+	public void agregarServicio(Servicio servicio){
+		this.getEstado().agregarServicio(this, servicio);
 	}
 
-	public List<Servicio> getServicios(){
-		return this.carrito.getServicios();
+	public void quitarServicio(Servicio servicio){
+		this.getEstado().quitarServicio(this, servicio);
+	}
+
+	public void confirmar() {
+		this.getEstado().confirmar(this);
+	}
+	public void enCheckin() {
+		this.getEstado().enCheckin(this);
+	}
+	public void enCurso() {
+		this.getEstado().enCurso(this);
+	}
+	public void finalizar() {
+		this.getEstado().finalizada(this);
+	}
+	public void cancelar() {
+		this.getEstado().cancelada(this);
+	}
+
+	//-------
+
+	public Estado getEstado() {
+		return this.estado;
+	}
+
+	private Carrito getCarrito(){
+		return carrito;
+	}
+
+	public void cambiarAEstado(Estado estadoNuevo) {
+		this.estado = estadoNuevo;
+	}
+	
+	public void agregarAlCarrito(Servicio servicio){
+		this.getCarrito().addServicio(servicio);
+		//this.getPublicador().actualizar();
+	}
+
+	public void eliminarDelCarrito(Servicio servicio){
+		this.getCarrito().removeServicio(servicio);
+	}
+
+	public void confirmarCarrito(){
+		this.getCarrito().confirmar();
+	}
+
+	public void cancelarCarrito(){
+		this.getCarrito().cancelar();
 	}
 
 	public double costoDeServicio(){
-		return this.carrito.costoDeServicio() ;
+		return this.getCarrito().costoDeServicio() ;
 	}
 
 	public double tasasAdministrativas(){
-		return this.carrito.tasasAdministrativas();
+		return this.getCarrito().tasasAdministrativas();
 	}
 
 	public double costoDeServicioConTasas(){
-		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
+		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
+	/* Esto no va aca
 	public int pasajeros(){
-		return 0; //COMO CALCULO LOS PUTOS PASAJEROS
+		return 0; 
 	}
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
 	}
-
-	//-------
-	public Estado getEstado() {
-		return this.estado;
-	}
-	public void cambiarAEstado(Estado estadoNuevo) {
-		this.estadoAnterior = estado;
-		this.estado = estadoNuevo;
-	}
-	public void confirmar() {
-		estado.confirmar(this);
-	}
-	public void enCheckin() {
-		estado.enCheckin(this);
-	}
-	public void enCurso() {
-		estado.enCurso(this);
-	}
-	public void finalizar() {
-		estado.finalizada(this);
-	}
-	public void cancelar() {
-		estado.cancelada(this);
-	}
-
-	//-------
-	public void agregarServicio(Servicio servicio){
-		this.estado.agregarServicio(this,servicio);
-	}
-
-	public void quitarServicio(Servicio servicio){
-		this.estado.quitarServicio(this,servicio);
-	}
-
-	public void agregarAlCarrito(Servicio servicio){
-		this.carrito.addServicio(servicio);
-	}
-
-	public void eliminarDelCarrito(Servicio servicio){
-		this.carrito.removeServicio(servicio);
-	}
-
-	public void confirmarCarrito(){
-		this.carrito.confirmar();
-	}
-
-	public void cancelarCarrito(){
-		this.carrito.cancelar();
-	}
-
-	//---------
-
-	
-
-
-
-//la reserva se conecte a un catalogo
-//el catalogo tiene una lista de servicios 
-// el carrito de la reserva tiene una lista de productos del catalogo
+	*/
 }
-
+ 

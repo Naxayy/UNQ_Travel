@@ -26,7 +26,7 @@ public class AtributoDinamicoTest {
     void atributoDinamicoConError(){
         IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> exclusivoMayoresDeEdad.validar() );
-            assertEquals("Es obligatorio y no tiene valor", error.getMessage());
+        assertEquals("Es obligatorio y no tiene valor", error.getMessage());
     } 
 
     @Test 

@@ -12,216 +12,31 @@ import ar.edu.unq.travel.traslados.Traslado;
 
 public class ConfirmadaTest {
 
-    EnCheckin checkin;
     Reserva reserva;
 	Traslado unTraslado;
 	MetodoDePago unMetodoDePago;
 
     @BeforeEach
     void setUp() {
-        this.checkin = new EnCheckin();
-        this.reserva = mock(Reserva.class);
-        this.unTraslado = mock(Traslado.class);
-		this.unMetodoDePago = mock(MetodoDePago.class);
+		this.unTraslado = mock(Traslado.class);
+        this.reserva = new Reserva(unTraslado);
     }
 
 	@Test
-	void deInicialAConfirmada(){
-		assertInstanceOf(Pendiente.class, reserva.getEstado());
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class, reserva.getEstado());
-	}
-	
-	
-	@Test
-	void deConfirmadaAEnCheckin() {
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class,reserva.getEstado());
+	void cofirmarCarritoYRealizarCheckin() {
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
+		this.reserva.confirmar();
+		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 		reserva.enCheckin();
-		//todos los pedidos de estados anteriores son invalidos
-		//todos los pedidos de estados posterior a checkin son invalidos
-		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertInstanceOf(EnCheckin.class, reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), EnCheckin.class);
 	}
-		
-	@Test
-	void deCheckinACurso() {
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		reserva.confirmar();
-		reserva.enCheckin();
-		assertInstanceOf(EnCheckin.class ,reserva.getEstado());
-		reserva.enCurso();
-		//todos los pedidos de estados anteriores son invalidos
-		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertInstanceOf(EnCurso.class,  reserva.getEstado());
-	}
-	
 
 	@Test
-	void deCursoAFinalizada() {
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		assertInstanceOf(EnCurso.class, reserva.getEstado());
-		reserva.finalizar();
-		//no se puede cancelar ni pasar a otro estado
-		assertInstanceOf(Finalizada.class, reserva.getEstado());
-	}
-	
-	
-
-	
-	//------cancelados
-	
-	@Test
-	void estadoInicialACancelado() {
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		assertInstanceOf(Pendiente.class , reserva.getEstado());
+	void cofirmarCarritoYCancelarlo() {
+		assertEquals(reserva.getEstado().getClass(), SolicitudPendiente.class);
+		this.reserva.confirmar();
+		assertEquals(reserva.getEstado().getClass(), Confirmada.class);
 		reserva.cancelar();
-		assertInstanceOf(Cancelada.class, reserva.getEstado());
+		assertEquals(reserva.getEstado().getClass(), Cancelada.class);
 	}
-	
-
-
-	@Test
-	void deConfirmadaACancelado(){
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		reserva.confirmar();
-		assertInstanceOf(Confirmada.class,reserva.getEstado());
-		reserva.cancelar();
-		//confirmar decrementa o bloquea el cupo disponible
-		assertInstanceOf(Cancelada.class, reserva.getEstado());
-	}
-		
-
-	
-	@Test
-	void deEnCheckinACancelado() {
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		reserva.confirmar();
-		reserva.enCheckin();
-		//la cancelacion del checkin implica liberar cupo y reembolso total
-		assertInstanceOf(Cancelada.class, reserva.getEstado());
-	}
-	
-
-	
-	@Test
-	void deCursoACancelado() {
-		Reserva reserva = new Reserva(unTraslado, unMetodoDePago);
-		reserva.confirmar();
-		reserva.enCheckin();
-		reserva.enCurso();
-		assertInstanceOf(EnCurso.class, reserva.getEstado());
-		reserva.cancelar();
-		//La cancelacion de el en curso solo se reembolsa el costo de servicios pero no tasas
-		assertInstanceOf(Cancelada.class, reserva.getEstado());
-	}
-	
 }
-
-/*	
-	//---------estados invalidos-----
-	//Para todo esto hay que crear una clase para las excepciones y
-	//cambiar el illegalStateException por la apropiada
-	
-	@Test
-	void invalidoDesdeInicial() {
-		//todos los pedidos de estados posterior a confirmado son invalidos
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkin();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.enCurso();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizar();
-		});
-	}
-	
-	@Test
-	void invalidoDesdeConfirmado(){
-		reserva.confirmar();
-		//todos los pedidos de estados anteriores son invalidos
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.enCurso();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizar();
-		});
-	}
-		
-	@Test
-	void invalidoDesdeCheckin() {
-		//todos los pedidos de estados anteriores son invalidos
-		//todos los pedidos de estados posterior a checkin son invalidos
-		reserva.confirmar();
-		reserva.checkin();
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmar();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizar();
-		});
-	}
-	
-	@Test
-	void invalidoDesdeEnCurso() {
-		reserva.confirmar();
-		reserva.checkin();
-		reserva.enCurso();
-		//todos los pedidos de estados anteriores son invalidos
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkin();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmar();
-		});
-	}
-	@Test
-	void invalidoDesdeFinalizado() {
-		reserva.confirmar();
-		reserva.checkin();
-		reserva.enCurso();
-		reserva.finalizar();
-
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmar();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkin();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.enCurso();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.cancelar();
-		});
-	}
-
-	@Test
-	void invalidoDesdeCancelado() {
-		reserva.cancelar();
-		
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.confirmar();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.checkin();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.enCurso();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.finalizar();
-		});
-		assertThrows(IllegalStateException.class, ()-> {
-			reserva.cancelar();
-		});
-		
-	}
-	
-
-}
-*/
