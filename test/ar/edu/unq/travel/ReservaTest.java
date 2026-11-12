@@ -2,6 +2,7 @@ package ar.edu.unq.travel;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -40,7 +41,7 @@ class ReservaTest {
 	}
 
 	@Test
-	void testAgregaUnServicioEnUnEstadoInvalidoGeneraUnaExcepcion(){
+	void testAgregaUnServicioEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
 		reserva.agregarServicio(estadiaCancun);
 		reserva.confirmar();
 		IllegalStateException error = 
@@ -61,22 +62,38 @@ class ReservaTest {
 	}
 
 	@Test
-	void testUnaReservaPuedeAgregarUnServicioAlCarrito() {
+	void testUnaReservaAgregarUnServicioYElServicioYaNoApareceEnElCarrito() {
     	this.reserva.agregarServicio(this.estadiaCancun);
 		assertTrue(this.reserva.getCarrito().getServicios().contains(this.estadiaCancun));
 	}
 
-	//
+	@Test 
+	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		this.reserva.confirmar();
+		IllegalStateException error = assertThrows(IllegalStateException.class, ()-> this.reserva.quitarServicio(estadiaCancun));
+		assertEquals("solo se pueden quitar servicios al iniciar la reserva", error.getMessage());
+	}
 
 	@Test
-	void testQuitarUnServicioAlCarritoAlInicioDeLaReservaNoGeneraUnaExcepcion(){
+	void testQuitarUnServicioDelCarritoDeLaReservaNoGeneraUnaExcepcion(){
 		reserva.agregarServicio(estadiaCancun);
 		assertDoesNotThrow(() -> this.reserva.quitarServicio(estadiaCancun));
 	}
 
 	@Test
-	void testConfirmarReservaAlInicioNoGeneraUnaExcepcion() {
-		assertDoesNotThrow(() -> this.reserva.confirmar());
+	void testQuitarUnServicioAlCarritoDelegaLaResonsabilidadAOtro(){
+    	this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun); 
+		this.reserva.quitarServicio(this.estadiaCancun); 
+		verify(this.estado).quitarServicio(this.reserva, this.estadiaCancun);
+	}
+
+	@Test
+	void testUnaReservaQuitaUnServicioYElServicioYaNoApareceEnElCarrito() {
+    	this.reserva.agregarServicio(this.estadiaCancun);
+		this.reserva.quitarServicio(this.estadiaCancun);
+		assertFalse(this.reserva.getCarrito().getServicios().contains(this.estadiaCancun));
 	}
 
 	@Test
