@@ -37,7 +37,6 @@ public class Reserva {
 
 	public void confirmar() {
 		this.getEstado().confirmar(this);
-		this.getPublicador().actualizar();
 	}
 	public void enCheckin() {
 		this.getEstado().enCheckin(this);
@@ -68,6 +67,7 @@ public class Reserva {
 	
 	public void agregarAlCarrito(Servicio servicio){
 		this.getCarrito().addServicio(servicio);
+		//this.getPublicador().actualizar();
 	}
 
 	public void eliminarDelCarrito(Servicio servicio){
@@ -104,4 +104,4 @@ public class Reserva {
 	}
 	*/
 }
-
+ 
