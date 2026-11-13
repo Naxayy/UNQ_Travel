@@ -1,5 +1,7 @@
 package ar.edu.unq.travel.reportes;
 
+import ar.edu.unq.travel.Catalogo;
+
 public class ReporteDeCupos implements Visitor {
     
     @Override 
@@ -17,7 +19,7 @@ public class ReporteDeCupos implements Visitor {
         return html;
     }
 
-    private void generarReporte() {
+    private void generarReporte(Catalogo catalogo) {
         
     }
     
