@@ -5,8 +5,8 @@ public class BilleteraVirtual extends MetodoDePago {
     private double saldo;
     private String vendedor;
 
-    public void validarDatos() {
-        api.haySaldoSuficiente(saldo);
+    public boolean validarDatos() {
+        return api.haySaldoSuficiente(saldo);
     };
 
     public void reservarFondos() {
@@ -16,6 +16,10 @@ public class BilleteraVirtual extends MetodoDePago {
     public void ejecutarTransaccion() {
         api.ejecutarTransaccion(vendedor);
     };
+
+    public String codigoTransaccion() {
+        return null;
+    }
 
     @Override
     public void notificarResultado() {

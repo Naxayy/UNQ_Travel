@@ -6,13 +6,9 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD:test/ar/edu/unq/travel/ciclo/ConfirmadaTest.java
-import ar.edu.unq.travel.Reserva;
-=======
-import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.pagos.MetodoDePago;
->>>>>>> main:test/ar/edu/unq/travel/ConfirmadaTest.java
 import ar.edu.unq.travel.traslados.Traslado;
+import ar.edu.unq.travel.Reserva;
 
 public class ConfirmadaTest {
 
@@ -23,7 +19,8 @@ public class ConfirmadaTest {
     @BeforeEach
     void setUp() {
 		this.unTraslado = mock(Traslado.class);
-        this.reserva = new Reserva(unTraslado);
+		this.unMetodoDePago = mock(MetodoDePago.class);
+        this.reserva = new Reserva(unTraslado,unMetodoDePago);
     }
 
 	@Test
