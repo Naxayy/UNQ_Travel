@@ -3,10 +3,10 @@ package ar.edu.unq.travel;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
+import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Traslado;
-import ar.edu.unq.travel.pagos.*;
 
 public class Reserva {	
 	
@@ -17,6 +17,7 @@ public class Reserva {
 	private Carrito carrito;
 	private Direccion direccionDestino;
 	private int cantidadDePasajeros;
+	private Estado estadoAnterior; 
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
 		this.estado = new SolicitudPendiente();
@@ -58,11 +59,16 @@ public class Reserva {
 		return this.estado;
 	}
 
+	public Estado getEstadoAnterior(){
+		return this.estadoAnterior;
+	}
+
 	public Carrito getCarrito(){
 		return carrito;
 	}
 
 	public void cambiarAEstado(Estado estadoNuevo) {
+		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
 	}
 	

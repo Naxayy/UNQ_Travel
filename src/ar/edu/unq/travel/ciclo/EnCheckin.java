@@ -8,7 +8,7 @@ public class EnCheckin extends Estado {
 
 	@Override
 	public void enCurso(Reserva reserva) {
-		EnCursoTest enCurso = new EnCursoTest();
+		EnCurso enCurso = new EnCurso();
 		reserva.cambiarAEstado(enCurso);
 	}
 
@@ -17,4 +17,13 @@ public class EnCheckin extends Estado {
 		Cancelada cancelada = new Cancelada();
 		reserva.cambiarAEstado(cancelada);
 	}
+
+	@Override 
+	public double montoVoucher(Reserva reserva){
+		return reserva.costoDeServicioConTasas();
+	}
+	
+
+
+
 }
