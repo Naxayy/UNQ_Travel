@@ -35,5 +35,9 @@ public abstract class Estado {
 	public boolean esFidelizador(){
 		return false;//pensar si seria mejor abstract o definida
 	};
+	//este 0.0 esta re hardcodeado
+	public double montoVoucher(Reserva reserva){
+		return 0.0 ;
+	}
 	//limitaciones de este modelo: siempre que se quiera agregar una notificacion se debe tocar el estado
 }

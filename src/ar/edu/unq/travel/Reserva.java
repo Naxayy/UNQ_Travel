@@ -16,13 +16,13 @@ public class Reserva {
 	private MetodoDePago metodoDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
+	private Estado estadoAnterior; 
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		//preguntar :p
 	}
 
 	//-------
@@ -57,11 +57,16 @@ public class Reserva {
 		return this.estado;
 	}
 
+	public Estado getEstadoAnterior(){
+		return this.estadoAnterior;
+	}
+
 	public Carrito getCarrito(){
 		return carrito;
 	}
 
 	public void cambiarAEstado(Estado estadoNuevo) {
+		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
 	}
 	

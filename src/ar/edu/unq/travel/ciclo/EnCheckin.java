@@ -18,6 +18,10 @@ public class EnCheckin extends Estado {
 		reserva.cambiarAEstado(cancelada);
 	}
 
+	@Override 
+	public double montoVoucher(Reserva reserva){
+		return reserva.costoDeServicioConTasas();
+	}
 	
 
 

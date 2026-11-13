@@ -1,5 +1,4 @@
 package ar.edu.unq.travel.notificaciones;
-import ar.edu.unq.travel.Carrito;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 
@@ -18,8 +17,8 @@ public class ObsGeneradorDeVoucher implements Observador {
     public void actualizar() {
         Estado estado = reserva.getEstado();
         if (estado.esGeneradorDeVoucher()){
-        Carrito carrito = reserva.getCarrito();
-        double valor = estado.calcularMontoVoucher(reserva);
+            Estado estadoAnterior = reserva.getEstadoAnterior();
+            double valor = estadoAnterior.montoVoucher(reserva);
             this.generarVoucher(valor);
         }
     }
