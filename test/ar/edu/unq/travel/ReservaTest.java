@@ -41,7 +41,7 @@ class ReservaTest {
 		this.estado = mock(Estado.class);
 	
 		//SUT
-		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago, this.carrito);
+		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago);
 	}
 
 	@Test
@@ -226,13 +226,15 @@ class ReservaTest {
 
 	@Test
 	void testCancelarCarritoDelegaEnCarrito() {
-    	reserva.cancelarCarrito();
+		this.reserva.cambiarCarrito(this.carrito);
+    	this.reserva.cancelarCarrito();
 
     	verify(this.carrito).cancelar();
 	}
 
 	@Test
 	void testCostoDeServicioDelegaEnCarrito() {
+		this.reserva.cambiarCarrito(this.carrito);
 		when(this.carrito.costoDeServicio()).thenReturn(1500.0);
 
 		assertEquals(1500.0, this.reserva.costoDeServicio());
@@ -242,6 +244,7 @@ class ReservaTest {
 
 	@Test
 	void testTasasAdministrativasDelegaEnCarrito() {
+		this.reserva.cambiarCarrito(this.carrito);
     	when(this.carrito.tasasAdministrativas()).thenReturn(200.0);
 
     	assertEquals(200.0, this.reserva.tasasAdministrativas());
@@ -251,6 +254,7 @@ class ReservaTest {
 
 	@Test
 	void testCostoDeServicioConTasasSumaLosValoresDelCarrito() {
+		this.reserva.cambiarCarrito(this.carrito);
 		when(carrito.costoDeServicio()).thenReturn(1500.0);
 		when(carrito.tasasAdministrativas()).thenReturn(200.0);
 
@@ -259,6 +263,7 @@ class ReservaTest {
 
 	@Test
 	void testAgegraUnPasajeroALaReserva() {
+		this.reserva.cambiarCarrito(this.carrito);
 		this.reserva.cambiarLaCantidadDePasajeros(2);
 
 		assertEquals(this.reserva.pasajeros(), 2);
@@ -266,6 +271,7 @@ class ReservaTest {
 
 	@Test
 	void testDireccionDelViaje() {
+		this.reserva.cambiarCarrito(this.carrito);
 		this.reserva.cambiarDireccionDestino(this.direccion);
 
 		assertEquals(this.reserva.direccionDestino(), this.direccion);

@@ -26,11 +26,8 @@ public class Reserva {
 		this.cantidadDePasajeros = 1;
 	}
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago, Carrito carrito) {
-		this.estado = new SolicitudPendiente();
-		this.carrito = carrito;
-		this.metodoTraslado = traslado;
-		this.metodoDePago = metodoDePago;
+	public void cambiarCarrito(Carrito carritoNuevo){
+		this.carrito = carritoNuevo;
 	}
 
 	public void agregarServicio(Servicio servicio){
