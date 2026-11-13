@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.pagos.MetodoDePago;
+import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
 import ar.edu.unq.travel.traslados.Traslado;
 
@@ -27,6 +27,7 @@ class ReservaTest {
 	MetodoDePago unMetodoDePago;
 	Carrito carrito;
 	Estado estado;
+	Direccion direccion;
 
 	@BeforeEach
 	public void setUp() {
@@ -34,12 +35,13 @@ class ReservaTest {
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
 		this.unMetodoDePago = mock(MetodoDePago.class);
+		this.direccion = mock(Direccion.class);
 
 		this.carrito = mock(Carrito.class);
 		this.estado = mock(Estado.class);
 	
 		//SUT
-		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago);
+		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago, this.carrito);
 	}
 
 	@Test
@@ -65,8 +67,10 @@ class ReservaTest {
 
 	@Test
 	void testUnaReservaAgregarUnServicioYElServicioYaNoApareceEnElCarrito() {
+		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(true);
+
     	this.reserva.agregarServicio(this.estadiaCancun);
-		assertTrue(this.reserva.getCarrito().getServicios().contains(this.estadiaCancun));
+		assertTrue(this.reserva.getCarrito().contieneElServicio(estadiaCancun));
 	}
 
 	@Test 
@@ -93,9 +97,12 @@ class ReservaTest {
 
 	@Test
 	void testUnaReservaQuitaUnServicioYElServicioYaNoApareceEnElCarrito() {
+		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(false);
+
     	this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.quitarServicio(this.estadiaCancun);
-		assertFalse(this.reserva.getCarrito().getServicios().contains(this.estadiaCancun));
+		
+		assertFalse(this.reserva.getCarrito().contieneElServicio(estadiaCancun));
 	}
 
 	@Test
@@ -215,5 +222,52 @@ class ReservaTest {
 		this.reserva.cambiarAEstado(this.estado);
     	this.reserva.cancelar();
 		verify(this.estado).cancelada(this.reserva);
+	}
+
+	@Test
+	void testCancelarCarritoDelegaEnCarrito() {
+    	reserva.cancelarCarrito();
+
+    	verify(this.carrito).cancelar();
+	}
+
+	@Test
+	void testCostoDeServicioDelegaEnCarrito() {
+		when(this.carrito.costoDeServicio()).thenReturn(1500.0);
+
+		assertEquals(1500.0, this.reserva.costoDeServicio());
+
+		verify(this.carrito).costoDeServicio();
+	}
+
+	@Test
+	void testTasasAdministrativasDelegaEnCarrito() {
+    	when(this.carrito.tasasAdministrativas()).thenReturn(200.0);
+
+    	assertEquals(200.0, this.reserva.tasasAdministrativas());
+
+	    verify(this.carrito).tasasAdministrativas();
+	}
+
+	@Test
+	void testCostoDeServicioConTasasSumaLosValoresDelCarrito() {
+		when(carrito.costoDeServicio()).thenReturn(1500.0);
+		when(carrito.tasasAdministrativas()).thenReturn(200.0);
+
+		assertEquals(1700.0, reserva.costoDeServicioConTasas());
+	}
+
+	@Test
+	void testAgegraUnPasajeroALaReserva() {
+		this.reserva.cambiarLaCantidadDePasajeros(2);
+
+		assertEquals(this.reserva.pasajeros(), 2);
+	}
+
+	@Test
+	void testDireccionDelViaje() {
+		this.reserva.cambiarDireccionDestino(this.direccion);
+
+		assertEquals(this.reserva.direccionDestino(), this.direccion);
 	}
 }

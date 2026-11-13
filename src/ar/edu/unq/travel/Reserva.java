@@ -16,10 +16,19 @@ public class Reserva {
 	private MetodoDePago metodoDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
+	private int cantidadDePasajeros;
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
+		this.metodoTraslado = traslado;
+		this.metodoDePago = metodoDePago;
+		this.cantidadDePasajeros = 1;
+	}
+
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, Carrito carrito) {
+		this.estado = new SolicitudPendiente();
+		this.carrito = carrito;
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
 	}
@@ -90,11 +99,19 @@ public class Reserva {
 	}
 
 	public int pasajeros(){
-		return 0; 
+		return cantidadDePasajeros; 
 	}
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
+	}
+
+	public void cambiarDireccionDestino(Direccion direccionNueva){
+		this.direccionDestino = direccionNueva;
+	}
+
+	public void cambiarLaCantidadDePasajeros(int pasajeros){
+		this.cantidadDePasajeros = pasajeros;
 	}
 }
  
