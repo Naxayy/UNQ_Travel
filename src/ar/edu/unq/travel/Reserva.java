@@ -1,5 +1,6 @@
 package ar.edu.unq.travel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ar.edu.unq.travel.ciclo.*;
@@ -18,15 +19,32 @@ public class Reserva {
 	private Carrito carrito;
 	private Direccion direccionDestino;
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
+	//Atributos necesarios para calcular cupos con fechas
+	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
+	private int cantPersonas;
+
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, Traslado metodoTraslado, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		//preguntar :p
+		this.metodoTraslado = metodoTraslado;
+		this.fechaInicio = inicio;
+		this.fechaFin = fin;
+		this.cantPersonas = personas;
+		this.direccionDestino = destino;
 	}
 
 	//-------
+
+	public Direccion getDireccion() {
+		return this.direccionDestino;
+	}
+
+	public int getCantPersonas() {
+		return this.cantPersonas;
+	}
 
 	public void agregarServicio(Servicio servicio){
 		this.getEstado().agregarServicio(this, servicio);
