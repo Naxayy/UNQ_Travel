@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -116,8 +116,8 @@ class ReservaTest {
 	@Test 
 	void testLaReservaHaceUnCambioDeEstadoValidoModificaSuEstadoActualYElAntrerior(){
 		this.reserva.confirmar();
-		assertEquals(this.reserva.getEstado(), Confirmada.class);
-		assertEquals(this.reserva.estadoAnterior(), SolicitudPendiente.class);
+		assertEquals(this.reserva.getEstado().getClass(), Confirmada.class);
+		assertEquals(this.reserva.getEstadoAnterior().getClass(), SolicitudPendiente.class);
 	}
 
 	@Test
