@@ -1,21 +1,15 @@
 package ar.edu.unq.travel.servicios;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.*;
 
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
 	private int cuposDisponibles;
-	private List<AtributoDinamico> atributoDinamico;
 	
 	public Servicio(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-		this.atributoDinamico = new ArrayList<>();
     }
 
 	public boolean hayDisponibilidad() {

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unq.travel.categoria.*;
 
 class ServicioTest {
+	
 	private ServicioIndividual noche;
 	private Paquete paqueteTravel;
 	private Categoria unaCategoria;
@@ -17,7 +18,9 @@ class ServicioTest {
 	@BeforeEach
 	void setUp() {
 		this.unaCategoria = mock(Categoria.class);
-		//al ser clase abstracta instancio sus dos clases hijas.
+		
+		//al ser clase abstracta instancio sus dos clases hijas 
+		//testeo los metodos heredados y no repeto codigo ni test
 		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, unaCategoria);
 		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",10, unaCategoria);
 	}
