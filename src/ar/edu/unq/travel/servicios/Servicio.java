@@ -1,7 +1,10 @@
 package ar.edu.unq.travel.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.*;
@@ -9,7 +12,7 @@ import ar.edu.unq.travel.categoria.*;
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
-	private int cuposDisponibles;
+	private Map<LocalDate, Integer> cupos;
 	private List<AtributoDinamico> atributoDinamico;
 	
 	public Servicio(String nombre, String descripcion) {
@@ -18,18 +21,20 @@ public abstract class Servicio {
 		this.atributoDinamico = new ArrayList<>();
     }
 
-	public boolean hayDisponibilidad() {
-		return cuposDisponibles > 0;
-	};
 
-	public void decrementarCupo() {
-		if (this.hayDisponibilidad()) {
-			cuposDisponibles--;
-		}
+	public boolean hayDisponibilidad(LocalDate fecha, int cantidad) {
+		return cupos.getOrDefault(fecha, 0) >= cantidad;
 	}
 
-	public void incrementarCupo() {
-		cuposDisponibles++;
+	public void decrementarCupo(LocalDate fecha, int cantidad) {
+		if (!hayDisponibilidad(fecha, cantidad)) {
+        	throw new IllegalStateException("No hay cupos suficientes");
+    	}
+    	cupos.put(fecha, cupos.get(fecha) - cantidad);
+	}
+
+	public void incrementarCupo(LocalDate fecha, int cantidad) {
+		cupos.put(fecha, cupos.get(fecha) + cantidad);;
 	}
 
 	public abstract boolean contieneCategoria(Categoria categoria);
@@ -58,10 +63,6 @@ public abstract class Servicio {
 
 	public void confirmar(){
 		this.decrementarCupo(1);
-	}
-
-	private void decrementarCupo(int cant){
-		this.cuposDisponibles = cuposDisponibles - cant;
 	}
 
 	public void cancelar(){
