@@ -13,7 +13,9 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.ciclo.Confirmada;
 import ar.edu.unq.travel.ciclo.Estado;
+import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
@@ -31,6 +33,7 @@ class ReservaTest {
 
 	@BeforeEach
 	public void setUp() {
+
 		//DOCS
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
@@ -44,6 +47,7 @@ class ReservaTest {
 		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago);
 	}
 
+	//la reserva al hacer cambios de estado invalidos genera una excepcion error  
 	@Test
 	void testAgregaUnServicioEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
 		reserva.agregarServicio(estadiaCancun);
@@ -51,6 +55,69 @@ class ReservaTest {
 		IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> this.reserva.agregarServicio(estadiaCancun) );
         assertEquals("solo se pueden agregar servicios al iniciar la reserva", error.getMessage());
+	}
+
+	@Test 
+	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		this.reserva.confirmar();
+		IllegalStateException error = assertThrows(IllegalStateException.class, ()-> this.reserva.quitarServicio(estadiaCancun));
+		assertEquals("solo se pueden quitar servicios al iniciar la reserva", error.getMessage());
+	}
+
+	@Test
+	void testconfirmarUnaReservaEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.confirmar() );
+        assertEquals("no se puede confirmar la reserva en este estado de la compra", error.getMessage());
+	}
+
+	@Test
+	void testHacerCheckinDeLaReservaEnUnEstadoQueNoSeaConfirmadoGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.enCheckin() );
+        assertEquals("no se puede realizar checkin de la reserva en este estado de la compra", error.getMessage());
+	}
+
+	@Test
+	void testQueLaReservaEsteEnCursoDespuesDeUnEstadoQueNoSeaEnChickInGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		this.reserva.confirmar();
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.enCurso() );
+        assertEquals("no se puede poner en curso a la reserva en este estado de la compra", error.getMessage());
+	}
+
+	@Test
+	void testFinaliarUnaReservaDespuesDeUnEstadoQueNoSeaEnCursoGeneraUnaExcepcion(){
+		this.reserva.agregarServicio(estadiaCancun);
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
+        assertEquals("no se puede finalizar la reserva en este estado de la compra", error.getMessage());
+	}
+
+	@Test
+	void testCancelarUnaReservaDespuesDeFinalizadaGeneraUnaExcepcion(){
+		this.reserva.confirmar();
+		this.reserva.enCheckin();
+		this.reserva.enCurso();
+		this.reserva.finalizar();
+		IllegalStateException error = 
+            assertThrows(IllegalStateException.class, () -> this.reserva.cancelar() );
+        assertEquals("no se puede cancelar la reserva en este estado de la compra", error.getMessage());
+	}
+
+	//la reserva al hacer cambios de estado validos: cambia de estado, modifica el carrito, modifican su estado anterior
+
+	@Test 
+	void testLaReservaHaceUnCambioDeEstadoValidoModificaSuEstadoActualYElAntrerior(){
+		this.reserva.confirmar();
+		assertEquals(this.reserva.getEstado(), Confirmada.class);
+		assertEquals(this.reserva.estadoAnterior(), SolicitudPendiente.class);
 	}
 
 	@Test
@@ -71,14 +138,6 @@ class ReservaTest {
 
     	this.reserva.agregarServicio(this.estadiaCancun);
 		assertTrue(this.reserva.getCarrito().contieneElServicio(estadiaCancun));
-	}
-
-	@Test 
-	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
-		this.reserva.agregarServicio(estadiaCancun);
-		this.reserva.confirmar();
-		IllegalStateException error = assertThrows(IllegalStateException.class, ()-> this.reserva.quitarServicio(estadiaCancun));
-		assertEquals("solo se pueden quitar servicios al iniciar la reserva", error.getMessage());
 	}
 
 	@Test
@@ -106,16 +165,6 @@ class ReservaTest {
 	}
 
 	@Test
-	void testconfirmarUnaReservaEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
-		this.reserva.agregarServicio(estadiaCancun);
-		this.reserva.confirmar();
-		this.reserva.enCheckin();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.confirmar() );
-        assertEquals("no se puede confirmar la reserva en este estado de la compra", error.getMessage());
-	}
-
-	@Test
 	void testConfirmarLaReservaDelegaLaResonsabilidadAOtro(){
     	this.reserva.cambiarAEstado(this.estado);
 		this.reserva.agregarServicio(this.estadiaCancun); 
@@ -126,15 +175,6 @@ class ReservaTest {
 	@Test
 	void testConfirmarLaReservaDespuesDelEstadoInicialNoGeneraUnaExcepcion() {
 		assertDoesNotThrow(() -> this.reserva.confirmar());
-	}
-
-
-	@Test
-	void testHacerCheckinDeLaReservaEnUnEstadoQueNoSeaConfirmadoGeneraUnaExcepcion(){
-		this.reserva.agregarServicio(estadiaCancun);
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.enCheckin() );
-        assertEquals("no se puede realizar checkin de la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
@@ -150,15 +190,6 @@ class ReservaTest {
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		verify(this.estado).enCheckin(this.reserva);
-	}
-
-	@Test
-	void testReservaEnCursoEnUnEstadoInvalidoGeneraUnaExcepcion(){
-		this.reserva.agregarServicio(estadiaCancun);
-		this.reserva.confirmar();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.enCurso() );
-        assertEquals("no se puede poner en curso a la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
@@ -179,14 +210,6 @@ class ReservaTest {
 	}
 
 	@Test
-	void testFinaliarUnaReservaEnUnEstadoInvalidoGeneraUnaExcepcion(){
-		this.reserva.agregarServicio(estadiaCancun);
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
-        assertEquals("no se puede finalizar la reserva en este estado de la compra", error.getMessage());
-	}
-
-	@Test
 	void testFinaliarUnaReservaDelegaLaResonsabilidadAOtro(){
     	this.reserva.cambiarAEstado(this.estado);
 		this.reserva.agregarServicio(this.estadiaCancun); 
@@ -203,18 +226,6 @@ class ReservaTest {
 		this.reserva.enCheckin();
 		this.reserva.enCurso();
 		assertDoesNotThrow(() -> this.reserva.finalizar());
-	}
-
-
-	@Test
-	void testCancelarUnaReservaEnUnEstadoInvalidoGeneraUnaExcepcion(){
-		this.reserva.confirmar();
-		this.reserva.enCheckin();
-		this.reserva.enCurso();
-		this.reserva.finalizar();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.cancelar() );
-        assertEquals("no se puede cancelar la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
