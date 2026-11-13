@@ -12,18 +12,19 @@ import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class SolicitudPendienteTest {
 
-	//se testea que los cambios de estado de la reserva sean validos
+	//que el voucher reciba el monto correcto
+	//el estado al ser cancelado da un monto para el voucher
 
 	ServicioIndividual estadiaCancun;
-	TrasladoEstandar traslado;
 	Reserva reserva;
+	SolicitudPendiente estado;
 
 	@BeforeEach
 	void setUp() {
+		this.reserva = mock(Reserva.class)
 		this.estadiaCancun = mock(ServicioIndividual.class);
-		this.traslado = mock(TrasladoEstandar.class);
 
-		this.reserva = new Reserva(traslado);
+		this.estado = new SolicitudPendiente();
 	}
 
 	@Test

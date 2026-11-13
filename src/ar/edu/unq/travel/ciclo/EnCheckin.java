@@ -8,7 +8,7 @@ public class EnCheckin extends Estado {
 
 	@Override
 	public void enCurso(Reserva reserva) {
-		EnCurso enCurso = new EnCurso();
+		EnCursoTest enCurso = new EnCursoTest();
 		reserva.cambiarAEstado(enCurso);
 	}
 
