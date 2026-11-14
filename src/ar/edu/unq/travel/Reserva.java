@@ -4,6 +4,7 @@ import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.pagos.MetodoDePago;
+import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Direccion;
 import ar.edu.unq.travel.traslados.Traslado;
@@ -19,12 +20,13 @@ public class Reserva {
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, int cantPasajeros) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		this.cantidadDePasajeros = 1;
+		this.cantPasajeros = cantPasajeros;
+		//preguntar :p
 	}
 
 	public void cambiarCarrito(Carrito carritoNuevo){
@@ -102,7 +104,7 @@ public class Reserva {
 	}
 
 	public int pasajeros(){
-		return cantidadDePasajeros; 
+		return this.cantPasajeros; 
 	}
 
 	public Direccion direccionDestino(){

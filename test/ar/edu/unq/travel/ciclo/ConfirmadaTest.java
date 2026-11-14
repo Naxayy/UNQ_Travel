@@ -7,8 +7,11 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.pagos.MetodoDePago;
+import ar.edu.unq.travel.traslados.Traslado;
 
 public class ConfirmadaTest {
 

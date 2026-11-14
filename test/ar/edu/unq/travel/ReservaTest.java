@@ -27,6 +27,7 @@ class ReservaTest {
 	Carrito carrito;
 	Estado estado;
 	Direccion direccion;
+	int cantPasajerosDummy = 0;
 
 	@BeforeEach
 	public void setUp() {
@@ -41,7 +42,7 @@ class ReservaTest {
 		this.estado = mock(Estado.class);
 	
 		//SUT
-		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago);
+		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago,cantPasajerosDummy);
 	}
 
 	//la reserva al hacer cambios de estado invalidos genera una excepcion error  
