@@ -23,6 +23,7 @@ public class Reserva {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private int cantPersonas;
+	//#######################
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago, Traslado metodoTraslado, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
 		this.estado = new SolicitudPendiente();
@@ -95,6 +96,9 @@ public class Reserva {
 	}
 	
 	public void agregarAlCarrito(Servicio servicio){
+		if(!servicio.hayDisponibilidad(LocalDate getFechaInicio(), LocalDate getFechaFin(), int getCantPersonas()) {
+			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
+		}
 		this.getCarrito().addServicio(servicio);
 		//this.getPublicador().actualizar();
 	}
