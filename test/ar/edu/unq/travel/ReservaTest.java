@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.pagos.MetodoDePago;
-import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.traslados.Direccion;
 import ar.edu.unq.travel.traslados.Traslado;
 
 class ReservaTest {

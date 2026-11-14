@@ -1,4 +1,4 @@
-package ar.edu.unq.travel.plataformaTransporte;
+package ar.edu.unq.travel.traslados;
 
 public interface PlataformaTransporte {
     
