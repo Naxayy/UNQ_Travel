@@ -1,4 +1,5 @@
 package ar.edu.unq.travel;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,12 @@ public class Carrito {
         this.lista.remove(servicio);
     }
 
-    public void confirmar(){
-        this.lista.forEach(producto -> producto.confirmar());
+    public void confirmar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+        this.lista.forEach(producto -> producto.confirmar(fechaInicio, fechaFin, cantidadPersonas));
     }
 
-    public void cancelar(){
-        this.lista.forEach(producto -> producto.cancelar());
+    public void cancelar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+        this.lista.forEach(producto -> producto.cancelar(fechaInicio, fechaFin, cantidadPersonas));
         this.lista.clear();
     }
 

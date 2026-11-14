@@ -58,11 +58,11 @@ public class Reserva {
 
 	//########## ESTADOS ##########
 
-	public void agregarServicio(Servicio servicio){
+	public void agregarServicio(Servicio servicio) {
 		this.getEstado().agregarServicio(this, servicio);
 	}
 
-	public void quitarServicio(Servicio servicio){
+	public void quitarServicio(Servicio servicio) {
 		this.getEstado().quitarServicio(this, servicio);
 	}
 
@@ -92,11 +92,11 @@ public class Reserva {
 
 	//########## CARRITO ##########
 
-	private Carrito getCarrito(){
+	private Carrito getCarrito() {
 		return carrito;
 	}
 	
-	public void agregarAlCarrito(Servicio servicio){
+	public void agregarAlCarrito(Servicio servicio) {
 		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantPersonas())) {
 			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
 		}
@@ -104,27 +104,27 @@ public class Reserva {
 		//this.getPublicador().actualizar();
 	}
 
-	public void eliminarDelCarrito(Servicio servicio){
+	public void eliminarDelCarrito(Servicio servicio) {
 		this.getCarrito().removeServicio(servicio);
 	}
 
-	public void confirmarCarrito(){
-		this.getCarrito().confirmar();
+	public void confirmarCarrito() {
+		this.getCarrito().confirmar(getFechaInicio(), getFechaFin(), getCantPersonas());
 	}
 
-	public void cancelarCarrito(){
-		this.getCarrito().cancelar();
+	public void cancelarCarrito() {
+		this.getCarrito().cancelar(getFechaInicio(), getFechaFin(), getCantPersonas());
 	}
 
-	public double costoDeServicio(){
-		return this.getCarrito().costoDeServicio() ;
+	public double costoDeServicio() {
+		return this.getCarrito().costoDeServicio();
 	}
 
-	public double tasasAdministrativas(){
+	public double tasasAdministrativas() {
 		return this.getCarrito().tasasAdministrativas();
 	}
 
-	public double costoDeServicioConTasas(){
+	public double costoDeServicioConTasas() {
 		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
