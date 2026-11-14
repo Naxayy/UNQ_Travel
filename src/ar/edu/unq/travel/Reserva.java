@@ -16,12 +16,14 @@ public class Reserva {
 	private MetodoDePago metodoDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
+	private int cantPasajeros;
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, int cantPasajeros) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
+		this.cantPasajeros = cantPasajeros;
 		//preguntar :p
 	}
 
@@ -94,14 +96,12 @@ public class Reserva {
 		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
-	/* Esto no va aca
 	public int pasajeros(){
-		return 0; 
+		return this.cantPasajeros; 
 	}
 
 	public Direccion direccionDestino(){
 		return this.direccionDestino;
 	}
-	*/
 }
  
