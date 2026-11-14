@@ -19,11 +19,13 @@ public class SolicitudPendienteTest {
 	ServicioIndividual estadiaCancun;
 	TrasladoEstandar traslado;
 	Reserva reserva;
+	Carrito carrito;
+	int cantPasajerosDummy = 0; //al ser un int no se puede mockear como los otros pero le damos un valor random ya que no es usado en el test
 
 	@BeforeEach
 	void setUp() {
 		MetodoDePago pagoDummy = mock(MetodoDePago.class);
-		int cantPasajerosDummy = 0; //al ser un int no se puede mockear como los otros pero le damos un valor random ya que no es usado en el test
+		reserva.getCarrito();
 		this.reserva = new Reserva(traslado, pagoDummy, cantPasajerosDummy);
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.traslado = mock(TrasladoEstandar.class);
@@ -31,14 +33,12 @@ public class SolicitudPendienteTest {
 
 	@Test
 	void agregarServicio(){
-		Carrito carrito = reserva.getCarrito();
 		reserva.agregarServicio(estadiaCancun);
 		assertTrue(carrito.contiene(estadiaCancun));		
 	}
 
 	@Test
 	void quitarServicio(){
-		Carrito carrito = reserva.getCarrito();
 		reserva.agregarServicio(estadiaCancun);
 		assertTrue(carrito.contiene(estadiaCancun));
 

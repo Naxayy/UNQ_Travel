@@ -17,6 +17,7 @@ class ReservaTest {
 	ServicioIndividual estadiaCancun;
 	Traslado unTraslado;
 	MetodoDePago unMetodoDePago;
+	int cantPasajerosDummy = 0;
 
 	@BeforeEach
 	public void setUp() {
@@ -24,7 +25,6 @@ class ReservaTest {
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
 		this.unMetodoDePago = mock(MetodoDePago.class);
-		int cantPasajerosDummy = 0;
 	
 		//SUT
 		this.reserva = new Reserva(unTraslado,unMetodoDePago, cantPasajerosDummy);
