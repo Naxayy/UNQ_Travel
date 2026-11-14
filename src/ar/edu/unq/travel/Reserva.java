@@ -36,7 +36,7 @@ public class Reserva {
 		this.direccionDestino = destino;
 	}
 
-	//-------
+	//########## OTROS ##########
 
 	public Direccion getDireccion() {
 		return this.direccionDestino;
@@ -44,6 +44,14 @@ public class Reserva {
 
 	public int getCantPersonas() {
 		return this.cantPersonas;
+	}
+
+	public LocalDate getFechaInicio() {
+		return this.fechaInicio;
+	}
+	
+	public LocalDate getFechaFin() {
+		return this.fechaFin;
 	}
 
 	//########## ESTADOS ##########
@@ -85,7 +93,6 @@ public class Reserva {
 	private Carrito getCarrito(){
 		return carrito;
 	}
-
 	
 	public void agregarAlCarrito(Servicio servicio){
 		this.getCarrito().addServicio(servicio);
