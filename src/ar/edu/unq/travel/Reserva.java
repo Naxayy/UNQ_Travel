@@ -31,6 +31,7 @@ public class Reserva {
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
 		this.metodoTraslado = metodoTraslado;
+		this.metodoDePago = metodoDePago;
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
 		this.cantPersonas = personas;
@@ -96,10 +97,10 @@ public class Reserva {
 	}
 	
 	public void agregarAlCarrito(Servicio servicio){
-		if(!servicio.hayDisponibilidad(LocalDate getFechaInicio(), LocalDate getFechaFin(), int getCantPersonas()) {
+		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantPersonas())) {
 			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
 		}
-		this.getCarrito().addServicio(servicio);
+		getCarrito().addServicio(servicio);
 		//this.getPublicador().actualizar();
 	}
 

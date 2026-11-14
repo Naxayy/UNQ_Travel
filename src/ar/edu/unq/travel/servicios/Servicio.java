@@ -22,13 +22,12 @@ public abstract class Servicio {
     }
 
 	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
-		boolean disponible = true;
-
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
-			disponible = disponible && (!hayDisponibilidadEnFecha(fecha, cantidadPersonas));
+			if (!hayDisponibilidadEnFecha(fecha, cantidadPersonas)) {
+				return false;
+			}
 		}
-
-		return disponible;
+		return true;
 	}
 
 	public boolean hayDisponibilidadEnFecha(LocalDate fecha, int cantidad) {

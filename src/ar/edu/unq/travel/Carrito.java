@@ -1,6 +1,6 @@
 package ar.edu.unq.travel;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.travel.servicios.Servicio;
 
@@ -8,7 +8,7 @@ public class Carrito {
     private List<Servicio> lista;
 
     public Carrito() {
-        this.lista = new ArrayList<Servicio>();
+        this.lista = new ArrayList<>();
     }
 
     public void addServicio(Servicio servicio){
