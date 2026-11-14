@@ -22,32 +22,13 @@ public abstract class Servicio {
     }
 	
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
-	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
-		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
-			if (!hayDisponibilidadEnFecha(fecha, cantidadPersonas)) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	//valida se hay disponibilidad en una fecha para cierta cantidad de personas
-	public boolean hayDisponibilidadEnFecha(LocalDate fecha, int cantidad) {
-		return cuposDisponibles.getOrDefault(fecha, 0) >= cantidad;
-	}
+	public abstract boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas);
 	
 	//decrementa en una fecha, una cantidad de cupos segun cantidad de persoans
-	public void decrementarCupo(LocalDate fecha, int cantidad) {
-		if (!hayDisponibilidadEnFecha(fecha, cantidad)) {
-        	throw new IllegalStateException("No hay cupos suficientes");
-    	}
-    	cuposDisponibles.put(fecha, cuposDisponibles.get(fecha) - cantidad);
-	}
+	public abstract void decrementarCupo(LocalDate fecha, int cantidad);
 
 	//incrementa en una fecha, una cantidad de cupos segun cantidad de personas
-	public void incrementarCupo(LocalDate fecha, int cantidad) {
-		cuposDisponibles.put(fecha, cuposDisponibles.get(fecha) + cantidad);;
-	}
+	public abstract void incrementarCupo(LocalDate fecha, int cantidad);
 
 	public abstract boolean contieneCategoria(Categoria categoria);
 	
@@ -71,6 +52,14 @@ public abstract class Servicio {
 	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	protected Map<LocalDate, Integer> getCuposDisponibles() {
+		return this.cuposDisponibles;
+	}
+
+	protected void setCuposDisponibles(LocalDate fecha, int cantidad) {
+		cuposDisponibles.put(fecha, cantidad);
 	}
 
 	public void confirmar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){

@@ -1,7 +1,9 @@
 package ar.edu.unq.travel.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ar.edu.unq.travel.categoria.*;
 
@@ -9,10 +11,29 @@ public class Paquete extends Servicio {
 	private List<Servicio> servicios =  new ArrayList<Servicio>();
 	private int descuento;
 	
-	public Paquete(String nombre, String descripcion, int descuento, Categoria categoria) {
-		super(nombre, descripcion);
+	public Paquete(String nombre, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int descuento, Categoria categoria) {
+		super(nombre, descripcion, cuposDisponibles);
 		this.descuento = descuento;
 	}
+
+	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
+    @Override
+	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
+		return servicios.stream().allMatch(servicio -> !servicio.hayDisponibilidad(fechaInicio,fechaFin,cantidadPersonas));
+	}
+	
+	//decrementa en una fecha, una cantidad de cupos segun cantidad de persoans
+	@Override
+	public void decrementarCupo(LocalDate fecha, int cantidad) {
+		servicios.stream().forEach(servicio -> servicio.decrementarCupo(fecha, cantidad));
+	}
+
+	//incrementa en una fecha, una cantidad de cupos segun cantidad de personas
+	@Override
+	public void incrementarCupo(LocalDate fecha, int cantidad) {
+		servicios.stream().forEach(servicio -> servicio.incrementarCupo(fecha, cantidad));
+	}
+
 	@Override
 	public boolean contieneCategoria(Categoria categoria) {
 		return servicios.stream()
