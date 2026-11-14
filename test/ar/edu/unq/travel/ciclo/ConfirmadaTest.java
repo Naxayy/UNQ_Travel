@@ -1,5 +1,6 @@
 package ar.edu.unq.travel.ciclo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,5 +35,10 @@ public class ConfirmadaTest {
 
     	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
     	verify(this.reserva).cancelarCarrito();
+	}
+
+	@Test
+	void testConfirmadaTiene0DeMontoVaucher() {
+		assertEquals(0.0, this.estado.montoVoucher(this.reserva));
 	}
 }
