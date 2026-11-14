@@ -1,7 +1,10 @@
 package ar.edu.unq.travel.ciclo;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,45 +15,45 @@ import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class SolicitudPendienteTest {
 
+	//que el voucher reciba el monto correcto
+	//el estado al ser cancelado da un monto para el voucher
+
 	ServicioIndividual estadiaCancun;
-	TrasladoEstandar traslado;
 	Reserva reserva;
+	SolicitudPendiente estado;
 
 	@BeforeEach
 	void setUp() {
-		this.reserva = new Reserva(traslado);
+		this.reserva = mock(Reserva.class);
 		this.estadiaCancun = mock(ServicioIndividual.class);
-		this.traslado = mock(TrasladoEstandar.class);
+
+		this.estado = new SolicitudPendiente();
 	}
 
 	@Test
-	void agregarServicio(){
-		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.elCarritoContiene(estadiaCancun));		
+	void testAgregarServicioLeDelegaLaResponsabilidadAReserva(){
+		this.estado.agregarServicio(this.reserva, this.estadiaCancun);
+		verify(this.reserva).agregarAlCarrito(estadiaCancun);	
 	}
 
 	@Test
-	void quitarServicio(){
-		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.elCarritoContiene(estadiaCancun));
-
-		reserva.quitarServicio(estadiaCancun);
-		assertFalse(reserva.elCarritoContiene(estadiaCancun));
+	void testQuitarServicioLeDelegaLaResponsabilidadAReserva(){
+		this.estado.quitarServicio(this.reserva, this.estadiaCancun);
+		verify(this.reserva).eliminarDelCarrito(this.estadiaCancun);	
 	}
 
 	@Test
-	void seConfirmaLaReserva() {
-		reserva.confirmar();
-		assertEquals(Confirmada.class, reserva.getEstado().getClass());
-		assertNotEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
+	void testConfirmarLeDelegaLaResponsabilidadAReserva() {
+    	this.estado.confirmar(this.reserva);
+
+    	verify(this.reserva).cambiarAEstado(any(Confirmada.class));
+    	verify(this.reserva).confirmarCarrito();
 	}
 
 	@Test
-	void seCancelaLaReserva() {
-		assertEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
-		reserva.cancelar();
-		assertEquals(Cancelada.class, reserva.getEstado().getClass());
-		assertNotEquals(SolicitudPendiente.class, reserva.getEstado().getClass());
-	}
+	void testCancelarLeDelegaLaResponsabilidadAReserva() {
+    	this.estado.cancelada(this.reserva);
 
+    	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
+	}
 }

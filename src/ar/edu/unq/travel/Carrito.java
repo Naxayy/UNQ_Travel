@@ -38,15 +38,12 @@ public class Carrito {
             .sum();
     }
 
-    public List<Servicio> getServicios(){
+    public List<Servicio> getListaDelCarrito(){
         return this.lista;
     }
 
-    public boolean contiene(Servicio servicio) {
-       return getLista().contains(servicio);
+    public boolean contieneElServicio(Servicio servicio){
+        return this.getListaDelCarrito().contains(servicio);
     }
 
-    private List<Servicio> getLista(){
-        return lista;
-    }
 }

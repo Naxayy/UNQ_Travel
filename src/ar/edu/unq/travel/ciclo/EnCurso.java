@@ -18,4 +18,14 @@ public class EnCurso extends Estado {
 		reserva.cambiarAEstado(cancelada);
 	}
 
+	@Override
+	public double montoVoucher(Reserva reserva){
+		return reserva.costoDeServicio();
+	}
+
+	@Override
+	public boolean esGeneradorDeVoucher(){
+		return true;
+	}
+
 }

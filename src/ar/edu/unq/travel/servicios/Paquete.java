@@ -13,6 +13,7 @@ public class Paquete extends Servicio {
 		super(nombre, descripcion);
 		this.descuento = descuento;
 	}
+	
 	@Override
 	public boolean contieneCategoria(Categoria categoria) {
 		return servicios.stream()

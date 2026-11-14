@@ -5,6 +5,12 @@ public class BilleteraVirtual extends MetodoDePago {
     private double saldo;
     private String vendedor;
 
+    public BilleteraVirtual(BilleteraVirtualAPI api, double saldo, String vendedor){
+        this.api = api;
+        this.saldo = saldo;
+        this.vendedor = vendedor;
+    }
+
     public void validarDatos() {
         api.haySaldoSuficiente(saldo);
     };

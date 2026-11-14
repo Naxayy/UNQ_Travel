@@ -1,10 +1,11 @@
-package ar.edu.unq.travel;
+
 
 import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.notificaciones.Observador;
 import ar.edu.unq.travel.notificaciones.Publicador;
 

@@ -6,8 +6,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import ar.edu.unq.travel.plataformaTransporte.Direccion;
-import ar.edu.unq.travel.plataformaTransporte.PlataformaTransporte;
 import ar.edu.unq.travel.Reserva;
 
 public class TrasladoEstandarTest {
