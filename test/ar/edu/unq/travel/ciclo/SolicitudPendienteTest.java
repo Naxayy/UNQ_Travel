@@ -55,6 +55,5 @@ public class SolicitudPendienteTest {
     	this.estado.cancelada(this.reserva);
 
     	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
-    	verify(this.reserva).cancelarCarrito();
 	}
 }

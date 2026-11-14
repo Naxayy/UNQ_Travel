@@ -16,6 +16,12 @@ public class EnCheckin extends Estado {
 	public void cancelada(Reserva reserva) {
 		Cancelada cancelada = new Cancelada();
 		reserva.cambiarAEstado(cancelada);
+		reserva.cancelarCarrito();
+	}
+
+	@Override 
+	public boolean esGeneradorDeVoucher(){
+		return true;
 	}
 
 	@Override 
@@ -23,7 +29,4 @@ public class EnCheckin extends Estado {
 		return reserva.costoDeServicioConTasas();
 	}
 	
-
-
-
 }

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,9 +12,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.ciclo.Confirmada;
-import ar.edu.unq.travel.ciclo.Estado;
-import ar.edu.unq.travel.ciclo.SolicitudPendiente;
+import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.ServicioIndividual;

@@ -23,4 +23,9 @@ public class EnCurso extends Estado {
 		return reserva.costoDeServicio();
 	}
 
+	@Override
+	public boolean esGeneradorDeVoucher(){
+		return true;
+	}
+
 }

@@ -1,6 +1,8 @@
 package ar.edu.unq.travel.ciclo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -41,5 +43,20 @@ public class EnCursoTest {
         when(this.reserva.costoDeServicio()).thenReturn(200.0);
     	
         assertEquals(200, this.estado.montoVoucher(this.reserva));
+	}
+
+	@Test
+	void testEsGeneradorDeVoucher() {
+        assertTrue(this.estado.esGeneradorDeVoucher());
+	}
+
+	@Test
+	void testNoesGeneradorDeEmail(){
+        assertFalse(this.estado.esGeneradorDeEmail());
+	}
+
+	@Test
+	void testNoesFidelizador(){
+        assertFalse(this.estado.esFidelizador());
 	}
 }
