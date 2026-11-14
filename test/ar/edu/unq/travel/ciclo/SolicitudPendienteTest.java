@@ -23,7 +23,8 @@ public class SolicitudPendienteTest {
 	@BeforeEach
 	void setUp() {
 		MetodoDePago pagoDummy = mock(MetodoDePago.class);
-		this.reserva = new Reserva(traslado, pagoDummy);
+		int cantPasajerosDummy = 0; //al ser un int no se puede mockear como los otros pero le damos un valor random ya que no es usado en el test
+		this.reserva = new Reserva(traslado, pagoDummy, cantPasajerosDummy);
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.traslado = mock(TrasladoEstandar.class);
 	}
