@@ -1,13 +1,17 @@
 package ar.edu.unq.travel.ciclo;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
+import ar.edu.unq.travel.Carrito;
 import ar.edu.unq.travel.Reserva;
-import ar.edu.unq.travel.servicios.*;
+import ar.edu.unq.travel.pagos.MetodoDePago;
+import ar.edu.unq.travel.servicios.ServicioIndividual;
 import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class SolicitudPendienteTest {
@@ -18,24 +22,27 @@ public class SolicitudPendienteTest {
 
 	@BeforeEach
 	void setUp() {
-		this.reserva = new Reserva(traslado);
+		MetodoDePago pagoDummy = mock(MetodoDePago.class);
+		this.reserva = new Reserva(traslado, pagoDummy);
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.traslado = mock(TrasladoEstandar.class);
 	}
 
 	@Test
 	void agregarServicio(){
+		Carrito carrito = reserva.getCarrito();
 		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.elCarritoContiene(estadiaCancun));		
+		assertTrue(carrito.contiene(estadiaCancun));		
 	}
 
 	@Test
 	void quitarServicio(){
+		Carrito carrito = reserva.getCarrito();
 		reserva.agregarServicio(estadiaCancun);
-		assertTrue(reserva.elCarritoContiene(estadiaCancun));
+		assertTrue(carrito.contiene(estadiaCancun));
 
 		reserva.quitarServicio(estadiaCancun);
-		assertFalse(reserva.elCarritoContiene(estadiaCancun));
+		assertFalse(carrito.contiene(estadiaCancun));
 	}
 
 	@Test
