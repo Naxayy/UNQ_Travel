@@ -23,7 +23,7 @@ public class ServicioIndividual extends Servicio{
 	}
 
 	public boolean contieneCategoria(Categoria categoria) {
-		return this.categoria == categoria;
+		return this.categoria == categoria;//ver
 	}
 
 
