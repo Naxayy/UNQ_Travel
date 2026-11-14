@@ -1,29 +1,25 @@
 package ar.edu.unq.travel.ciclo;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
-<<<<<<< HEAD:test/ar/edu/unq/travel/ciclo/ConfirmadaTest.java
 import ar.edu.unq.travel.Reserva;
-=======
-import ar.edu.unq.travel.ciclo.*;
 import ar.edu.unq.travel.pagos.MetodoDePago;
->>>>>>> main:test/ar/edu/unq/travel/ConfirmadaTest.java
 import ar.edu.unq.travel.traslados.Traslado;
 
 public class ConfirmadaTest {
 
     Reserva reserva;
 	Traslado unTraslado;
-	MetodoDePago unMetodoDePago;
+	MetodoDePago medioDePagoDummy;
 
     @BeforeEach
     void setUp() {
 		this.unTraslado = mock(Traslado.class);
-        this.reserva = new Reserva(unTraslado);
+		medioDePagoDummy = mock(MetodoDePago.class);
+        this.reserva = new Reserva(unTraslado,medioDePagoDummy, 0);
     }
 
 	@Test
