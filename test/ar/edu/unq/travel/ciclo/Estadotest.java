@@ -1,4 +1,4 @@
-package ciclo;
+package ar.edu.unq.travel.ciclo;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
