@@ -2,14 +2,14 @@ package ar.edu.unq.travel.notificaciones;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 
-public class ObsGeneradorDeVoucher implements Observador {
+public class GeneradorDeVoucher implements Observador {
     private Reserva reserva;
 
-    public ObsGeneradorDeVoucher(Reserva reserva){
+    public GeneradorDeVoucher(Reserva reserva){
         this.reserva = reserva;
     }
 
-    public Voucher generarVoucher(Double monto){
+    private Voucher generarVoucher(Double monto){
         return new Voucher(monto);
     } 
    
@@ -21,5 +21,13 @@ public class ObsGeneradorDeVoucher implements Observador {
             double valor = estadoAnterior.montoVoucher(reserva);
             this.generarVoucher(valor);
         }
+    }
+
+    public void setReserva(Reserva reserva){
+        this.reserva = reserva;
+    }
+
+    public Reserva getReserva(){
+        return this.reserva;
     }
 }

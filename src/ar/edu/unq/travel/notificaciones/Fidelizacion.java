@@ -3,10 +3,10 @@ import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 
 
-public class ObsFidelizacion implements Observador {
+public class Fidelizacion implements Observador {
     private Reserva reserva;
 
-    public ObsFidelizacion(Reserva reserva){
+    public Fidelizacion(Reserva reserva){
         this.reserva = reserva;
     }
 
@@ -16,5 +16,13 @@ public class ObsFidelizacion implements Observador {
         if(estado.esFidelizador()){
             //cupon de descuento con 5%
         }
+    }
+
+    public void setReserva(Reserva reserva){
+        this.reserva = reserva;
+    }
+
+    public Reserva getReserva(){
+        return this.reserva;
     }
 }

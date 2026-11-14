@@ -2,13 +2,13 @@ package ar.edu.unq.travel.notificaciones;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 
-public class ObsNotificadorDeEmail implements Observador {
+public class NotificadorDeEmail implements Observador {
     private Reserva reserva;
     private MailSender mail;
     private String direccionDestino;
     private Object adjunto;
 
-    public ObsNotificadorDeEmail(MailSender mail, String direccionDestino,Reserva reserva) {
+    public NotificadorDeEmail(MailSender mail, String direccionDestino,Reserva reserva) {
         this.reserva= reserva;
         this.mail = mail;
         this.direccionDestino = direccionDestino;
@@ -25,5 +25,13 @@ public class ObsNotificadorDeEmail implements Observador {
 
     public void enviarMail(){
         //mail.enviarMail(this.direccionDestino, "Actualización de reserva", "Su reserva ha sido actualizada a " + observable.getEstado().toString() + ".", adjunto);
+    }
+
+    public void setReserva(Reserva reserva){
+        this.reserva = reserva;
+    }
+
+    public Reserva getReserva(){
+        return this.reserva;
     }
 }
