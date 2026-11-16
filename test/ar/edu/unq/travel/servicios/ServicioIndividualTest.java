@@ -3,13 +3,12 @@ package ar.edu.unq.travel.servicios;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
-import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
-import ar.edu.unq.travel.categoria.*;
+import ar.edu.unq.travel.categoria.Categoria;
 
 
 public class ServicioIndividualTest {
@@ -26,10 +25,10 @@ public class ServicioIndividualTest {
 		this.unaCategoria = mock(Categoria.class);
 
 		//servicio individual con un de atributo por parametro
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.00, "descripcion", 1, unaCategoria, this.ratingEstrellas);
+		this.noche = new ServicioIndividual("Noche de hotel central", "descripcion", 1, unaCategoria,15000.00);// this.ratingEstrellas);
 
 		//servicio individual sin atributos
-		this.excursion = new ServicioIndividual("Excursion guiada museo" , 4000.00,"Descripcion", 2, unaCategoria);
+		this.excursion = new ServicioIndividual("Excursion guiada museo","Descripcion", 2, unaCategoria, 4000.00);
 	}
 
 	@Test

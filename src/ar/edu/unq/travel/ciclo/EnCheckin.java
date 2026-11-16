@@ -4,7 +4,7 @@ import ar.edu.unq.travel.Reserva;
 
 public class EnCheckin extends Estado {
 
-	public EnCheckin(Reserva reserva) {}
+	public EnCheckin() {}
 
 	@Override
 	public void enCurso(Reserva reserva) {
@@ -16,10 +16,17 @@ public class EnCheckin extends Estado {
 	public void cancelada(Reserva reserva) {
 		Cancelada cancelada = new Cancelada();
 		reserva.cambiarAEstado(cancelada);
+		reserva.cancelarCarrito();
 	}
 
+	@Override 
+	public boolean esGeneradorDeVoucher(){
+		return true;
+	}
+
+	@Override 
+	public double montoVoucher(Reserva reserva){
+		return reserva.costoDeServicioConTasas();
+	}
 	
-
-
-
 }

@@ -7,8 +7,8 @@ import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.pagos.MetodoDePago;
-import ar.edu.unq.travel.plataformaTransporte.Direccion;
 import ar.edu.unq.travel.servicios.Servicio;
+import ar.edu.unq.travel.traslados.Direccion;
 import ar.edu.unq.travel.traslados.Traslado;
 
 public class Reserva {	
@@ -19,6 +19,8 @@ public class Reserva {
 	private MetodoDePago metodoDePago;
 	private Carrito carrito;
 	private Direccion direccionDestino;
+	private int cantidadDePasajeros;
+	private Estado estadoAnterior; 
 
 	//Atributos necesarios para calcular cupos con fechas
 	private LocalDate fechaInicio;
@@ -37,7 +39,9 @@ public class Reserva {
 		this.direccionDestino = destino;
 	}
 
-	//########## OTROS ##########
+	public void cambiarCarrito(Carrito carritoNuevo){
+		this.carrito = carritoNuevo;
+	}
 
 	public Direccion getDireccion() {
 		return this.direccionDestino;
@@ -84,8 +88,13 @@ public class Reserva {
 	public Estado getEstado() {
 		return this.estado;
 	}
-	
+
+	public Estado getEstadoAnterior(){
+		return this.estadoAnterior;
+	}
+
 	public void cambiarAEstado(Estado estadoNuevo) {
+		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
 	}
 
@@ -130,6 +139,21 @@ public class Reserva {
 	//###### REPORTES ######
 	public List<Servicio> getServicios() {
 		return this.carrito.getServicios();
+	}
+	public int pasajeros(){
+		return this.cantidadDePasajeros; 
+	}
+
+	public Direccion direccionDestino(){
+		return this.direccionDestino;
+	}
+
+	public void cambiarDireccionDestino(Direccion direccionNueva){
+		this.direccionDestino = direccionNueva;
+	}
+
+	public void cambiarLaCantidadDePasajeros(int pasajeros){
+		this.cantidadDePasajeros = pasajeros;
 	}
 }
  

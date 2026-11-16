@@ -8,6 +8,14 @@ public class TarjetaDeCredito extends MetodoDePago {
     private String cvv;
     private Date vto;
     private String bancoEmisor;
+
+    public TarjetaDeCredito(TarjetaDeCreditoAPI api, String nroTarjeta, String cvv, Date vto, String bancoEmisor){
+        this.api = api;
+        this.nroTarjeta = nroTarjeta;
+        this.cvv = cvv;
+        this.vto = vto;
+        this.bancoEmisor = bancoEmisor;
+    }
     
     public void validarDatos() {
         api.validarDatos(nroTarjeta, cvv, vto);
