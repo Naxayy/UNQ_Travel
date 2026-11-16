@@ -1,10 +1,12 @@
 package ar.edu.unq.travel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.busqueda.CriterioBusqueda;
+import ar.edu.unq.travel.categoria.Categoria;
+import ar.edu.unq.travel.servicios.Servicio;
 
 public class Catalogo {
     private List<Servicio> items;
@@ -29,5 +31,16 @@ public class Catalogo {
 
     private void setCondicion(CriterioBusqueda condicion) {
         this.condicion = condicion;
+    }
+
+    public int cuposDisponibles(Categoria categoria, LocalDate desde, LocalDate hasta) {
+        int libres = 0;
+
+        for (Servicio servicio : getItems()) {
+            if (servicio.contieneCategoria(categoria)) {
+                libres += servicio.cuposDisponiblesEnPeriodo(desde, hasta);
+            }
+        }
+        return libres;
     }
 }

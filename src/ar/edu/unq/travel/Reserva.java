@@ -1,6 +1,7 @@
 package ar.edu.unq.travel;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
@@ -126,14 +127,9 @@ public class Reserva {
 		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
-	/* Esto no va aca
-	public int pasajeros(){
-		return 0; 
+	//###### REPORTES ######
+	public List<Servicio> getServicios() {
+		return this.carrito.getServicios();
 	}
-
-	public Direccion direccionDestino(){
-		return this.direccionDestino;
-	}
-	*/
 }
  
