@@ -64,7 +64,7 @@ public abstract class Servicio {
 
 	public void confirmar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
-			incrementarCupo(fecha, cantidadPersonas);
+			decrementarCupo(fecha, cantidadPersonas);
 		}
 	}
 
@@ -72,6 +72,26 @@ public abstract class Servicio {
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
 			incrementarCupo(fecha, cantidadPersonas);
 		}
+	}
+
+	//###### REPORTES #####
+
+	public int cuposDisponiblesEnPeriodo(LocalDate desde, LocalDate hasta) {
+		if (this.cuposDisponibles == null) {
+			return 0;
+		}
+
+		int libres = 0;
+
+		for (Map.Entry<LocalDate, Integer> entrada : this.cuposDisponibles.entrySet()) {
+			LocalDate fecha = entrada.getKey();
+
+			if (!fecha.isBefore(desde) && !fecha.isAfter(hasta)) {
+				libres += entrada.getValue();
+			}
+		}
+
+		return libres;
 	}
 }
 

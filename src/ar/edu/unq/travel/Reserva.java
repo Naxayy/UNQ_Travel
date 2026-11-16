@@ -25,12 +25,10 @@ public class Reserva {
 	private int cantPersonas;
 	//#######################
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago, Traslado metodoTraslado, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
-		this.metodoDePago = metodoDePago;
-		this.metodoTraslado = metodoTraslado;
 		this.metodoDePago = metodoDePago;
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
