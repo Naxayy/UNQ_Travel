@@ -1,7 +1,9 @@
 package ar.edu.unq.travel.reportes;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ar.edu.unq.travel.Catalogo;
 import ar.edu.unq.travel.Reserva;
@@ -61,15 +63,13 @@ public class DatoCupo {
     }
 
     private int cantidadServiciosDeCategoria(Reserva reserva) {
-        int cantidad = 0;
+        Set<Servicio> individuales = new HashSet<>();
 
-        for (Servicio servicio : reserva.getServicios()) {
-            if (servicio.contieneCategoria(categoria)) {
-                cantidad++;
-            }
-        }
-
-        return cantidad;
+        reserva.getServicios().forEach(servicio -> servicio.recolectarServiciosIndividuales(individuales));
+        
+        return individuales.stream()
+                .mapToInt(servicio -> servicio.contieneCategoria(this.categoria) ? 1 : 0)
+                .sum();
     }
 
     private boolean estaActiva(Reserva reserva) {
