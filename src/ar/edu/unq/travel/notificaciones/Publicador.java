@@ -1,13 +1,13 @@
 package ar.edu.unq.travel.notificaciones;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 public class Publicador {
-    private List<Observador> observadores = new ArrayList<Observador>();
+    private List<Observador> observadores;
 
-	public Publicador(){}
+	public Publicador(List<Observador> observadores) {
+		this.observadores = observadores;
+	}
 
 	public void notificarAObservadores() {
 		for (Observador observador : observadores) {

@@ -1,6 +1,7 @@
 package ar.edu.unq.travel;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.unq.travel.servicios.Servicio;
 
@@ -8,7 +9,7 @@ public class Carrito {
     private List<Servicio> lista;
 
     public Carrito() {
-        this.lista = new ArrayList<Servicio>();
+        this.lista = new ArrayList<>();
     }
 
     public void addServicio(Servicio servicio){
@@ -19,12 +20,12 @@ public class Carrito {
         this.lista.remove(servicio);
     }
 
-    public void confirmar(){
-        this.lista.forEach(producto -> producto.confirmar());
+    public void confirmar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+        this.lista.forEach(producto -> producto.confirmar(fechaInicio, fechaFin, cantidadPersonas));
     }
 
-    public void cancelar(){
-        this.lista.forEach(producto -> producto.cancelar());
+    public void cancelar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+        this.lista.forEach(producto -> producto.cancelar(fechaInicio, fechaFin, cantidadPersonas));
         this.lista.clear();
     }
 
@@ -44,6 +45,10 @@ public class Carrito {
 
     public boolean contieneElServicio(Servicio servicio){
         return this.getListaDelCarrito().contains(servicio);
+    }
+
+    public List<Servicio> getServicios() {
+        return this.lista;
     }
 
 }

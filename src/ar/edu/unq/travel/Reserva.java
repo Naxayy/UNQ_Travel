@@ -1,5 +1,8 @@
 package ar.edu.unq.travel;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Publicador;
@@ -19,24 +22,50 @@ public class Reserva {
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago, int cantPasajeros) {
+	//Atributos necesarios para calcular cupos con fechas
+	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
+	private int cantPersonas;
+	//#######################
+
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		this.cantidadDePasajeros = cantPasajeros;
-		//preguntar :p
+		this.fechaInicio = inicio;
+		this.fechaFin = fin;
+		this.cantPersonas = personas;
+		this.direccionDestino = destino;
 	}
 
 	public void cambiarCarrito(Carrito carritoNuevo){
 		this.carrito = carritoNuevo;
 	}
 
-	public void agregarServicio(Servicio servicio){
+	public Direccion getDireccion() {
+		return this.direccionDestino;
+	}
+
+	public int getCantPersonas() {
+		return this.cantPersonas;
+	}
+
+	public LocalDate getFechaInicio() {
+		return this.fechaInicio;
+	}
+	
+	public LocalDate getFechaFin() {
+		return this.fechaFin;
+	}
+
+	//########## ESTADOS ##########
+
+	public void agregarServicio(Servicio servicio) {
 		this.getEstado().agregarServicio(this, servicio);
 	}
 
-	public void quitarServicio(Servicio servicio){
+	public void quitarServicio(Servicio servicio) {
 		this.getEstado().quitarServicio(this, servicio);
 	}
 
@@ -64,44 +93,53 @@ public class Reserva {
 		return this.estadoAnterior;
 	}
 
-	public Carrito getCarrito(){
-		return carrito;
-	}
-
 	public void cambiarAEstado(Estado estadoNuevo) {
 		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
 	}
+
+	//########## CARRITO ##########
+
+	private Carrito getCarrito() {
+		return carrito;
+	}
 	
-	public void agregarAlCarrito(Servicio servicio){
-		this.getCarrito().addServicio(servicio);
+	public void agregarAlCarrito(Servicio servicio) {
+		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantPersonas())) {
+			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
+		}
+		getCarrito().addServicio(servicio);
 		//this.getPublicador().actualizar();
 	}
 
-	public void eliminarDelCarrito(Servicio servicio){
+	public void eliminarDelCarrito(Servicio servicio) {
 		this.getCarrito().removeServicio(servicio);
 	}
 
-	public void confirmarCarrito(){
-		this.getCarrito().confirmar();
+	public void confirmarCarrito() {
+		this.getCarrito().confirmar(getFechaInicio(), getFechaFin(), getCantPersonas());
 	}
 
-	public void cancelarCarrito(){
-		this.getCarrito().cancelar();
+	public void cancelarCarrito() {
+		this.getCarrito().cancelar(getFechaInicio(), getFechaFin(), getCantPersonas());
 	}
 
-	public double costoDeServicio(){
-		return this.getCarrito().costoDeServicio() ;
+	public double costoDeServicio() {
+		return this.getCarrito().costoDeServicio();
 	}
 
-	public double tasasAdministrativas(){
+	public double tasasAdministrativas() {
 		return this.getCarrito().tasasAdministrativas();
 	}
 
-	public double costoDeServicioConTasas(){
+	public double costoDeServicioConTasas() {
 		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
+	//###### REPORTES ######
+	public List<Servicio> getServicios() {
+		return this.carrito.getServicios();
+	}
 	public int pasajeros(){
 		return this.cantidadDePasajeros; 
 	}

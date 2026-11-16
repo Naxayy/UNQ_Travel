@@ -1,7 +1,10 @@
 package ar.edu.unq.travel.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.*;
@@ -13,19 +16,59 @@ public class ServicioIndividual extends Servicio{
 	private Categoria categoria;
 	
 	//Cambiar atributos metodos ??
-	//private Proveedor provedor; 
+	private Proveedor proveedor;
 	
-	public ServicioIndividual(String nombre, String descripcion, int codigo, Categoria categoria, double precioBase) {
-		super(nombre, descripcion);
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor) {
+		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;
+		this.proveedor = proveedor;
 	}
 
+	@Override
 	public boolean contieneCategoria(Categoria categoria) {
-		return this.categoria == categoria;//ver
+		return this.categoria.getNombre().equals(categoria.getNombre());
+	}
+	
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, AtributoDinamico atributo) {
+		super(nombre, descripcion, cuposDisponibles);
+		this.codigo = codigo;
+		this.precioBase = precioBase;
+		this.categoria = categoria;
+		this.agregarAtributo(atributo);
 	}
 
+	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
+	@Override
+	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
+		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+			if (!hayDisponibilidadEnFecha(fecha, cantidadPersonas)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//valida se hay disponibilidad en una fecha para cierta cantidad de personas
+	public boolean hayDisponibilidadEnFecha(LocalDate fecha, int cantidad) {
+		return getCuposDisponibles().getOrDefault(fecha, 0) >= cantidad;
+	}
+	
+	//decrementa en una fecha, una cantidad de cupos segun cantidad de persoans
+	@Override
+	public void decrementarCupo(LocalDate fecha, int cantidad) {
+		if (!hayDisponibilidadEnFecha(fecha, cantidad)) {
+        	throw new IllegalStateException("No hay cupos suficientes");
+    	}
+    	setCuposDisponibles(fecha, getCuposDisponibles().get(fecha) - cantidad);
+	}
+
+	//incrementa en una fecha, una cantidad de cupos segun cantidad de personas
+	@Override
+	public void incrementarCupo(LocalDate fecha, int cantidad) {
+		setCuposDisponibles(fecha, getCuposDisponibles().get(fecha) + cantidad);
+	}
 
 	public void agregarAtributo(AtributoDinamico atributo){
 		atributosDinamicos.add(atributo);
@@ -52,6 +95,21 @@ public class ServicioIndividual extends Servicio{
 	
 	public int getCodigo() {
 		return codigo;
+	}
+
+	@Override
+	public void recolectarServiciosIndividuales(Set<Servicio> resultado) {
+		resultado.add(this);
+	}
+
+	@Override
+	public void agregarProveedoresA(Set<Proveedor> proveedores) {
+		proveedores.add(this.proveedor);
+	}
+
+	@Override
+	public boolean esDeProveedor(Proveedor proveedor) {
+		return this.proveedor.equals(proveedor);
 	}
 
 }
