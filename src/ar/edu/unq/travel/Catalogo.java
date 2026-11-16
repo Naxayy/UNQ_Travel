@@ -1,8 +1,9 @@
-package ar.edu.unq.travel.busqueda;
+package ar.edu.unq.travel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.travel.busqueda.CriterioBusqueda;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class Catalogo {
