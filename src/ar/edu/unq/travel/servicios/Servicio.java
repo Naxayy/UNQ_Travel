@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.Categoria;
@@ -93,5 +94,11 @@ public abstract class Servicio {
 
 		return libres;
 	}
+
+	public abstract void recolectarServiciosIndividuales(Set<Servicio> resultado);
+
+	public abstract void agregarProveedoresA(Set<Proveedor> proveedores);
+
+	public abstract boolean esDeProveedor(Proveedor proveedor);
 }
 

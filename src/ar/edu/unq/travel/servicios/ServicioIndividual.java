@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.*;
@@ -15,17 +16,19 @@ public class ServicioIndividual extends Servicio{
 	private Categoria categoria;
 	
 	//Cambiar atributos metodos ??
-	//private Proveedor provedor; 
+	private Proveedor proveedor;
 	
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria) {
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor) {
 		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;
+		this.proveedor = proveedor;
 	}
 
+	@Override
 	public boolean contieneCategoria(Categoria categoria) {
-		return this.categoria == categoria;
+		return this.categoria.getNombre().equals(categoria.getNombre());
 	}
 	
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, AtributoDinamico atributo) {
@@ -92,6 +95,21 @@ public class ServicioIndividual extends Servicio{
 	
 	public int getCodigo() {
 		return codigo;
+	}
+
+	@Override
+	public void recolectarServiciosIndividuales(Set<Servicio> resultado) {
+		resultado.add(this);
+	}
+
+	@Override
+	public void agregarProveedoresA(Set<Proveedor> proveedores) {
+		proveedores.add(this.proveedor);
+	}
+
+	@Override
+	public boolean esDeProveedor(Proveedor proveedor) {
+		return this.proveedor.equals(proveedor);
 	}
 
 }

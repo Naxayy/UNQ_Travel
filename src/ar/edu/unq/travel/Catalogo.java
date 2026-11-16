@@ -2,10 +2,13 @@ package ar.edu.unq.travel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ar.edu.unq.travel.busqueda.CriterioBusqueda;
 import ar.edu.unq.travel.categoria.Categoria;
+import ar.edu.unq.travel.servicios.Proveedor;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class Catalogo {
@@ -34,13 +37,32 @@ public class Catalogo {
     }
 
     public int cuposDisponibles(Categoria categoria, LocalDate desde, LocalDate hasta) {
-        int libres = 0;
+        return this.serviciosIndividuales().stream()
+                .filter(servicio -> servicio.contieneCategoria(categoria))
+                .mapToInt(servicio -> servicio.cuposDisponiblesEnPeriodo(desde, hasta))
+                .sum();
+    }
 
-        for (Servicio servicio : getItems()) {
-            if (servicio.contieneCategoria(categoria)) {
-                libres += servicio.cuposDisponiblesEnPeriodo(desde, hasta);
-            }
+    public Set<Proveedor> proveedores() {
+        Set<Proveedor> resultado = new HashSet<>();
+        this.items.forEach(servicio -> servicio.agregarProveedoresA(resultado));
+        return resultado;
+    }
+
+    public double porcentajeDeProveedor(Proveedor proveedor) {
+        Set<Servicio> individuales = this.serviciosIndividuales();
+        if (individuales.isEmpty()) {
+            return 0.0;
         }
-        return libres;
+        long delProveedor = individuales.stream()
+                .filter(servicio -> servicio.esDeProveedor(proveedor))
+                .count();
+        return (delProveedor * 100.0) / individuales.size();
+    }
+
+    private Set<Servicio> serviciosIndividuales() {
+        Set<Servicio> individuales = new HashSet<>();
+        this.items.forEach(servicio -> servicio.recolectarServiciosIndividuales(individuales));
+        return individuales;
     }
 }

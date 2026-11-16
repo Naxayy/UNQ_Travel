@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unq.travel.categoria.*;
 
@@ -71,6 +72,21 @@ public class Paquete extends Servicio {
 	
 	public void quitarItem(Servicio item) {
 		servicios.remove(item);
+	}
+
+	@Override
+	public void recolectarServiciosIndividuales(Set<Servicio> resultado) {
+		this.servicios.forEach(servicio -> servicio.recolectarServiciosIndividuales(resultado));
+	}
+
+	@Override
+	public void agregarProveedoresA(Set<Proveedor> proveedores) {
+		this.servicios.forEach(servicio -> servicio.agregarProveedoresA(proveedores));
+	}
+
+	@Override
+	public boolean esDeProveedor(Proveedor proveedor) {
+		return false;
 	}
 	
 }

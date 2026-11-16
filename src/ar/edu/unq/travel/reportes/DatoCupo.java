@@ -25,7 +25,7 @@ public class DatoCupo {
     }
 
     public String getCategoria() {
-        return categoria.toString();
+        return categoria.getNombre();
     }
 
     public int getLibres() {
