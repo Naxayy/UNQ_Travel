@@ -3,6 +3,7 @@ bin/
 *.class
 *.project
 target/*
+oraclejdk-27
 
 # Archivos de metadatos de Eclipse (opcional si todos usan distintas versiones/configuraciones)
 .metadata/
