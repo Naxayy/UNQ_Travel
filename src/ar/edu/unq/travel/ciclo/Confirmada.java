@@ -6,11 +6,11 @@ public class Confirmada extends Estado {
 
     public Confirmada() {}
 
-    @Override
-    public void enCheckin(Reserva reserva) {
-        EnCheckin enCheckin = new EnCheckin(reserva);
-        reserva.cambiarAEstado(enCheckin);
-    }
+	@Override
+	public void enCheckin(Reserva reserva) {
+		EnCheckin enCheckin = new EnCheckin();
+		reserva.cambiarAEstado(enCheckin);
+	}
 
     @Override
     public void cancelada(Reserva reserva) {

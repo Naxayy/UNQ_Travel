@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ar\edu\unq\travel\busqueda\CriterioCategoria.class
 ar\edu\unq\travel\busqueda\CriterioComplejo.class
 ar\edu\unq\travel\plataformaTransporte\Direccion.class
@@ -38,3 +39,6 @@ ar\edu\unq\travel\notificaciones\Publicador.class
 ar\edu\unq\travel\atributosDinamicos\AtributoDinamico.class
 ar\edu\unq\travel\atributosDinamicos\Fecha.class
 ar\edu\unq\travel\notificaciones\Observable.class
+=======
+ar\edu\unq\travel\Carrito.class
+>>>>>>> main

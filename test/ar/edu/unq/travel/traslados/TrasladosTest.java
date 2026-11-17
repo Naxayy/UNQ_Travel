@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 
-import ar.edu.unq.travel.plataformaTransporte.PlataformaTransporte;
 import ar.edu.unq.travel.traslados.TrasladoEstandar;
 import ar.edu.unq.travel.traslados.TrasladoPunto;
 import ar.edu.unq.travel.traslados.TrasladoVip;
