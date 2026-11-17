@@ -5,7 +5,9 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -181,19 +183,39 @@ public class PaqueteTest {
 
 
 	@Test
-	void recolectarServiciosIndividuales(){
+    void recolectarServiciosIndividuales() {
+        Set<Servicio> resultado = new HashSet<>();
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
 
-	}
+        paqueteDePaquetes.recolectarServiciosIndividuales(resultado);
+
+        verify(noche).recolectarServiciosIndividuales(resultado);
+        verify(excursion).recolectarServiciosIndividuales(resultado);
+        verify(paqueteTravel).recolectarServiciosIndividuales(resultado);
+    }
 
 	@Test
-	void esDeProveedor(){
+    void esDeProveedor() {
+        Proveedor unProveedor = mock(Proveedor.class);
 
-	}
+        assertFalse(paqueteDePaquetes.esDeProveedor(unProveedor));
+    }
 
 	@Test
-	void agregarProveedoresA(){
+    void agregarProveedoresA() {
+        Set<Proveedor> proveedores = new HashSet<>();
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
 
-	}
+        paqueteDePaquetes.agregarProveedoresA(proveedores);
+
+        verify(noche).agregarProveedoresA(proveedores);
+        verify(excursion).agregarProveedoresA(proveedores);
+        verify(paqueteTravel).agregarProveedoresA(proveedores);
+    }
 
 }
 
