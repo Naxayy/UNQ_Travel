@@ -9,13 +9,13 @@ public abstract class MetodoDePago {
         this.notificarResultado();
     }
 
-    public abstract void validarDatos();
+    public abstract boolean validarDatos();
 
     public abstract void reservarFondos();
 
     public abstract void ejecutarTransaccion();
+
+    public abstract String codigoTransaccion();
     
-    public void notificarResultado() {
-        
-    };
+    public abstract void notificarResultado();
 }

@@ -11,8 +11,8 @@ public class BilleteraVirtual extends MetodoDePago {
         this.vendedor = vendedor;
     }
 
-    public void validarDatos() {
-        api.haySaldoSuficiente(saldo);
+    public boolean validarDatos() {
+        return api.haySaldoSuficiente(saldo);
     };
 
     @Override

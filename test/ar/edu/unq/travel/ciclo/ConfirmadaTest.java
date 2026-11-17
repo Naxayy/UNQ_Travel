@@ -12,6 +12,7 @@ import static org.mockito.Mockito.mock;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.traslados.Traslado;
+import ar.edu.unq.travel.Reserva;
 
 public class ConfirmadaTest {
 

@@ -201,9 +201,8 @@ class ReservaTest {
 	}
 
 	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
-		this.reserva.confirmar();
-		this.reserva.enCheckin();
-		this.reserva.enCurso();
+		this.reserva.cambiarAEstado(new EnCheckin(this.reserva));
+
 		assertDoesNotThrow(() -> this.reserva.enCurso());
 	}
 

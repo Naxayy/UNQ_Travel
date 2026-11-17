@@ -11,8 +11,8 @@ public class TransferenciaBancaria extends MetodoDePago {
         this.alias = alias;
     }
 
-    public void validarDatos() {
-        api.validarDatos(cbu, alias);
+    public boolean validarDatos() {
+        return api.validarDatos(cbu, alias);
     };
 
     public void reservarFondos() {
@@ -23,7 +23,11 @@ public class TransferenciaBancaria extends MetodoDePago {
         api.transferenciaInmediataOProgramada();
     };
 
-    public void notificarResultado() {
+    public String codigoTransaccion() {
+        return api.getCodigoTransaccion();
+    };
 
+    public void notificarResultado() {
+        api.getCodigoTransaccion();
     };
 }

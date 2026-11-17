@@ -17,8 +17,8 @@ public class TarjetaDeCredito extends MetodoDePago {
         this.bancoEmisor = bancoEmisor;
     }
     
-    public void validarDatos() {
-        api.validarDatos(nroTarjeta, cvv, vto);
+    public boolean validarDatos() {
+        return api.validarDatos(nroTarjeta, cvv, vto);
     };
 
     public void reservarFondos() {
@@ -29,7 +29,11 @@ public class TarjetaDeCredito extends MetodoDePago {
         api.transferenciaInmediata();
     };
 
-    public void notificarResultado() {
-        
+    public String codigoTransaccion() {
+        return api.getCodigoTransaccion();
     };
+
+    public void notificarResultado() {
+        api.getCodigoTransaccion();
+    }
 }
