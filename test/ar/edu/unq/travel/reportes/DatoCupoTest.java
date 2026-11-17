@@ -1,17 +1,17 @@
 package ar.edu.unq.travel.reportes;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import ar.edu.unq.travel.Catalogo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.categoria.Categoria;
