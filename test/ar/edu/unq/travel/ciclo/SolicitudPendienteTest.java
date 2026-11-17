@@ -1,20 +1,13 @@
 package ar.edu.unq.travel.ciclo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
-
-import ar.edu.unq.travel.Carrito;
 import ar.edu.unq.travel.Reserva;
-import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
-import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class SolicitudPendienteTest {
 

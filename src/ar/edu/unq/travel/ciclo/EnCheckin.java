@@ -14,7 +14,7 @@ public class EnCheckin extends Estado {
 
 	@Override
 	public void cancelada(Reserva reserva) {
-		Cancelada cancelada = new Cancelada();
+		CanceladaTest cancelada = new CanceladaTest();
 		reserva.cambiarAEstado(cancelada);
 		reserva.cancelarCarrito();
 	}
