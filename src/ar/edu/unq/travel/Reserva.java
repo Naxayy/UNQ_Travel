@@ -26,7 +26,7 @@ public class Reserva extends Publicador {
 	//Atributos necesarios para calcular cupos con fechas
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
-	private int cantPersonas;
+
 	//#######################
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino, List<Observador> observadores) {
@@ -37,9 +37,9 @@ public class Reserva extends Publicador {
 		this.metodoDePago = metodoDePago;
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
-		this.cantPersonas = personas;
 		this.direccionDestino = destino;
 	}
+
 
 	public void cambiarCarrito(Carrito carritoNuevo){
 		this.carrito = carritoNuevo;
@@ -49,9 +49,6 @@ public class Reserva extends Publicador {
 		return this.direccionDestino;
 	}
 
-	public int getCantPersonas() {
-		return this.cantPersonas;
-	}
 
 	public LocalDate getFechaInicio() {
 		return this.fechaInicio;
@@ -107,7 +104,7 @@ public class Reserva extends Publicador {
 	}
 	
 	public void agregarAlCarrito(Servicio servicio) {
-		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantPersonas())) {
+		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantidadPasajeros())) {
 			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
 		}
 		getCarrito().addServicio(servicio);
@@ -119,11 +116,11 @@ public class Reserva extends Publicador {
 	}
 
 	public void confirmarCarrito() {
-		this.getCarrito().confirmar(getFechaInicio(), getFechaFin(), getCantPersonas());
+		this.getCarrito().confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
 	}
 
 	public void cancelarCarrito() {
-		this.getCarrito().cancelar(getFechaInicio(), getFechaFin(), getCantPersonas());
+		this.getCarrito().cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
 	}
 
 	public double costoDeServicio() {
@@ -142,7 +139,7 @@ public class Reserva extends Publicador {
 	public List<Servicio> getServicios() {
 		return this.carrito.getListaDelCarrito();
 	}
-	public int pasajeros(){
+	public int getCantidadPasajeros(){
 		return this.cantidadDePasajeros; 
 	}
 
@@ -154,8 +151,5 @@ public class Reserva extends Publicador {
 		this.direccionDestino = direccionNueva;
 	}
 
-	public void cambiarLaCantidadDePasajeros(int pasajeros){
-		this.cantidadDePasajeros = pasajeros;
-	}
 }
  
