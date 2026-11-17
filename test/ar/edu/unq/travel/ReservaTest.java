@@ -284,14 +284,11 @@ class ReservaTest {
 
 		assertEquals(1700.0, reserva.costoDeServicioConTasas());
 	}
-
 	@Test
-	void testAgegraUnPasajeroALaReserva() {
-		this.reserva.cambiarCarrito(this.carrito);
-		this.reserva.cambiarLaCantidadDePasajeros(2);
-
-		assertEquals(this.reserva.pasajeros(), 2);
+	void testLaReservaConoceSuCantidadDePersonas() {
+    	assertEquals(4, this.reserva.getCantidadPasajeros());
 	}
+
 
 	@Test
 	void testDireccionDelViaje() {
