@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import ar.edu.unq.travel.notificaciones.Observador;
 import ar.edu.unq.travel.notificaciones.Publicador;
@@ -46,7 +47,11 @@ public class PublicadorTest {
 
     @Test
     void testEliminarObservador(){
-        
+        Observador nuevoObservador = mock(Observador.class);
+        this.publicador.agregarObservador(nuevoObservador);
+        this.publicador.eliminarObservador(nuevoObservador);
+        this.publicador.notificarAObservadores();
+        verifyNoInteractions(nuevoObservador);
 
     }
 
