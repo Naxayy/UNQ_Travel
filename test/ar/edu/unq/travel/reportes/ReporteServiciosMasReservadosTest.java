@@ -95,6 +95,9 @@ public class ReporteServiciosMasReservadosTest {
 
     @Test
     void testReservaFueraDelPeriodoNoEsValida() {
+        Estado estadoMock = mock(Estado.class);
+        when(estadoMock.ocupaCupo()).thenReturn(true);
+        when(reserva.getEstado()).thenReturn(estadoMock);
 
         when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 2, 10));
         when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 2, 20));
@@ -107,6 +110,9 @@ public class ReporteServiciosMasReservadosTest {
 
     @Test
     void testReservaConEstadoQueNoOcupaCupoNoEsValida() {
+        Estado estadoMock = mock(Estado.class);
+        when(estadoMock.ocupaCupo()).thenReturn(false);
+        when(reserva.getEstado()).thenReturn(estadoMock);
 
         when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 1, 10));
         when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 1, 20));
