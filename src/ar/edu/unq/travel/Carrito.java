@@ -1,6 +1,7 @@
 package ar.edu.unq.travel;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ar.edu.unq.travel.servicios.Servicio;
@@ -12,7 +13,10 @@ public class Carrito {
         this.lista = new ArrayList<>();
     }
 
-    public void addServicio(Servicio servicio){
+    public void addServicio(Servicio servicio, LocalDate fechaInicio, LocalDate fechaFin, int cantidadPasajeros){
+        if (!servicio.hayDisponibilidad(fechaInicio, fechaFin, cantidadPasajeros)) {
+			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
+		}
         this.lista.add(servicio);
     }
 
@@ -40,7 +44,7 @@ public class Carrito {
     }
 
     public List<Servicio> getListaDelCarrito(){
-        return this.lista;
+        return Collections.unmodifiableList(this.lista);
     }
 
     public boolean contieneElServicio(Servicio servicio){

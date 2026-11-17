@@ -95,6 +95,7 @@ public class Reserva extends Publicador {
 	public void cambiarAEstado(Estado estadoNuevo) {
 		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
+		this.notificarAObservadores();
 	}
 
 	//########## CARRITO ##########
@@ -104,35 +105,31 @@ public class Reserva extends Publicador {
 	}
 	
 	public void agregarAlCarrito(Servicio servicio) {
-		if (!servicio.hayDisponibilidad(this.getFechaInicio(), this.getFechaFin(), this.getCantidadPasajeros())) {
-			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
-		}
-		getCarrito().addServicio(servicio);
-		//this.getPublicador().actualizar();
+		this.carrito.addServicio(servicio, this.fechaInicio, this.fechaFin, this.cantidadDePasajeros);
 	}
 
 	public void eliminarDelCarrito(Servicio servicio) {
-		this.getCarrito().removeServicio(servicio);
+		this.carrito.removeServicio(servicio);
 	}
 
 	public void confirmarCarrito() {
-		this.getCarrito().confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		this.carrito.confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
 	}
 
 	public void cancelarCarrito() {
-		this.getCarrito().cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		this.carrito.cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
 	}
 
 	public double costoDeServicio() {
-		return this.getCarrito().costoDeServicio();
+		return this.carrito.costoDeServicio();
 	}
 
 	public double tasasAdministrativas() {
-		return this.getCarrito().tasasAdministrativas();
+		return this.carrito.tasasAdministrativas();
 	}
 
 	public double costoDeServicioConTasas() {
-		return this.getCarrito().costoDeServicio() + this.carrito.tasasAdministrativas();
+		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
 	//###### REPORTES ######
