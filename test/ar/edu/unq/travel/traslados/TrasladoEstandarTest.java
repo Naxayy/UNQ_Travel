@@ -1,33 +1,41 @@
 package ar.edu.unq.travel.traslados;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Reserva;
 
-public class TrasladoEstandarTest {
-    Reserva unaReserva;
-    PlataformaTransporte unaPlataforma;
-    Direccion unaDireccion;
-    TrasladoEstandar miTraslado;
+class TrasladoEstandarTest {
+
+    private TrasladoEstandar traslado; 
+
+    private PlataformaTransporte plataforma; 
+    private Reserva reserva;
+    private Direccion direccion;
 
     @BeforeEach
-    public void setUp() {
-        this.unaPlataforma = mock(PlataformaTransporte.class);
-        this.unaReserva = mock(Reserva.class);
-        this.miTraslado = new TrasladoEstandar(unaPlataforma);
-        this.unaDireccion = mock(Direccion.class);
+    void setUp() {
+        plataforma = mock(PlataformaTransporte.class);
+        reserva = mock(Reserva.class);
+        direccion = mock(Direccion.class);
+
+        traslado = new TrasladoEstandar(plataforma);
     }
 
     @Test
-    void primerTest() {
-        when(unaReserva.pasajeros()).thenReturn(3);
-        when(unaReserva.direccionDestino()).thenReturn(unaDireccion);
+    void testCalcularCostoDelegaElCalculoALaPlataforma() {
 
-        verify(unaPlataforma).estimarTraslado(unaReserva.pasajeros(), unaDireccion);
+        when(reserva.getCantPersonas()).thenReturn(3);
+        when(reserva.getDireccion()).thenReturn(direccion);
+
+        when(plataforma.estimarTraslado(3, direccion)).thenReturn(15000f);
+
+        double costo = traslado.calcularCosto(reserva);
+
+        assertEquals(15000.0, costo);
+        verify(plataforma).estimarTraslado(3, direccion);
     }
-    
 }

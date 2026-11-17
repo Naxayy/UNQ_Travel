@@ -21,6 +21,5 @@ public class TrasladoVip extends Traslado {
         this.porcentajeFijo = porcentaje;
     }
     protected void cargoBase(double cargoBase){
-
     }
 }

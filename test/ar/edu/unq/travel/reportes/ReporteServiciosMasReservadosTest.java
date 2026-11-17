@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -12,8 +15,32 @@ import static org.mockito.Mockito.when;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.servicios.Servicio;
+import ar.edu.unq.travel.traslados.Direccion;
+import ar.edu.unq.travel.traslados.PlataformaTransporte;
+import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class ReporteServiciosMasReservadosTest {
+
+    private ReporteServiciosMasReservados reporte;
+    private Reserva reserva;
+    private LocalDate desde;
+    private Servicio servicio;
+    private LocalDate hasta;
+    private Estado estado;
+
+    @BeforeEach
+    void setUp() {
+        this.reserva = mock(Reserva.class);
+        servicio = mock(Servicio.class);
+        estado = mock(Estado.class);
+
+        desde = LocalDate.of(2026, 1, 1);
+        hasta = LocalDate.of(2026, 1, 31);
+
+        when(reserva.getServicios()).thenReturn(List.of(servicio));
+        when(servicio.getNombre()).thenReturn("Hotel");
+    }
+
 
     @Test
     public void testOrdenaServiciosDeMayorAMenorCantidadYAceptaVisitor() {
@@ -53,5 +80,47 @@ public class ReporteServiciosMasReservadosTest {
         when(visitor.visitServiciosMasReservados(reporte)).thenReturn("ok");
         assertEquals("ok", reporte.accept(visitor));
         verify(visitor).visitServiciosMasReservados(reporte);
+    }
+
+    @Test
+    void testReservaDentroDelPeriodoYEstadoQueOcupaCupoEsValida() {
+
+        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 1, 10));
+        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 1, 20));
+        when(reserva.getEstado()).thenReturn(estado);
+        when(reserva.getEstado().ocupaCupo()).thenReturn(true);
+
+        ReporteServiciosMasReservados reporte =
+            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
+
+        assertEquals(1, reporte.getDatos().size());
+        assertEquals("Hotel", reporte.getDatos().get(0).getNombre());
+    }
+
+    @Test
+    void testReservaFueraDelPeriodoNoEsValida() {
+
+        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 2, 10));
+        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 2, 20));
+
+        ReporteServiciosMasReservados reporte =
+            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
+
+        assertTrue(reporte.getDatos().isEmpty());
+    }
+
+    @Test
+    void testReservaConEstadoQueNoOcupaCupoNoEsValida() {
+
+        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 1, 10));
+        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 1, 20));
+
+        // Configurar el estado para que no ocupe cupo
+        // Ver aclaración debajo.
+
+        ReporteServiciosMasReservados reporte =
+            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
+
+        assertTrue(reporte.getDatos().isEmpty());
     }
 }
