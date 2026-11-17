@@ -1,7 +1,6 @@
 package ar.edu.unq.travel;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ar.edu.unq.travel.servicios.Servicio;
@@ -44,7 +43,7 @@ public class Carrito {
     }
 
     public List<Servicio> getListaDelCarrito(){
-        return Collections.unmodifiableList(this.lista);
+        return this.lista;
     }
 
     public boolean contieneElServicio(Servicio servicio){
