@@ -26,17 +26,15 @@ public class ServicioIndividual extends Servicio{
 		this.proveedor = proveedor;
 	}
 
+	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria,  Proveedor proveedor, AtributoDinamico atributo) {
+		this(nombre,precioBase,descripcion,cuposDisponibles,codigo,categoria,proveedor);
+		this.agregarAtributo(atributo);
+
+		}
+
 	@Override
 	public boolean contieneCategoria(Categoria categoria) {
 		return this.categoria.getNombre().equals(categoria.getNombre());
-	}
-	//agregar proveedor
-	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria,  Proveedor proveedor, AtributoDinamico atributo) {
-		super(nombre, descripcion, cuposDisponibles);
-		this.codigo = codigo;
-		this.precioBase = precioBase;
-		this.categoria = categoria;
-		this.agregarAtributo(atributo);
 	}
 
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
@@ -67,7 +65,7 @@ public class ServicioIndividual extends Servicio{
 	//incrementa en una fecha, una cantidad de cupos segun cantidad de personas
 	@Override
 	public void incrementarCupo(LocalDate fecha, int cantidad) {
-		setCuposDisponibles(fecha, getCuposDisponibles().get(fecha) + cantidad);
+		setCuposDisponibles(fecha, getCuposDisponibles().getOrDefault(fecha, 0) + cantidad);
 	}
 
 	public void agregarAtributo(AtributoDinamico atributo){
