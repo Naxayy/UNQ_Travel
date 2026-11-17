@@ -1,5 +1,8 @@
 package ar.edu.unq.travel.servicios;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,19 +19,22 @@ public class ServicioIndividualTest {
 
 	private ServicioIndividual noche;
 	private ServicioIndividual excursion;
-
+	private Map<LocalDate, Integer> map;
+	private Proveedor proveedor;
 	private Categoria unaCategoria;
 	
 	@BeforeEach
 	void setUp() {
 		this.ratingEstrellas = mock(AtributoDinamico.class);
 		this.unaCategoria = mock(Categoria.class);
-
+		this.map.put(LocalDate.of(2004,2,10),1);
+		this.proveedor = mock(Proveedor.class);
+//String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor
 		//servicio individual con un de atributo por parametro
-		this.noche = new ServicioIndividual("Noche de hotel central", "descripcion", 1, unaCategoria,15000.00);// this.ratingEstrellas);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.0, "descripcion",map, 1, unaCategoria,proveedor);// this.ratingEstrellas);
 
 		//servicio individual sin atributos
-		this.excursion = new ServicioIndividual("Excursion guiada museo","Descripcion", 2, unaCategoria, 4000.00);
+		this.excursion = new ServicioIndividual("Excursion guiada museo",4000.00,"Descripcion",map, 2, unaCategoria,proveedor );
 	}
 
 	@Test
@@ -39,7 +45,7 @@ public class ServicioIndividualTest {
 
 	@Test
 	void esPrecioFinal() {
-		assertEquals(15000 , noche.precioFinal());
+		assertEquals(15000.0 , noche.precioFinal());
 	}
 
 	@Test
