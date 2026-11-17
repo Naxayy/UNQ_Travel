@@ -1,5 +1,7 @@
 package ar.edu.unq.travel.ciclo;
 
+import java.time.LocalDate;
+
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.servicios.Servicio;
 
@@ -20,8 +22,8 @@ public class SolicitudPendiente extends Estado {
 	@Override
 	public void confirmar(Reserva reserva) {
 		Confirmada confirmada = new Confirmada();
-		reserva.cambiarAEstado(confirmada);
 		reserva.confirmarCarrito();
+		reserva.cambiarAEstado(confirmada);
 	}	
 	
 	@Override

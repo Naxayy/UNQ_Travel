@@ -15,7 +15,7 @@ public class Confirmada extends Estado {
     @Override
     public void cancelada(Reserva reserva) {
         Cancelada cancelada = new Cancelada();
-        reserva.cambiarAEstado(cancelada);
         reserva.cancelarCarrito();
+        reserva.cambiarAEstado(cancelada);
     }
 }
