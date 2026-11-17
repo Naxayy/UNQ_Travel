@@ -140,7 +140,7 @@ public class Reserva extends Publicador {
 
 	//###### REPORTES ######
 	public List<Servicio> getServicios() {
-		return this.carrito.getServicios();
+		return this.carrito.getListaDelCarrito();
 	}
 	public int pasajeros(){
 		return this.cantidadDePasajeros; 
