@@ -8,4 +8,8 @@ public abstract class CriterioComplejo implements CriterioBusqueda {
     public CriterioComplejo(List<CriterioBusqueda> criterios) {
         this.criterios = criterios;
     }
+
+    protected List<CriterioBusqueda> getCriterios() {
+        return this.criterios;
+    }
 }

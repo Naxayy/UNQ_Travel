@@ -1,17 +1,17 @@
 package ar.edu.unq.travel.busqueda;
 
-import ar.edu.unq.travel.servicios.Servicio;
 import java.util.List;
 
-public class OperadorOR extends CriterioComplejo {
+import ar.edu.unq.travel.servicios.Servicio;
 
-    private List<CriterioBusqueda> criterios;
+public class OperadorOR extends CriterioComplejo {
 
     public OperadorOR(List<CriterioBusqueda> criterios) {
         super(criterios);
     }
 
+    @Override
     public boolean satisface(Servicio item) {
-        return this.criterios.stream().anyMatch(criterio -> criterio.satisface(item));
+        return this.getCriterios().stream().anyMatch(criterio -> criterio.satisface(item));
     }
 }
