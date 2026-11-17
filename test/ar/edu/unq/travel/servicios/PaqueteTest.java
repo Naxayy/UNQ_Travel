@@ -2,6 +2,11 @@ package ar.edu.unq.travel.servicios;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +20,8 @@ public class PaqueteTest {
 	private ServicioIndividual excursion;
 	private ServicioIndividual trasladoAH;
 	
+	private Map<LocalDate, Integer> map;
+
 	private Categoria unaCategoria;
 	
 	private Paquete paqueteTravel;
@@ -28,9 +35,11 @@ public class PaqueteTest {
 		this.trasladoAH = mock(ServicioIndividual.class);
 		this.paqueteTravel = mock(Paquete.class);
 		this.unaCategoria = mock(Categoria.class);
+		this.map = new HashMap<LocalDate,Integer>();
+		this.map.put(LocalDate.of(2004,2,10),1);
 		
 		//SUT
-		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",10,unaCategoria);
+		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",map,10,unaCategoria);
 	}
 
 	@Test
