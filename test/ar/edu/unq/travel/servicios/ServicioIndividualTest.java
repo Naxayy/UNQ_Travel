@@ -1,6 +1,7 @@
 package ar.edu.unq.travel.servicios;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,11 +28,12 @@ public class ServicioIndividualTest {
 	void setUp() {
 		this.ratingEstrellas = mock(AtributoDinamico.class);
 		this.unaCategoria = mock(Categoria.class);
+		this.map = new HashMap<LocalDate,Integer>();
 		this.map.put(LocalDate.of(2004,2,10),1);
 		this.proveedor = mock(Proveedor.class);
-//String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor
+
 		//servicio individual con un de atributo por parametro
-		this.noche = new ServicioIndividual("Noche de hotel central",15000.0, "descripcion",map, 1, unaCategoria,proveedor);// this.ratingEstrellas);
+		this.noche = new ServicioIndividual("Noche de hotel central",15000.0, "descripcion",map, 1, unaCategoria,proveedor, ratingEstrellas);
 
 		//servicio individual sin atributos
 		this.excursion = new ServicioIndividual("Excursion guiada museo",4000.00,"Descripcion",map, 2, unaCategoria,proveedor );
