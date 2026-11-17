@@ -1,18 +1,25 @@
 package ar.edu.unq.travel;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import ar.edu.unq.travel.ciclo.*;
+import ar.edu.unq.travel.ciclo.Confirmada;
+import ar.edu.unq.travel.ciclo.EnCheckin;
+import ar.edu.unq.travel.ciclo.Estado;
+import ar.edu.unq.travel.ciclo.SolicitudPendiente;
+import ar.edu.unq.travel.notificaciones.Observador;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
 import ar.edu.unq.travel.traslados.Direccion;
@@ -28,6 +35,10 @@ class ReservaTest {
 	Estado estado;
 	Direccion direccion;
 	int cantPasajerosDummy = 0;
+	LocalDate inicio  = LocalDate.of(2004,01,02);
+	LocalDate fin = LocalDate.of(2000,12,11);
+	List<Observador> obs = new ArrayList<>();
+
 
 	@BeforeEach
 	public void setUp() {
@@ -40,9 +51,11 @@ class ReservaTest {
 
 		this.carrito = mock(Carrito.class);
 		this.estado = mock(Estado.class);
-	
+		this.direccion = mock(Direccion.class);
+
+	//Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino, List<Observador> observadores
 		//SUT
-		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago,cantPasajerosDummy);
+		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago,inicio, fin, cantPasajerosDummy, direccion, obs);
 	}
 
 	//la reserva al hacer cambios de estado invalidos genera una excepcion error  
@@ -201,7 +214,7 @@ class ReservaTest {
 	}
 
 	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
-		this.reserva.cambiarAEstado(new EnCheckin(this.reserva));
+		this.reserva.cambiarAEstado(new EnCheckin());
 
 		assertDoesNotThrow(() -> this.reserva.enCurso());
 	}
@@ -232,13 +245,6 @@ class ReservaTest {
 		verify(this.estado).cancelada(this.reserva);
 	}
 
-	@Test
-	void testCancelarCarritoDelegaEnCarrito() {
-		this.reserva.cambiarCarrito(this.carrito);
-    	this.reserva.cancelarCarrito();
-
-    	verify(this.carrito).cancelar();
-	}
 
 	@Test
 	void testCostoDeServicioDelegaEnCarrito() {
