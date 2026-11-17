@@ -30,7 +30,7 @@ public class ServicioIndividual extends Servicio{
 	public boolean contieneCategoria(Categoria categoria) {
 		return this.categoria.getNombre().equals(categoria.getNombre());
 	}
-	
+	//agregar proveedor
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, AtributoDinamico atributo) {
 		super(nombre, descripcion, cuposDisponibles);
 		this.codigo = codigo;

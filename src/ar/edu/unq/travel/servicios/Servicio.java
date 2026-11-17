@@ -1,24 +1,19 @@
 package ar.edu.unq.travel.servicios;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.Categoria;
 
 public abstract class Servicio {
 	private String nombre;
 	private String descripcion;
 	private Map<LocalDate, Integer> cuposDisponibles;
-	private List<AtributoDinamico> atributoDinamico;
 	
 	public Servicio(String nombre, String descripcion, Map<LocalDate, Integer> cuposDisponibles) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-		this.atributoDinamico = new ArrayList<>();
 		this.cuposDisponibles = cuposDisponibles;
     }
 	

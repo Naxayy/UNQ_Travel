@@ -102,7 +102,7 @@ public class Reserva extends Publicador {
 
 	//########## CARRITO ##########
 
-	private Carrito getCarrito() {
+	public Carrito getCarrito() {
 		return carrito;
 	}
 	

@@ -1,14 +1,17 @@
 package ar.edu.unq.travel;
 
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import ar.edu.unq.travel.servicios.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import ar.edu.unq.travel.servicios.Servicio;
 
 
 class CarritoTest {
@@ -18,6 +21,9 @@ class CarritoTest {
     Servicio vuelo;
     Servicio alojamiento;
     Servicio paquete;
+    Reserva reserva;
+    LocalDate inicio = LocalDate.of(2005,12,7);
+    LocalDate fin = LocalDate.of(2005,12,15);
 
     @BeforeEach
     public void startUp() {
@@ -25,6 +31,7 @@ class CarritoTest {
         this.vuelo = mock(Servicio.class);
         this.alojamiento = mock(Servicio.class);
         this.paquete = mock(Servicio.class);
+        this.reserva = mock(Reserva.class);
 
         //SUT
         this.miCarrito = new Carrito();
@@ -54,9 +61,9 @@ class CarritoTest {
 
         this.miCarrito.addServicio(this.vuelo);
 
-        this.miCarrito.confirmar();
+        this.miCarrito.confirmar(inicio, fin , 1);
 
-        verify(this.vuelo).confirmar();
+        verify(this.vuelo).confirmar(inicio, fin , 1);
     }
 
     @Test
@@ -64,10 +71,10 @@ class CarritoTest {
 
         this.miCarrito.addServicio(this.vuelo);
 
-        this.miCarrito.confirmar();
-        this.miCarrito.cancelar();
+        this.miCarrito.confirmar(inicio, fin , 1);
+        this.miCarrito.cancelar(inicio, fin , 1);
 
-        verify(this.vuelo).cancelar();
+        verify(this.vuelo).cancelar(inicio, fin , 1);
         this.miCarrito.getListaDelCarrito().isEmpty();
     }
 
@@ -99,4 +106,5 @@ class CarritoTest {
 
         assertFalse(this.miCarrito.getListaDelCarrito().isEmpty());
     }
+    
 }
