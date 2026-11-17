@@ -61,7 +61,7 @@ public class DatoCupoTest {
         when(reserva.getEstado()).thenReturn(confirmada);
         when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 8));
         when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 12));
-        when(reserva.getCantPersonas()).thenReturn(2);
+        when(reserva.getCantidadPasajeros()).thenReturn(2);
         when(reserva.getServicios()).thenReturn(List.of(hotel));
 
         when(catalogo.cuposDisponibles(alojamiento, desde, hasta)).thenReturn(10);

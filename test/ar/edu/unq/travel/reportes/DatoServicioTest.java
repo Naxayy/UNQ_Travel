@@ -37,14 +37,14 @@ public class DatoServicioTest {
         when(r1.getEstado()).thenReturn(activa);
         when(r1.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 5));
         when(r1.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 7));
-        when(r1.getCantPersonas()).thenReturn(2);
+        when(r1.getCantidadPasajeros()).thenReturn(2);
         when(r1.getServicios()).thenReturn(List.of(hotel));
 
         Reserva r2 = mock(Reserva.class);
         when(r2.getEstado()).thenReturn(activa);
         when(r2.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 10));
         when(r2.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 12));
-        when(r2.getCantPersonas()).thenReturn(3);
+        when(r2.getCantidadPasajeros()).thenReturn(3);
         when(r2.getServicios()).thenReturn(List.of(hotel));
 
         DatoServicio dato = new DatoServicio(hotel, List.of(r1, r2), desde, hasta);

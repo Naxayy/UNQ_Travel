@@ -1,10 +1,11 @@
 package ar.edu.unq.travel.traslados;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Reserva;
 
@@ -28,7 +29,7 @@ class TrasladoEstandarTest {
     @Test
     void testCalcularCostoDelegaElCalculoALaPlataforma() {
 
-        when(reserva.getCantPersonas()).thenReturn(3);
+        when(reserva.getCantidadPasajeros()).thenReturn(3);
         when(reserva.getDireccion()).thenReturn(direccion);
 
         when(plataforma.estimarTraslado(3, direccion)).thenReturn(15000f);

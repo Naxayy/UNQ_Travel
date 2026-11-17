@@ -59,7 +59,7 @@ public class DatoCupo {
             return 0;
         }
 
-        return cantidadServiciosDeCategoria(reserva) * reserva.getCantPersonas() * dias;
+        return cantidadServiciosDeCategoria(reserva) * reserva.getCantidadPasajeros() * dias;
     }
 
     private int cantidadServiciosDeCategoria(Reserva reserva) {
