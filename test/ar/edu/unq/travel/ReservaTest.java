@@ -61,6 +61,7 @@ class ReservaTest {
 	//la reserva al hacer cambios de estado invalidos genera una excepcion error  
 	@Test
 	void testAgregaUnServicioEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		reserva.agregarServicio(estadiaCancun);
 		reserva.confirmar();
 		IllegalStateException error = 
@@ -70,6 +71,7 @@ class ReservaTest {
 
 	@Test 
 	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
 		IllegalStateException error = assertThrows(IllegalStateException.class, ()-> this.reserva.quitarServicio(estadiaCancun));
@@ -78,6 +80,7 @@ class ReservaTest {
 
 	@Test
 	void testconfirmarUnaReservaEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
@@ -88,6 +91,7 @@ class ReservaTest {
 
 	@Test
 	void testHacerCheckinDeLaReservaEnUnEstadoQueNoSeaConfirmadoGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> this.reserva.enCheckin() );
@@ -96,6 +100,7 @@ class ReservaTest {
 
 	@Test
 	void testQueLaReservaEsteEnCursoDespuesDeUnEstadoQueNoSeaEnChickInGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
 		IllegalStateException error = 
@@ -105,6 +110,7 @@ class ReservaTest {
 
 	@Test
 	void testFinaliarUnaReservaDespuesDeUnEstadoQueNoSeaEnCursoGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		IllegalStateException error = 
             assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
@@ -133,6 +139,7 @@ class ReservaTest {
 
 	@Test
 	void testAgregaUnServicioAlCarritoNoGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		assertDoesNotThrow(() -> this.reserva.agregarServicio(estadiaCancun));
 	}
 
@@ -145,6 +152,7 @@ class ReservaTest {
 
 	@Test
 	void testUnaReservaAgregarUnServicioYElServicioYaNoApareceEnElCarrito() {
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(true);
 
     	this.reserva.agregarServicio(this.estadiaCancun);
@@ -153,6 +161,7 @@ class ReservaTest {
 
 	@Test
 	void testQuitarUnServicioDelCarritoDeLaReservaNoGeneraUnaExcepcion(){
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		reserva.agregarServicio(estadiaCancun);
 		assertDoesNotThrow(() -> this.reserva.quitarServicio(estadiaCancun));
 	}
@@ -167,6 +176,7 @@ class ReservaTest {
 
 	@Test
 	void testUnaReservaQuitaUnServicioYElServicioYaNoApareceEnElCarrito() {
+		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
 		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(false);
 
     	this.reserva.agregarServicio(this.estadiaCancun);

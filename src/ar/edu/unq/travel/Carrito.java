@@ -47,8 +47,4 @@ public class Carrito {
         return this.getListaDelCarrito().contains(servicio);
     }
 
-    public List<Servicio> getServicios() {
-        return this.lista;
-    }
-
 }
