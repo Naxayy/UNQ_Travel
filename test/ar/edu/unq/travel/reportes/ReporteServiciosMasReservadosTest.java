@@ -5,7 +5,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
@@ -15,9 +14,6 @@ import static org.mockito.Mockito.when;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.servicios.Servicio;
-import ar.edu.unq.travel.traslados.Direccion;
-import ar.edu.unq.travel.traslados.PlataformaTransporte;
-import ar.edu.unq.travel.traslados.TrasladoEstandar;
 
 public class ReporteServiciosMasReservadosTest {
 
@@ -60,14 +56,14 @@ public class ReporteServiciosMasReservadosTest {
         when(r1.getEstado()).thenReturn(activa);
         when(r1.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 2));
         when(r1.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 4));
-        when(r1.getCantPersonas()).thenReturn(1);
+        when(r1.getCantidadPasajeros()).thenReturn(1);
         when(r1.getServicios()).thenReturn(List.of(menosVendido));
 
         Reserva r2 = mock(Reserva.class);
         when(r2.getEstado()).thenReturn(activa);
         when(r2.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 5));
         when(r2.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 8));
-        when(r2.getCantPersonas()).thenReturn(4);
+        when(r2.getCantidadPasajeros()).thenReturn(4);
         when(r2.getServicios()).thenReturn(List.of(masVendido));
 
         ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(r1, r2), desde, hasta);
