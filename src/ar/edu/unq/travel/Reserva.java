@@ -5,16 +5,16 @@ import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
+import ar.edu.unq.travel.notificaciones.Observador;
 import ar.edu.unq.travel.notificaciones.Publicador;
 import ar.edu.unq.travel.pagos.MetodoDePago;
 import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.traslados.Direccion;
 import ar.edu.unq.travel.traslados.Traslado;
 
-public class Reserva {	
+public class Reserva extends Publicador {	
 	
 	private Estado estado;
-	private Publicador publicador;
 	private Traslado metodoTraslado;
 	private MetodoDePago metodoDePago;
 	private Carrito carrito;
@@ -22,13 +22,15 @@ public class Reserva {
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
 
+
 	//Atributos necesarios para calcular cupos con fechas
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private int cantPersonas;
 	//#######################
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino, List<Observador> observadores) {
+		super(observadores);
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
