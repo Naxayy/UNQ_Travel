@@ -96,5 +96,104 @@ public class PaqueteTest {
 		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
 	}
 
+	@Test
+    void hayDisponibilidad() {
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
+
+        when(noche.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
+        when(excursion.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
+        when(paqueteTravel.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
+
+        assertTrue(paqueteDePaquetes.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2));
+        verify(noche).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
+        verify(excursion).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
+        verify(paqueteTravel).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
+    }
+
+    @Test
+    void noHayDisponibilidad() {
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+
+        when(noche.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
+        when(excursion.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(false);
+
+        assertFalse(paqueteDePaquetes.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2));
+    }
+
+	@Test
+    void decrementarCupo() {
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
+
+        paqueteDePaquetes.decrementarCupo(LocalDate.of(2004,2,10), 2);
+
+        verify(noche).decrementarCupo(LocalDate.of(2004,2,10), 2);
+        verify(excursion).decrementarCupo(LocalDate.of(2004,2,10), 2);
+        verify(paqueteTravel).decrementarCupo(LocalDate.of(2004,2,10), 2);
+    }
+
+	@Test
+	void icrementarCupo(){
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
+
+		paqueteDePaquetes.incrementarCupo(LocalDate.of(2004,2,10),2);
+
+		verify(noche).incrementarCupo(LocalDate.of(2004,2,10),2);
+		verify(excursion).incrementarCupo(LocalDate.of(2004,2,10),2);
+		verify(paqueteTravel).incrementarCupo(LocalDate.of(2004,2,10),2);
+	}
+
+
+	@Test
+    void contieneCategoria() {
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+
+        when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
+        when(excursion.contieneCategoria(unaCategoria)).thenReturn(true);
+
+        assertTrue(paqueteDePaquetes.contieneCategoria(unaCategoria));
+        verify(noche).contieneCategoria(unaCategoria);
+        verify(excursion).contieneCategoria(unaCategoria);
+    }
+
+    @Test
+    void noContieneCategoria() {
+        paqueteDePaquetes.agregarItem(noche);
+        paqueteDePaquetes.agregarItem(excursion);
+        paqueteDePaquetes.agregarItem(paqueteTravel);
+
+        when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
+        when(excursion.contieneCategoria(unaCategoria)).thenReturn(false);
+        when(paqueteTravel.contieneCategoria(unaCategoria)).thenReturn(false);
+
+        assertFalse(paqueteDePaquetes.contieneCategoria(unaCategoria));
+        verify(noche).contieneCategoria(unaCategoria);
+        verify(excursion).contieneCategoria(unaCategoria);
+        verify(paqueteTravel).contieneCategoria(unaCategoria);
+    }
+
+
+	@Test
+	void recolectarServiciosIndividuales(){
+
+	}
+
+	@Test
+	void esDeProveedor(){
+
+	}
+
+	@Test
+	void agregarProveedoresA(){
+
+	}
+
 }
 
