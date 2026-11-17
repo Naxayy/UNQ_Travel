@@ -1,14 +1,14 @@
 package ar.edu.unq.travel.busqueda;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import ar.edu.unq.travel.categoria.*;
-import ar.edu.unq.travel.servicios.*;
+import ar.edu.unq.travel.categoria.Categoria;
+import ar.edu.unq.travel.servicios.Servicio;
 
 class CriterioCategoriaTest {
     CriterioCategoria miCriterio;
@@ -18,8 +18,8 @@ class CriterioCategoriaTest {
 
     @BeforeEach 
     public void startUp() {
-        this.miCriterio = new CriterioCategoria(unaCategoria);
         this.unaCategoria = mock(Categoria.class);
+        this.miCriterio = new CriterioCategoria(unaCategoria);
         this.alojamiento = mock(Servicio.class);
         this.vuelo = mock(Servicio.class);
     }
