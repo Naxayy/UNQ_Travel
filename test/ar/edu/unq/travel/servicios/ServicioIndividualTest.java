@@ -2,7 +2,9 @@ package ar.edu.unq.travel.servicios;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -66,6 +68,15 @@ public class ServicioIndividualTest {
 	@Test
 	void getCodigo(){
 		assertEquals(2, excursion.getCodigo());
+	}
+
+	@Test
+	void agregarProveedorASet(){
+		Set<Proveedor> proveedores = new HashSet<>();
+		noche.agregarProveedoresA(proveedores);
+
+		assertTrue(proveedores.contains(proveedor));
+		assertEquals(1, proveedores.size());
 	}
 
 }
