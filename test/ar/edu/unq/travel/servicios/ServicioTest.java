@@ -2,6 +2,7 @@ package ar.edu.unq.travel.servicios;
 
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.categoria.Categoria;
 
@@ -20,6 +22,7 @@ class ServicioTest {
 	private Categoria unaCategoria;
 	private Map<LocalDate, Integer> map;
 	private Proveedor proveedor;
+	private Map<LocalDate, Integer> cuposDisponiblesMock = mock();
 	
 	@BeforeEach
 	void setUp() {
@@ -27,6 +30,7 @@ class ServicioTest {
 		this.map = new HashMap<LocalDate,Integer>();
 		this.map.put(LocalDate.of(2004,2,10),1);
 		this.proveedor = mock(Proveedor.class);
+		
 		
 
 		//al ser clase abstracta instancio sus dos clases hijas 
@@ -114,7 +118,14 @@ class ServicioTest {
 
 	@Test
 	void cuposDisponiblesEnPeriodo(){
+		when(cuposDisponiblesMock.entrySet()).thenReturn(Collections.emptySet());
 
+        int resultado = noche.cuposDisponiblesEnPeriodo(
+            LocalDate.of(2026, 11, 10),
+            LocalDate.of(2026, 11, 20)
+        );
+
+        assertEquals(0, resultado);
 	}
 
 
