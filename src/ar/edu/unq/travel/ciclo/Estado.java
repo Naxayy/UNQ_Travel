@@ -29,6 +29,7 @@ public abstract class Estado {
 	public boolean ocupaCupo() {
         return true;
     }
+
 	public boolean esGeneradorDeEmail(){
 		return false;
 	};
