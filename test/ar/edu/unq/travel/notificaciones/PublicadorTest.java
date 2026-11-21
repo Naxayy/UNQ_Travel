@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 public class PublicadorTest {
 
@@ -49,5 +50,32 @@ public class PublicadorTest {
 
         verify(observador1).actualizar();
         verify(observador2, never()).actualizar();
+    }
+
+    @Test 
+    void testNotificarObservadores(){
+        this.publicador.notificarAObservadores();
+
+        verify(observador1).actualizar();
+    }
+
+    @Test
+    void testAgregarObservador(){
+        Observador nuevoObservador = mock(Observador.class);
+        this.publicador.agregarObservador(nuevoObservador);
+        this.publicador.notificarAObservadores();
+
+        verify(observador1).actualizar();
+        verify(nuevoObservador).actualizar();
+    }
+
+    @Test
+    void testEliminarObservador(){
+        Observador nuevoObservador = mock(Observador.class);
+        this.publicador.agregarObservador(nuevoObservador);
+        this.publicador.eliminarObservador(nuevoObservador);
+        this.publicador.notificarAObservadores();
+        verifyNoInteractions(nuevoObservador);
+
     }
 }
