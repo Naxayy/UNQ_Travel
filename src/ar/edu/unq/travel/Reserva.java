@@ -22,7 +22,6 @@ public class Reserva extends Publicador {
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
 
-
 	//Atributos necesarios para calcular cupos con fechas
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
@@ -95,7 +94,7 @@ public class Reserva extends Publicador {
 	public void cambiarAEstado(Estado estadoNuevo) {
 		this.estadoAnterior = estado;
 		this.estado = estadoNuevo;
-		this.notificarAObservadores();
+		this.notificarAObservadores(this.getEstado());
 	}
 
 	//########## CARRITO ##########

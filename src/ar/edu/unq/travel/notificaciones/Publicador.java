@@ -2,6 +2,8 @@ package ar.edu.unq.travel.notificaciones;
 
 import java.util.List;
 
+import ar.edu.unq.travel.ciclo.Estado;
+
 public class Publicador {
     private List<Observador> observadores;
 
@@ -9,9 +11,9 @@ public class Publicador {
 		this.observadores = observadores;
 	}
 
-	public void notificarAObservadores() {
+	public void notificarAObservadores(Estado estado) {
 		for (Observador observador : observadores) {
-			observador.actualizar();
+			observador.accept(estado);
 		}
 	}
 	public void agregarObservador(Observador observador) {

@@ -15,12 +15,8 @@ public class NotificadorDeEmail implements Observador {
     }
 
     @Override
-    public void actualizar() {
-        Estado estado = reserva.getEstado();
-        if(estado.esGeneradorDeEmail()){
-            this.enviarMail();
-        }
-
+    public void accept(Estado estado) {
+        estado.visitarNotificadorDeEmail(this);
     }
 
     public void enviarMail(){

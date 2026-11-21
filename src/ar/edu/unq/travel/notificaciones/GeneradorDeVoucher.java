@@ -14,13 +14,8 @@ public class GeneradorDeVoucher implements Observador {
     } 
    
     @Override
-    public void actualizar() {
-        Estado estado = reserva.getEstado();
-        if (estado.esGeneradorDeVoucher()){
-            Estado estadoAnterior = reserva.getEstadoAnterior();
-            double valor = estadoAnterior.montoVoucher(reserva);
-            this.generarVoucher(valor);
-        }
+    public void accept(Estado estado) {
+        estado.visitarGeneradorDeVoucher(this);
     }
 
     public void setReserva(Reserva reserva){

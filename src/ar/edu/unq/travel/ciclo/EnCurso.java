@@ -1,6 +1,8 @@
 package ar.edu.unq.travel.ciclo;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.notificaciones.Fidelizacion;
+import ar.edu.unq.travel.notificaciones.NotificadorDeEmail;
 
 public class EnCurso extends Estado {
 
@@ -19,13 +21,8 @@ public class EnCurso extends Estado {
 	}
 
 	@Override
-	public double montoVoucher(Reserva reserva){
-		return reserva.costoDeServicio();
-	}
-
-	@Override
-	public boolean esGeneradorDeVoucher(){
-		return true;
+	public void visitarNotificadorDeEmail(NotificadorDeEmail notificador){
+		notificador.enviarMail();
 	}
 
 }

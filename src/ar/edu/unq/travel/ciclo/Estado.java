@@ -1,6 +1,9 @@
 package ar.edu.unq.travel.ciclo;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.notificaciones.Fidelizacion;
+import ar.edu.unq.travel.notificaciones.GeneradorDeVoucher;
+import ar.edu.unq.travel.notificaciones.NotificadorDeEmail;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public abstract class Estado {
@@ -30,18 +33,10 @@ public abstract class Estado {
         return true;
     }
 
-	public boolean esGeneradorDeEmail(){
-		return false;
-	};
-	public boolean esGeneradorDeVoucher(){
-		return false;
-	};
-	public boolean esFidelizador(){
-		return false;//pensar si seria mejor abstract o definida
-	};
-	//este 0.0 esta re hardcodeado
-	public double montoVoucher(Reserva reserva){
-		return 0.0 ;
-	}
-	//limitaciones de este modelo: siempre que se quiera agregar una notificacion se debe tocar el estado
+    public void visitarGeneradorDeVoucher(GeneradorDeVoucher generador){};
+
+	public void visitarNotificadorDeEmail(NotificadorDeEmail notificador){};
+
+	public void visitarFidelizacion(Fidelizacion fidelizacion){};
+
 }

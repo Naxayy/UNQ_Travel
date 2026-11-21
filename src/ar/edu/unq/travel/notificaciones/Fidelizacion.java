@@ -10,11 +10,8 @@ public class Fidelizacion implements Observador {
     }
 
     @Override
-    public void actualizar() {
-        Estado estado = reserva.getEstado();
-        if(estado.esFidelizador()){
-            //cupon de descuento con 5%
-        }
+    public void accept(Estado estado) {
+        estado.visitarFidelizacion(this);
     }
 
     public void setReserva(Reserva reserva){

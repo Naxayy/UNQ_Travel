@@ -18,15 +18,4 @@ public class EnCheckin extends Estado {
 		reserva.cancelarCarrito();
 		reserva.cambiarAEstado(cancelada);
 	}
-
-	@Override 
-	public boolean esGeneradorDeVoucher(){
-		return true;
-	}
-
-	@Override 
-	public double montoVoucher(Reserva reserva){
-		return reserva.costoDeServicioConTasas();
-	}
-	
 }
