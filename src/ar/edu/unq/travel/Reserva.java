@@ -123,12 +123,12 @@ public class Reserva extends Publicador {
 		return this.carrito.costoDeServicio();
 	}
 
-	public double tasasAdministrativas() {
+	private double tasasAdministrativas() {
 		return this.carrito.tasasAdministrativas();
 	}
 
 	public double costoDeServicioConTasas() {
-		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
+		return this.costoDeServicio() + this.tasasAdministrativas();
 	}
 
 	public double costoDeServiciosNoDisfrutados() {
