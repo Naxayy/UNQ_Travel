@@ -22,20 +22,20 @@ public class Reserva extends Publicador {
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
 
+	private PeriodoDeTiempo periodoDeTiempo;
 	//Atributos necesarios para calcular cupos con fechas
-	private LocalDate fechaInicio;
-	private LocalDate fechaFin;
+	//private LocalDate fechaInicio;
+	//private LocalDate fechaFin;
 
 	//#######################
 
-	public Reserva(Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino, List<Observador> observadores) {
+	public Reserva(Traslado traslado, MetodoDePago metodoDePago, PeriodoDeTiempo periodoDeTiempo, int personas, Direccion destino, List<Observador> observadores) {
 		super(observadores);
 		this.estado = new SolicitudPendiente();
 		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
-		this.fechaInicio = inicio;
-		this.fechaFin = fin;
+		this.periodoDeTiempo = periodoDeTiempo;
 		this.direccionDestino = destino;
 	}
 
@@ -49,13 +49,13 @@ public class Reserva extends Publicador {
 	}
 
 
-	public LocalDate getFechaInicio() {
+	/*public LocalDate getFechaInicio() {
 		return this.fechaInicio;
 	}
 	
 	public LocalDate getFechaFin() {
 		return this.fechaFin;
-	}
+	}*/
 
 	//########## ESTADOS ##########
 
