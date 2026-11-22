@@ -10,13 +10,14 @@ import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class ReporteServiciosMasReservados implements Element {
-
     private List<DatoServicio> datos;
 
     public ReporteServiciosMasReservados(List<Reserva> reservas, LocalDate desde, LocalDate hasta) {
         this.datos = new ArrayList<>();
+
         this.serviciosReservadosEnPeriodo(reservas, desde, hasta)
                 .forEach(servicio -> this.datos.add(new DatoServicio(servicio, reservas, desde, hasta)));
+                
         this.datos.sort((a, b) -> Integer.compare(b.getCantidad(), a.getCantidad()));
     }
 

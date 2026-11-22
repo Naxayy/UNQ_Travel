@@ -2,21 +2,20 @@ package ar.edu.unq.travel.busqueda;
 
 import java.time.LocalDate;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class CriterioDisponibilidad implements CriterioBusqueda {
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private PeriodoDeTiempo periodo;
     private int cantidad;
 
-    public CriterioDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidad) {
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+    public CriterioDisponibilidad(PeriodoDeTiempo periodo, int cantidad) {
+        this.periodo = periodo;
         this.cantidad = cantidad;
     }
     
     @Override
     public boolean satisface(Servicio item) {
-        return  item.hayDisponibilidad(fechaInicio, fechaFin, cantidad);
+        return  item.hayDisponibilidad(periodo, cantidad);
     }
 }
