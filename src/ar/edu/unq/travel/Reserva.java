@@ -1,6 +1,7 @@
 package ar.edu.unq.travel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.travel.ciclo.Estado;
@@ -17,7 +18,6 @@ public class Reserva extends Publicador {
 	private Estado estado;
 	private Traslado metodoTraslado;
 	private MetodoDePago metodoDePago;
-	private Carrito carrito;
 	private Direccion direccionDestino;
 	private int cantidadDePasajeros;
 	private Estado estadoAnterior; 
@@ -27,21 +27,19 @@ public class Reserva extends Publicador {
 	//private LocalDate fechaInicio;
 	//private LocalDate fechaFin;
 
+	//private Carrito carrito;
+	private List<Servicio> lista;
+
 	//#######################
 
 	public Reserva(Traslado traslado, MetodoDePago metodoDePago, PeriodoDeTiempo periodoDeTiempo, int personas, Direccion destino, List<Observador> observadores) {
 		super(observadores);
 		this.estado = new SolicitudPendiente();
-		this.carrito = new Carrito();
 		this.metodoTraslado = traslado;
 		this.metodoDePago = metodoDePago;
 		this.periodoDeTiempo = periodoDeTiempo;
 		this.direccionDestino = destino;
-	}
-
-
-	public void cambiarCarrito(Carrito carritoNuevo){
-		this.carrito = carritoNuevo;
+		this.lista = new ArrayList<>();
 	}
 
 	public Direccion getDireccion() {
@@ -99,32 +97,41 @@ public class Reserva extends Publicador {
 
 	//########## CARRITO ##########
 
-	public Carrito getCarrito() {
-		return carrito;
-	}
-	
 	public void agregarAlCarrito(Servicio servicio) {
-		this.carrito.addServicio(servicio, this.fechaInicio, this.fechaFin, this.cantidadDePasajeros);
+		//his.carrito.addServicio(servicio, this.fechaInicio, this.fechaFin, this.cantidadDePasajeros);
+		if (!servicio.hayDisponibilidad(this)) {
+			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
+		} else {
+			this.lista.add(servicio);
+		}
 	}
 
 	public void eliminarDelCarrito(Servicio servicio) {
-		this.carrito.removeServicio(servicio);
+		//this.carrito.removeServicio(servicio);
+		this.lista.remove(servicio);
 	}
 
 	public void confirmarCarrito() {
-		this.carrito.confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		//this.carrito.confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		this.lista.forEach(producto -> producto.confirmar(this));
 	}
 
 	public void cancelarCarrito() {
-		this.carrito.cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		//this.carrito.cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
+		this.lista.forEach(producto -> producto.cancelar(fechaInicio, fechaFin, cantidadPersonas));
+        this.lista.clear();
 	}
 
 	public double costoDeServicio() {
-		return this.carrito.costoDeServicio();
+		//return this.carrito.costoDeServicio();
+		return this.lista.stream()
+            .mapToDouble(producto -> producto.precioFinal())
+            .sum();
 	}
 
 	private double tasasAdministrativas() {
-		return this.carrito.tasasAdministrativas();
+		//return this.carrito.tasasAdministrativas();
+		return 0;  //falta esta logica
 	}
 
 	public double costoDeServicioConTasas() {
@@ -139,7 +146,8 @@ public class Reserva extends Publicador {
 
 	//###### REPORTES ######
 	public List<Servicio> getServicios() {
-		return this.carrito.getListaDelCarrito();
+		//return this.carrito.getListaDelCarrito();
+		return this.lista;
 	}
 	public int getCantidadPasajeros(){
 		return this.cantidadDePasajeros; 
