@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import ar.edu.unq.travel.Catalogo;
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.categoria.Categoria;
 import ar.edu.unq.travel.servicios.Servicio;
@@ -15,15 +16,13 @@ public class DatoCupo {
     private Categoria categoria;
     private Catalogo catalogo;
     private List<Reserva> reservas;
-    private LocalDate desde;
-    private LocalDate hasta;
+    private PeriodoDeTiempo periodoDeTiempo;
 
-    public DatoCupo(Categoria categoria, Catalogo catalogo, List<Reserva> reservas, LocalDate desde, LocalDate hasta) {
+    public DatoCupo(Categoria categoria, Catalogo catalogo, List<Reserva> reservas, PeriodoDeTiempo periodoDeTiempo) {
         this.categoria = categoria;
         this.catalogo = catalogo;
         this.reservas = reservas;
-        this.desde = desde;
-        this.hasta = hasta;
+        this.periodoDeTiempo = periodoDeTiempo;
     }
 
     public String getCategoria() {
@@ -31,7 +30,7 @@ public class DatoCupo {
     }
 
     public int getLibres() {
-        return catalogo.cuposDisponibles(categoria, desde, hasta);
+        return catalogo.cuposDisponibles(categoria, periodoDeTiempo);
     }
 
     public int getReservados() {
@@ -77,8 +76,11 @@ public class DatoCupo {
     }
 
     private int contarDiasEnPeriodo(Reserva reserva) {
-        LocalDate inicio = reserva.getFechaInicio().isAfter(desde) ? reserva.getFechaInicio() : desde;
-        LocalDate fin = reserva.getFechaFin().isBefore(hasta) ? reserva.getFechaFin() : hasta;
+        LocalDate inicio = this.laQueEstaDespues(reserva.fechaDeInicio(), this.periodoDeTiempo.getFechaInicio());
+                            //reserva.getFechaInicio().isAfter(desde) ? reserva.getFechaInicio() : desde;
+        LocalDate fin = this.laQueEstaAntes(reserva.fechaFin(), this.periodoDeTiempo.getFechaFin());
+                        //reserva.getFechaFin().isBefore(hasta) ? reserva.getFechaFin()   : hasta;
+
         int dias = 0;
 
         for (LocalDate fecha = inicio; !fecha.isAfter(fin); fecha = fecha.plusDays(1)) {
@@ -86,5 +88,13 @@ public class DatoCupo {
         }
 
         return dias;
+    }
+    
+    private LocalDate laQueEstaDespues(LocalDate fechaReserva, LocalDate desde){
+        if (fechaReserva.isAfter(desde)){
+            return fechaReserva;            
+        } else {
+            return desde;
+        }
     }
 }

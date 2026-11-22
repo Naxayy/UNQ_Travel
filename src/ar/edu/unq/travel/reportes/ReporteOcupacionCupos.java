@@ -15,8 +15,12 @@ public class ReporteOcupacionCupos implements Element {
     public ReporteOcupacionCupos(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, LocalDate desde, LocalDate hasta) {
         this.datos = new ArrayList<>();
         for (Categoria categoria : categorias) {
-            this.datos.add(new DatoCupo(categoria, catalogo, reservas, desde, hasta));
+            this.datos.add( this.crearCupo());
         }
+    }
+
+    private DatoCupo crearCupo() {
+        return new DatoCupo(categoria, catalogo, reservas, desde, hasta);
     }
 
     public List<DatoCupo> getDatos() {

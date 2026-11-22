@@ -55,7 +55,7 @@ public class DatoServicio {
     }
 
     private boolean estaEnPeriodo(Reserva reserva) {
-        return !reserva.getFechaFin().isBefore(this.desde)
-            && !reserva.getFechaInicio().isAfter(this.hasta);
+        return !reserva.fechaFin().isBefore(this.desde)
+            && !reserva.fechaDeInicio().isAfter(this.hasta);
     }
 }

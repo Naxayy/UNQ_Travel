@@ -55,6 +55,22 @@ public class Reserva extends Publicador {
 		return this.fechaFin;
 	}*/
 
+	public void cambiarPeriodoDeTiempo(PeriodoDeTiempo peridoDeTiempo){
+		this.periodoDeTiempo = peridoDeTiempo;
+	}
+
+	public PeriodoDeTiempo getPeridoDeTiempo(){
+		return this.periodoDeTiempo;
+	}
+
+	public LocalDate fechaDeInicio(){
+		return this.getPeridoDeTiempo().getFechaInicio();
+	}
+
+	public LocalDate fechaFin(){
+		return this.getPeridoDeTiempo().getFechaFin();
+	}
+
 	//########## ESTADOS ##########
 
 	public void agregarServicio(Servicio servicio) {
@@ -99,7 +115,7 @@ public class Reserva extends Publicador {
 
 	public void agregarAlCarrito(Servicio servicio) {
 		//his.carrito.addServicio(servicio, this.fechaInicio, this.fechaFin, this.cantidadDePasajeros);
-		if (!servicio.hayDisponibilidad(this)) {
+		if (!servicio.hayDisponibilidad(this.getPeridoDeTiempo(), this.getCantidadPasajeros())) {
 			throw new IllegalStateException("No hay cupos disponibles para este servicio en las fechas seleccionadas");
 		} else {
 			this.lista.add(servicio);
@@ -113,12 +129,12 @@ public class Reserva extends Publicador {
 
 	public void confirmarCarrito() {
 		//this.carrito.confirmar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
-		this.lista.forEach(producto -> producto.confirmar(this));
+		this.lista.forEach(producto -> producto.confirmar(this.getPeridoDeTiempo(), this.getCantidadPasajeros()));
 	}
 
 	public void cancelarCarrito() {
 		//this.carrito.cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
-		this.lista.forEach(producto -> producto.cancelar(this));
+		this.lista.forEach(producto -> producto.cancelar(this.getPeridoDeTiempo(), this.getCantidadPasajeros()));
         this.lista.clear();
 	}
 

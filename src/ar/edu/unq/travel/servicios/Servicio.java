@@ -59,14 +59,15 @@ public abstract class Servicio {
 		cuposDisponibles.put(fecha, cantidad);
 	}
 
+	//arreglar
 	public void confirmar(PeriodoDeTiempo periodo, int cantidadPersonas){
-		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+		for (LocalDate fecha = periodo.getFechaInicio(); !fecha.isAfter(periodo.getFechaFin()); fecha = fecha.plusDays(1)) {
 			decrementarCupo(fecha, cantidadPersonas);
 		}
 	}
 
 	public void cancelar(PeriodoDeTiempo periodo, int cantidadPersonas){
-		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+		for (LocalDate fecha = periodo.getFechaInicio(); !fecha.isAfter(periodo.getFechaFin()); fecha = fecha.plusDays(1)) {
 			incrementarCupo(fecha, cantidadPersonas);
 		}
 	}
@@ -83,7 +84,7 @@ public abstract class Servicio {
 		for (Map.Entry<LocalDate, Integer> entrada : this.cuposDisponibles.entrySet()) {
 			LocalDate fecha = entrada.getKey();
 
-			if (!fecha.isBefore(desde) && !fecha.isAfter(hasta)) {
+			if (!fecha.isBefore(periodo.getFechaInicio()) && !fecha.isAfter(periodo.getFechaFin())) {
 				libres += entrada.getValue();
 			}
 		}

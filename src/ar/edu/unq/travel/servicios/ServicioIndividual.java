@@ -41,7 +41,7 @@ public class ServicioIndividual extends Servicio{
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
 	@Override
 	public boolean hayDisponibilidad(PeriodoDeTiempo periodo, int cantidadPersonas) {
-		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
+		for (LocalDate fecha = periodo.getFechaInicio(); !fecha.isAfter(periodo.getFechaFin()); fecha = fecha.plusDays(1)) {
 			if (!hayDisponibilidadEnFecha(fecha, cantidadPersonas)) {
 				return false;
 			}

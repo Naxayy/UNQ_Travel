@@ -20,8 +20,7 @@ public class Catalogo {
     }
 
     public List<Servicio> busqueda(CriterioBusqueda condicion) {
-        this.setCondicion(condicion);
-        return items.stream().filter(item -> condicion.satisface(item)).toList();
+        this.setCondicion(condicion);        return items.stream().filter(item -> condicion.satisface(item)).toList();
     }
 
     public List<Servicio> getItems() {
@@ -36,10 +35,10 @@ public class Catalogo {
         this.condicion = condicion;
     }
 
-    public int cuposDisponibles(Categoria categoria, LocalDate desde, LocalDate hasta) {
+    public int cuposDisponibles(Categoria categoria, PeriodoDeTiempo periodo) {
         return this.serviciosIndividuales().stream()
                 .filter(servicio -> servicio.contieneCategoria(categoria))
-                .mapToInt(servicio -> servicio.cuposDisponiblesEnPeriodo(desde, hasta))
+                .mapToInt(servicio -> servicio.cuposDisponiblesEnPeriodo(periodo))
                 .sum();
     }
 

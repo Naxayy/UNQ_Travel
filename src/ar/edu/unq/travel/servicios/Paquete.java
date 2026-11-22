@@ -21,7 +21,7 @@ public class Paquete extends Servicio {
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
     @Override
 	public boolean hayDisponibilidad(PeriodoDeTiempo periodo, int cantidadPersonas) {
-		return servicios.stream().allMatch(servicio -> servicio.hayDisponibilidad(fechaInicio,fechaFin,cantidadPersonas));
+		return servicios.stream().allMatch(servicio -> servicio.hayDisponibilidad(periodo,cantidadPersonas));
 	}
 	
 	//decrementa en una fecha, una cantidad de cupos segun cantidad de persoans
