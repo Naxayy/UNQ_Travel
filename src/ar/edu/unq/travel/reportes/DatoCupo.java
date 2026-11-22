@@ -97,4 +97,12 @@ public class DatoCupo {
             return desde;
         }
     }
+
+    private LocalDate laQueEstaAntes(LocalDate fechaReserva, LocalDate hasta){
+        if (fechaReserva.isBefore(hasta)){
+            return fechaReserva;            
+        } else {
+            return hasta;
+        }
+    }
 }
