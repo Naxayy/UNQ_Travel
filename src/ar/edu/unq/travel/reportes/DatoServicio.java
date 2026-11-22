@@ -3,6 +3,7 @@ package ar.edu.unq.travel.reportes;
 import java.time.LocalDate;
 import java.util.List;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.servicios.Servicio;
 
@@ -10,14 +11,14 @@ public class DatoServicio {
 
     private Servicio servicio;
     private List<Reserva> reservas;
-    private LocalDate desde;
-    private LocalDate hasta;
+    //private LocalDate desde;
+    //private LocalDate hasta;
+    private PeriodoDeTiempo periodo;
 
-    public DatoServicio(Servicio servicio, List<Reserva> reservas, LocalDate desde, LocalDate hasta) {
+    public DatoServicio(Servicio servicio, List<Reserva> reservas, PeriodoDeTiempo periodo) {
         this.servicio = servicio;
         this.reservas = reservas;
-        this.desde = desde;
-        this.hasta = hasta;
+        this.periodo = periodo;
     }
 
     public String getNombre() {
@@ -55,7 +56,7 @@ public class DatoServicio {
     }
 
     private boolean estaEnPeriodo(Reserva reserva) {
-        return !reserva.fechaFin().isBefore(this.desde)
-            && !reserva.fechaDeInicio().isAfter(this.hasta);
+        return !reserva.fechaFin().isBefore(this.periodo.getFechaFin())
+            && !reserva.fechaDeInicio().isAfter(this.periodo.getFechaInicio());
     }
 }
