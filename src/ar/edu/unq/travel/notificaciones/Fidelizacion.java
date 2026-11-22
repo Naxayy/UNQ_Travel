@@ -21,4 +21,8 @@ public class Fidelizacion implements Observador {
     public Reserva getReserva(){
         return this.reserva;
     }
+
+    public void generarCupo(){
+        //logica del cupon
+    }
 }

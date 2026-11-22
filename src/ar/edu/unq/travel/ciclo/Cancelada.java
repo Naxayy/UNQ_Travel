@@ -1,5 +1,8 @@
 package ar.edu.unq.travel.ciclo;
 
+import ar.edu.unq.travel.notificaciones.Fidelizacion;
+import ar.edu.unq.travel.notificaciones.GeneradorDeVoucher;
+
 public class Cancelada extends Estado {
     public Cancelada() {}
 
@@ -7,4 +10,9 @@ public class Cancelada extends Estado {
     public boolean ocupaCupo() {
         return false;
     }
+
+    @Override
+	public void visitarGeneradorDeVoucher(GeneradorDeVoucher generador){
+		generador.generarVoucher();
+	}
 }

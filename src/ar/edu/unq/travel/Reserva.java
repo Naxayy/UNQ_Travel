@@ -131,6 +131,12 @@ public class Reserva extends Publicador {
 		return this.carrito.costoDeServicio() + this.carrito.tasasAdministrativas();
 	}
 
+	public double costoDeServiciosNoDisfrutados() {
+		//falta esta logica
+		return 0;
+	}
+
+
 	//###### REPORTES ######
 	public List<Servicio> getServicios() {
 		return this.carrito.getListaDelCarrito();

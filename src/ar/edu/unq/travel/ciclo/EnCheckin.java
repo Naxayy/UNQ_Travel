@@ -18,4 +18,9 @@ public class EnCheckin extends Estado {
 		reserva.cancelarCarrito();
 		reserva.cambiarAEstado(cancelada);
 	}
+
+	@Override 
+	public double monto(Reserva reserva){
+		return reserva.costoDeServicioConTasas();
+	}
 }

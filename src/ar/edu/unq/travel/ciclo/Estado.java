@@ -29,14 +29,21 @@ public abstract class Estado {
 	public void quitarServicio(Reserva reserva, Servicio servicio){
 		throw new IllegalStateException("solo se pueden quitar servicios al iniciar la reserva");
 	}
+
+	//
 	public boolean ocupaCupo() {
         return true;
     }
 
+	//notificaciones
     public void visitarGeneradorDeVoucher(GeneradorDeVoucher generador){};
 
 	public void visitarNotificadorDeEmail(NotificadorDeEmail notificador){};
 
 	public void visitarFidelizacion(Fidelizacion fidelizacion){};
+
+	public double monto(Reserva reserva){
+		return 0;
+	}
 
 }

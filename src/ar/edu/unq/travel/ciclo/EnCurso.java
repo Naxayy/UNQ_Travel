@@ -25,4 +25,9 @@ public class EnCurso extends Estado {
 		notificador.enviarMail();
 	}
 
+	@Override 
+	public double monto(Reserva reserva){
+		return reserva.costoDeServiciosNoDisfrutados();
+	}
+
 }

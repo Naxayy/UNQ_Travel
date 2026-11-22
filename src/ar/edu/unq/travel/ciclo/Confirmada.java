@@ -1,6 +1,7 @@
 package ar.edu.unq.travel.ciclo;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.notificaciones.NotificadorDeEmail;
 
 public class Confirmada extends Estado {
 
@@ -18,4 +19,9 @@ public class Confirmada extends Estado {
         reserva.cancelarCarrito();
         reserva.cambiarAEstado(cancelada);
     }
+
+    @Override
+	public void visitarNotificadorDeEmail(NotificadorDeEmail notificador){
+		notificador.enviarMail();
+	}
 }

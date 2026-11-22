@@ -9,8 +9,8 @@ public class GeneradorDeVoucher implements Observador {
         this.reserva = reserva;
     }
 
-    private Voucher generarVoucher(Double monto){
-        return new Voucher(monto);
+    public Voucher generarVoucher(){
+        return new Voucher(this.reserva.getEstadoAnterior().monto(reserva));
     } 
    
     @Override
