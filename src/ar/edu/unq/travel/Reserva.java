@@ -118,7 +118,7 @@ public class Reserva extends Publicador {
 
 	public void cancelarCarrito() {
 		//this.carrito.cancelar(getFechaInicio(), getFechaFin(), getCantidadPasajeros());
-		this.lista.forEach(producto -> producto.cancelar(fechaInicio, fechaFin, cantidadPersonas));
+		this.lista.forEach(producto -> producto.cancelar(this));
         this.lista.clear();
 	}
 

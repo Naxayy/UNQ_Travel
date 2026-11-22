@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.categoria.*;
 
 public class Paquete extends Servicio {
@@ -19,7 +20,7 @@ public class Paquete extends Servicio {
 
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
     @Override
-	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
+	public boolean hayDisponibilidad(PeriodoDeTiempo periodo, int cantidadPersonas) {
 		return servicios.stream().allMatch(servicio -> servicio.hayDisponibilidad(fechaInicio,fechaFin,cantidadPersonas));
 	}
 	

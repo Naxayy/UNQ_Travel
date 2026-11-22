@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.categoria.Categoria;
 
 public abstract class Servicio {
@@ -18,7 +19,7 @@ public abstract class Servicio {
     }
 	
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
-	public abstract boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas);
+	public abstract boolean hayDisponibilidad(PeriodoDeTiempo periodo, int cantidadPersonas);
 	
 	//decrementa en una fecha, una cantidad de cupos segun cantidad de persoans
 	public abstract void decrementarCupo(LocalDate fecha, int cantidad);
@@ -58,13 +59,13 @@ public abstract class Servicio {
 		cuposDisponibles.put(fecha, cantidad);
 	}
 
-	public void confirmar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+	public void confirmar(PeriodoDeTiempo periodo, int cantidadPersonas){
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
 			decrementarCupo(fecha, cantidadPersonas);
 		}
 	}
 
-	public void cancelar(LocalDate fechaInicio, LocalDate fechaFin,int cantidadPersonas){
+	public void cancelar(PeriodoDeTiempo periodo, int cantidadPersonas){
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
 			incrementarCupo(fecha, cantidadPersonas);
 		}
@@ -72,7 +73,7 @@ public abstract class Servicio {
 
 	//###### REPORTES #####
 
-	public int cuposDisponiblesEnPeriodo(LocalDate desde, LocalDate hasta) {
+	public int cuposDisponiblesEnPeriodo(PeriodoDeTiempo periodo) {
 		if (this.cuposDisponibles == null) {
 			return 0;
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.atributosDinamicos.AtributoDinamico;
 import ar.edu.unq.travel.categoria.*;
 
@@ -39,7 +40,7 @@ public class ServicioIndividual extends Servicio{
 
 	// valida si hay disponibilidad desde fechaInicio hasta fechaFin para una cierta cantidadPersonas
 	@Override
-	public boolean hayDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin, int cantidadPersonas) {
+	public boolean hayDisponibilidad(PeriodoDeTiempo periodo, int cantidadPersonas) {
 		for (LocalDate fecha = fechaInicio; !fecha.isAfter(fechaFin); fecha = fecha.plusDays(1)) {
 			if (!hayDisponibilidadEnFecha(fecha, cantidadPersonas)) {
 				return false;
