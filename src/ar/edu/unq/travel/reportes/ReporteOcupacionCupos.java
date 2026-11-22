@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.travel.Catalogo;
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.categoria.Categoria;
 
@@ -12,15 +13,16 @@ public class ReporteOcupacionCupos implements Element {
 
     private List<DatoCupo> datos;
 
-    public ReporteOcupacionCupos(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, LocalDate desde, LocalDate hasta) {
+    public ReporteOcupacionCupos(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, PeriodoDeTiempo periodo) {
         this.datos = new ArrayList<>();
         for (Categoria categoria : categorias) {
-            this.datos.add( this.crearCupo());
+            //MUCHOS PARAMETROS. REVISAR 
+            this.datos.add( this.crearCupo(categoria, catalogo, reservas, periodo));
         }
     }
 
-    private DatoCupo crearCupo() {
-        return new DatoCupo(categoria, catalogo, reservas, desde, hasta);
+    private DatoCupo crearCupo(Categoria categoria, Catalogo catalogo, List<Reserva> reservas, PeriodoDeTiempo periodo) {
+        return new DatoCupo(categoria, catalogo, reservas, periodo);
     }
 
     public List<DatoCupo> getDatos() {
