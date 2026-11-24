@@ -1,6 +1,5 @@
 package ar.edu.unq.travel.reportes;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import ar.edu.unq.travel.PeriodoDeTiempo;
@@ -56,7 +55,7 @@ public class DatoServicio {
     }
 
     private boolean estaEnPeriodo(Reserva reserva) {
-        return !reserva.fechaFin().isBefore(this.periodo.getFechaFin())
-            && !reserva.fechaDeInicio().isAfter(this.periodo.getFechaInicio());
+        return !reserva.fechaFin().isBefore(this.periodo.getFechaInicio())
+            && !reserva.fechaDeInicio().isAfter(this.periodo.getFechaFin());
     }
 }
