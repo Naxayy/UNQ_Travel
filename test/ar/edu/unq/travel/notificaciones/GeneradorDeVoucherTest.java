@@ -1,10 +1,10 @@
 package ar.edu.unq.travel.notificaciones;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,16 +14,11 @@ import ar.edu.unq.travel.ciclo.Estado;
 public class GeneradorDeVoucherTest {
 
     private Reserva reserva;
-    private Estado estadoActual;
-    private Estado estadoAnterior;
     private GeneradorDeVoucher generador;
 
     @BeforeEach
     public void setUp() {
         reserva = mock(Reserva.class);
-        estadoActual = mock(Estado.class);
-        estadoAnterior = mock(Estado.class);
-        when(reserva.getEstado()).thenReturn(estadoActual);
         generador = new GeneradorDeVoucher(reserva);
     }
 
@@ -31,31 +26,31 @@ public class GeneradorDeVoucherTest {
     public void testGetYSetReserva() {
         assertEquals(reserva, generador.getReserva());
 
-        Reserva otraReserva = mock(Reserva.class);
-        generador.setReserva(otraReserva);
+        Reserva nuevaReserva = mock(Reserva.class);
+        generador.setReserva(nuevaReserva);
 
-        assertEquals(otraReserva, generador.getReserva());
+        assertEquals(nuevaReserva, generador.getReserva());
     }
 
     @Test
-    public void testActualizarCuandoEsGeneradorDeVoucherCalculaMontoDelEstadoAnterior() {
-        when(estadoActual.esGeneradorDeVoucher()).thenReturn(true);
+    public void testAcceptDelegaEnVisitarGeneradorDeVoucherDelEstado() {
+        Estado estado = mock(Estado.class);
+
+        generador.accept(estado);
+
+        verify(estado).visitarGeneradorDeVoucher(generador);
+    }
+
+    @Test
+    public void testGenerarVoucherUsaMontoDelEstadoAnterior() {
+        Estado estadoAnterior = mock(Estado.class);
         when(reserva.getEstadoAnterior()).thenReturn(estadoAnterior);
-        when(estadoAnterior.montoVoucher(reserva)).thenReturn(3500.0);
+        when(estadoAnterior.monto(reserva)).thenReturn(3500.0);
 
-        generador.actualizar();
+        Voucher voucher = generador.generarVoucher();
 
-        verify(reserva).getEstadoAnterior();
-        verify(estadoAnterior).montoVoucher(reserva);
-    }
-
-    @Test
-    public void testActualizarCuandoNoEsGeneradorDeVoucherNoConsultaEstadoAnterior() {
-        when(estadoActual.esGeneradorDeVoucher()).thenReturn(false);
-
-        generador.actualizar();
-
-        verify(reserva, never()).getEstadoAnterior();
-        verify(estadoAnterior, never()).montoVoucher(reserva);
+        assertNotNull(voucher);
+        assertEquals(3500.0, voucher.getMonto()); // si Voucher es record, cambiá getMonto() por monto()
+        verify(estadoAnterior).monto(reserva);
     }
 }

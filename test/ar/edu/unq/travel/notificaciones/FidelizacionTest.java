@@ -1,11 +1,11 @@
 package ar.edu.unq.travel.notificaciones;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
@@ -13,14 +13,11 @@ import ar.edu.unq.travel.ciclo.Estado;
 public class FidelizacionTest {
 
     private Reserva reserva;
-    private Estado estado;
     private Fidelizacion fidelizacion;
 
     @BeforeEach
     public void setUp() {
         reserva = mock(Reserva.class);
-        estado = mock(Estado.class);
-        when(reserva.getEstado()).thenReturn(estado);
         fidelizacion = new Fidelizacion(reserva);
     }
 
@@ -28,29 +25,23 @@ public class FidelizacionTest {
     public void testGetYSetReserva() {
         assertEquals(reserva, fidelizacion.getReserva());
 
-        Reserva otraReserva = mock(Reserva.class);
-        fidelizacion.setReserva(otraReserva);
+        Reserva nuevaReserva = mock(Reserva.class);
+        fidelizacion.setReserva(nuevaReserva);
 
-        assertEquals(otraReserva, fidelizacion.getReserva());
+        assertEquals(nuevaReserva, fidelizacion.getReserva());
     }
 
     @Test
-    public void testActualizarCuandoElEstadoEsFidelizador() {
-        when(estado.esFidelizador()).thenReturn(true);
+    public void testAcceptDelegaEnVisitarFidelizacionDelEstado() {
+        Estado estado = mock(Estado.class);
 
-        fidelizacion.actualizar();
+        fidelizacion.accept(estado);
 
-        verify(reserva).getEstado();
-        verify(estado).esFidelizador();
+        verify(estado).visitarFidelizacion(fidelizacion);
     }
 
     @Test
-    public void testActualizarCuandoElEstadoNoEsFidelizador() {
-        when(estado.esFidelizador()).thenReturn(false);
-
-        fidelizacion.actualizar();
-
-        verify(reserva).getEstado();
-        verify(estado).esFidelizador();
+    public void testGenerarCupoNoLanzaExcepcion() {
+        assertDoesNotThrow(() -> fidelizacion.generarCupo());
     }
 }

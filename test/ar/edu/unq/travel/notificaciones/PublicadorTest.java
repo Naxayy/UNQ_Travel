@@ -6,76 +6,55 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
+import ar.edu.unq.travel.ciclo.Estado;
+
 public class PublicadorTest {
 
-    private Observador observador1;
-    private Observador observador2;
+    private List<Observador> observadores;
     private Publicador publicador;
+    private Estado estado;
 
     @BeforeEach
     public void setUp() {
-        observador1 = mock(Observador.class);
-        observador2 = mock(Observador.class);
-        publicador = new Publicador(new ArrayList<>(List.of(observador1, observador2)));
+        observadores = new ArrayList<>();
+        publicador = new Publicador(observadores);
+        estado = mock(Estado.class);
     }
 
     @Test
-    public void testNotificarAObservadoresNotificaATodosLosSuscriptos() {
-        publicador.notificarAObservadores();
+    public void testNotificarAObservadoresLlamaAcceptEnCadaObservador() {
+        Observador obs1 = mock(Observador.class);
+        Observador obs2 = mock(Observador.class);
+        publicador.agregarObservador(obs1);
+        publicador.agregarObservador(obs2);
 
-        verify(observador1).actualizar();
-        verify(observador2).actualizar();
+        publicador.notificarAObservadores(estado);
+
+        verify(obs1).accept(estado);
+        verify(obs2).accept(estado);
     }
 
     @Test
-    public void testAgregarObservadorLoIncluyeEnLasSiguientesNotificaciones() {
-        Observador observador3 = mock(Observador.class);
+    public void testEliminarObservadorEvitaQueSeaNotificado() {
+        Observador obs1 = mock(Observador.class);
+        Observador obs2 = mock(Observador.class);
+        publicador.agregarObservador(obs1);
+        publicador.agregarObservador(obs2);
 
-        publicador.agregarObservador(observador3);
-        publicador.notificarAObservadores();
+        publicador.eliminarObservador(obs1);
+        publicador.notificarAObservadores(estado);
 
-        verify(observador1).actualizar();
-        verify(observador2).actualizar();
-        verify(observador3).actualizar();
+        verifyNoInteractions(obs1);
+        verify(obs2).accept(estado);
     }
 
     @Test
-    public void testEliminarObservadorDejaDeNotificarlo() {
-        publicador.eliminarObservador(observador2);
-        publicador.notificarAObservadores();
+    public void testNotificarSinObservadoresNoFalla() {
+        publicador.notificarAObservadores(estado);
 
-        verify(observador1).actualizar();
-        verify(observador2, never()).actualizar();
-    }
-
-    @Test 
-    void testNotificarObservadores(){
-        this.publicador.notificarAObservadores();
-
-        verify(observador1).actualizar();
-    }
-
-    @Test
-    void testAgregarObservador(){
-        Observador nuevoObservador = mock(Observador.class);
-        this.publicador.agregarObservador(nuevoObservador);
-        this.publicador.notificarAObservadores();
-
-        verify(observador1).actualizar();
-        verify(nuevoObservador).actualizar();
-    }
-
-    @Test
-    void testEliminarObservador(){
-        Observador nuevoObservador = mock(Observador.class);
-        this.publicador.agregarObservador(nuevoObservador);
-        this.publicador.eliminarObservador(nuevoObservador);
-        this.publicador.notificarAObservadores();
-        verifyNoInteractions(nuevoObservador);
-
+        verifyNoInteractions(estado);
     }
 }
