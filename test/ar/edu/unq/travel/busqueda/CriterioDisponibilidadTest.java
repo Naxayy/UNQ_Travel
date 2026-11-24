@@ -10,36 +10,35 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class CriterioDisponibilidadTest {
 
-    private LocalDate inicio;
-    private LocalDate fin;
+    private PeriodoDeTiempo periodo;
     private CriterioDisponibilidad criterio;
     private Servicio servicio;
 
     @BeforeEach
     public void setUp() {
-        inicio = LocalDate.of(2026, 11, 10);
-        fin = LocalDate.of(2026, 11, 15);
-        criterio = new CriterioDisponibilidad(inicio, fin, 2);
+        PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 10),LocalDate.of(2026, 11, 15));
+        criterio = new CriterioDisponibilidad(periodo, 2);
         servicio = mock(Servicio.class);
     }
 
     @Test
     public void testSatisfaceDevuelveTrueCuandoElServicioTieneDisponibilidad() {
-        when(servicio.hayDisponibilidad(inicio, fin, 2)).thenReturn(true);
+        when(servicio.hayDisponibilidad(periodo, 2)).thenReturn(true);
 
         assertTrue(criterio.satisface(servicio));
-        verify(servicio).hayDisponibilidad(inicio, fin, 2);
+        verify(servicio).hayDisponibilidad(periodo, 2);
     }
 
     @Test
     public void testSatisfaceDevuelveFalseCuandoElServicioNoTieneDisponibilidad() {
-        when(servicio.hayDisponibilidad(inicio, fin, 2)).thenReturn(false);
+        when(servicio.hayDisponibilidad(periodo, 2)).thenReturn(false);
 
         assertFalse(criterio.satisface(servicio));
-        verify(servicio).hayDisponibilidad(inicio, fin, 2);
+        verify(servicio).hayDisponibilidad(periodo, 2);
     }
 }
