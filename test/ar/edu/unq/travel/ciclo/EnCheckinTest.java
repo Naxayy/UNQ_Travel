@@ -1,11 +1,13 @@
 package ar.edu.unq.travel.ciclo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
+import org.mockito.InOrder;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,51 +16,45 @@ import ar.edu.unq.travel.Reserva;
 
 public class EnCheckinTest {
 
-    Reserva reserva;
-	EnCheckin estado;
+    private EnCheckin estado;
+    private Reserva reserva;
 
     @BeforeEach
-    void setUp() {
-        this.reserva = mock(Reserva.class);
-
-		this.estado = new EnCheckin();
+    public void setUp() {
+        estado = new EnCheckin();
+        reserva = mock(Reserva.class);
     }
 
-	@Test
-	void testenCursoLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.enCurso(this.reserva);
+    @Test
+    public void testEnCursoCambiaEstadoAEnCurso() {
+        estado.enCurso(reserva);
 
-    	verify(this.reserva).cambiarAEstado(any(EnCurso.class));
-	}
-
-	@Test
-	void testCancelarLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.cancelada(this.reserva);
-
-    	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
-    	verify(this.reserva).cancelarCarrito();
-	}
+        verify(reserva).cambiarAEstado(any(EnCurso.class));
+    }
 
     @Test
-	void testMontoVoucherDa() {
-        when(this.reserva.costoDeServicioConTasas()).thenReturn(200.0);
-    	
-        assertEquals(200, this.estado.montoVoucher(this.reserva));
-	}
+    public void testCanceladaCancelaCarritoYCambiaEstadoACancelada() {
+        estado.cancelada(reserva);
 
-	@Test
-	void testEsGeneradorDeVoucher() {
-        assertTrue(this.estado.esGeneradorDeVoucher());
-	}
+        InOrder orden = inOrder(reserva);
+        orden.verify(reserva).cancelarCarrito();
+        orden.verify(reserva).cambiarAEstado(any(Cancelada.class));
+    }
 
-	@Test
-	void testNoesGeneradorDeEmail(){
-        assertFalse(this.estado.esGeneradorDeEmail());
-	}
+    @Test
+    public void testMontoDevuelveCostoDeServicioConTasas() {
+        when(reserva.costoDeServicioConTasas()).thenReturn(2500.0);
 
-	@Test
-	void testNoesFidelizador(){
-        assertFalse(this.estado.esFidelizador());
-	}
-    
+        assertEquals(2500.0, estado.monto(reserva));
+    }
+
+    @Test
+    public void testOcupaCupoDevuelveTrue() {
+        assertTrue(estado.ocupaCupo());
+    }
+
+    @Test
+    public void testTransicionInvalidaLanzaExcepcion() {
+        assertThrows(IllegalStateException.class, () -> estado.enCheckin(reserva));
+    }
 }

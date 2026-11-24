@@ -1,6 +1,7 @@
 package ar.edu.unq.travel.ciclo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -11,33 +12,38 @@ import ar.edu.unq.travel.Reserva;
 
 public class ConfirmadaTest {
 
-    Reserva reserva;
-	Confirmada estado;
+    private Confirmada estado;
+    private Reserva reserva;
 
     @BeforeEach
-    void setUp() {
-        this.reserva = mock(Reserva.class);
-
-		this.estado = new Confirmada();
+    public void setUp() {
+        estado = new Confirmada();
+        reserva = mock(Reserva.class);
     }
 
-	@Test
-	void testRealizarCheckinLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.enCheckin(this.reserva);
+    @Test
+    public void testOcupaCupoDevuelveTrue() {
+        assertTrue(estado.ocupaCupo());
+    }
 
-    	verify(this.reserva).cambiarAEstado(any(EnCheckin.class));
-	}
+    @Test
+    public void testEnCheckinCambiaEstadoAEnCheckin() {
+        estado.enCheckin(reserva);
 
-	@Test
-	void testCancelarLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.cancelada(this.reserva);
+        verify(reserva).cambiarAEstado(any(EnCheckin.class));
+    }
 
-    	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
-    	verify(this.reserva).cancelarCarrito();
-	}
+    @Test
+    public void testCancelarCambiaEstadoACancelada() {
+        estado.cancelada(reserva);
 
-	@Test
-	void testConfirmadaTiene0DeMontoVaucher() {
-		assertEquals(0.0, this.estado.montoVoucher(this.reserva));
-	}
+        verify(reserva).cambiarAEstado(any(Cancelada.class));
+    }
+
+    @Test
+    public void testTransicionesInvalidasLanzanExcepcion() {
+        assertThrows(IllegalStateException.class, () -> estado.confirmar(reserva));
+        assertThrows(IllegalStateException.class, () -> estado.enCurso(reserva));
+        assertThrows(IllegalStateException.class, () -> estado.finalizada(reserva));
+    }
 }

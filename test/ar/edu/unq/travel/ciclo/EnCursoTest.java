@@ -1,7 +1,7 @@
 package ar.edu.unq.travel.ciclo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,51 +11,57 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.notificaciones.NotificadorDeEmail;
 
 public class EnCursoTest {
-    Reserva reserva;
-	EnCurso estado;
+
+    private EnCurso estado;
+    private Reserva reserva;
 
     @BeforeEach
-    void setUp() {
-        this.reserva = mock(Reserva.class);
-
-		this.estado = new EnCurso();
+    public void setUp() {
+        estado = new EnCurso();
+        reserva = mock(Reserva.class);
     }
 
-	@Test
-	void testPasarAFinalizadoLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.finalizada(this.reserva);
+    @Test
+    public void testFinalizadaCambiaEstadoAFinalizada() {
+        estado.finalizada(reserva);
 
-    	verify(this.reserva).cambiarAEstado(any(Finalizada.class));
-	}
-
-	@Test
-	void testCancelarLeDelegaLaResponsabilidadAReserva() {
-    	this.estado.cancelada(this.reserva);
-
-    	verify(this.reserva).cambiarAEstado(any(Cancelada.class));
-	}
+        verify(reserva).cambiarAEstado(any(Finalizada.class));
+    }
 
     @Test
-	void testMontoVoucherDa() {
-        when(this.reserva.costoDeServicio()).thenReturn(200.0);
-    	
-        assertEquals(200, this.estado.montoVoucher(this.reserva));
-	}
+    public void testCanceladaCambiaEstadoACancelada() {
+        estado.cancelada(reserva);
 
-	@Test
-	void testEsGeneradorDeVoucher() {
-        assertTrue(this.estado.esGeneradorDeVoucher());
-	}
+        verify(reserva).cambiarAEstado(any(Cancelada.class));
+    }
 
-	@Test
-	void testNoesGeneradorDeEmail(){
-        assertFalse(this.estado.esGeneradorDeEmail());
-	}
+    @Test
+    public void testVisitarNotificadorDeEmailEnviaMail() {
+        NotificadorDeEmail notificador = mock(NotificadorDeEmail.class);
 
-	@Test
-	void testNoesFidelizador(){
-        assertFalse(this.estado.esFidelizador());
-	}
+        estado.visitarNotificadorDeEmail(notificador);
+
+        verify(notificador).enviarMail();
+    }
+
+    @Test
+    public void testMontoDevuelveCostoDeServiciosNoDisfrutados() {
+        when(reserva.costoDeServiciosNoDisfrutados()).thenReturn(1800.0);
+
+        assertEquals(1800.0, estado.monto(reserva));
+    }
+
+    @Test
+    public void testOcupaCupoDevuelveTrue() {
+        assertTrue(estado.ocupaCupo());
+    }
+
+    @Test
+    public void testTransicionesInvalidasLanzanExcepcion() {
+        assertThrows(IllegalStateException.class, () -> estado.enCheckin(reserva));
+        assertThrows(IllegalStateException.class, () -> estado.enCurso(reserva));
+    }
 }

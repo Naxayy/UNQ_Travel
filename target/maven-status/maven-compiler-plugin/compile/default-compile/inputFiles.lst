@@ -13,7 +13,6 @@ C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\busqueda\Criteri
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorAND.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorNOT.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\busqueda\OperadorOR.java
-C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\Carrito.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\Catalogo.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\categoria\Alojamiento.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\categoria\AlquilerDeAuto.java
@@ -41,6 +40,7 @@ C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\pagos\TarjetaDeC
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\pagos\TarjetaDeCreditoAPI.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\pagos\TransferenciaBancaria.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\pagos\TransferenciaBancariaAPI.java
+C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\PeriodoDeTiempo.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\reportes\DatoCupo.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\reportes\DatoProveedor.java
 C:\Users\USUARIO\Desktop\repos\UNQ_Travel\src\ar\edu\unq\travel\reportes\DatoServicio.java
