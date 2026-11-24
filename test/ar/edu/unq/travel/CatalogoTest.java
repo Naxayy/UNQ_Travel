@@ -105,18 +105,17 @@ class CatalogoTest {
     @Test
     public void testCuposDisponiblesSumaCuposDeServiciosIndividualesDeLaCategoria() {
         Categoria alojamiento = mock(Categoria.class);
-        LocalDate desde = LocalDate.of(2026, 12, 1);
-        LocalDate hasta = LocalDate.of(2026, 12, 10);
+        PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2026, 12, 1), LocalDate.of(2026, 12, 10));
 
         Servicio individual1 = mock(Servicio.class);
         Servicio individual2 = mock(Servicio.class);
         Servicio individualOtraCategoria = mock(Servicio.class);
 
         when(individual1.contieneCategoria(alojamiento)).thenReturn(true);
-        when(individual1.cuposDisponiblesEnPeriodo(desde, hasta)).thenReturn(4);
+        when(individual1.cuposDisponiblesEnPeriodo(periodo)).thenReturn(4);
 
         when(individual2.contieneCategoria(alojamiento)).thenReturn(true);
-        when(individual2.cuposDisponiblesEnPeriodo(desde, hasta)).thenReturn(6);
+        when(individual2.cuposDisponiblesEnPeriodo(periodo)).thenReturn(6);
 
         when(individualOtraCategoria.contieneCategoria(alojamiento)).thenReturn(false);
 
@@ -136,19 +135,18 @@ class CatalogoTest {
         catalogo.agregarItem(servicio1);
         catalogo.agregarItem(servicio2);
 
-        int cupos = catalogo.cuposDisponibles(alojamiento, desde, hasta);
+        int cupos = catalogo.cuposDisponibles(alojamiento, periodo);
 
         assertEquals(10, cupos);
-        verify(individualOtraCategoria, never()).cuposDisponiblesEnPeriodo(desde, hasta);
+        verify(individualOtraCategoria, never()).cuposDisponiblesEnPeriodo(periodo);
     }
 
     @Test
     public void testCuposDisponiblesDevuelveCeroCuandoElCatalogoEstaVacio() {
         Categoria vuelo = mock(Categoria.class);
-        LocalDate desde = LocalDate.of(2026, 12, 1);
-        LocalDate hasta = LocalDate.of(2026, 12, 5);
+        PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2026, 12, 1), LocalDate.of(2026, 12, 5));
 
-        assertEquals(0, catalogo.cuposDisponibles(vuelo, desde, hasta));
+        assertEquals(0, catalogo.cuposDisponibles(vuelo, periodo));
     }
 
     @Test
@@ -220,4 +218,3 @@ class CatalogoTest {
         assertEquals(25.0, catalogo.porcentajeDeProveedor(proveedorBuscado), 0.001);
     }
 }
-

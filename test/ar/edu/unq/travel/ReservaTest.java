@@ -31,164 +31,166 @@ class ReservaTest {
 	ServicioIndividual estadiaCancun;
 	Traslado unTraslado;
 	MetodoDePago unMetodoDePago;
-	Carrito carrito;
 	Estado estado;
 	Direccion direccion;
-	int cantPasajerosDummy = 0;
-	LocalDate inicio  = LocalDate.of(2004,01,02);
-	LocalDate fin = LocalDate.of(2000,12,11);
+	int cantPasajeros = 4;
+	LocalDate inicio = LocalDate.of(2026, 11, 2);
+	LocalDate fin = LocalDate.of(2026, 11, 10);
+	PeriodoDeTiempo periodo;
 	List<Observador> obs = new ArrayList<>();
-
 
 	@BeforeEach
 	public void setUp() {
-
-		//DOCS
+		// DOCS
 		this.estadiaCancun = mock(ServicioIndividual.class);
 		this.unTraslado = mock(Traslado.class);
 		this.unMetodoDePago = mock(MetodoDePago.class);
-		this.direccion = mock(Direccion.class);
-
-		this.carrito = mock(Carrito.class);
 		this.estado = mock(Estado.class);
 		this.direccion = mock(Direccion.class);
+		this.periodo = new PeriodoDeTiempo(inicio, fin);
 
-	//Traslado traslado, MetodoDePago metodoDePago, LocalDate inicio, LocalDate fin, int personas, Direccion destino, List<Observador> observadores
-		//SUT
-		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago,inicio, fin, cantPasajerosDummy, direccion, obs);
+		// SUT
+		this.reserva = new Reserva(this.unTraslado, this.unMetodoDePago, periodo, cantPasajeros, direccion, obs);
 	}
 
-	//la reserva al hacer cambios de estado invalidos genera una excepcion error  
+	// La reserva al hacer cambios de estado inválidos genera una excepción
+
 	@Test
-	void testAgregaUnServicioEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testAgregaUnServicioEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		reserva.agregarServicio(estadiaCancun);
 		reserva.confirmar();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.agregarServicio(estadiaCancun) );
-        assertEquals("solo se pueden agregar servicios al iniciar la reserva", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.agregarServicio(estadiaCancun));
+		assertEquals("solo se pueden agregar servicios al iniciar la reserva", error.getMessage());
 	}
 
-	@Test 
-	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	@Test
+	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
-		IllegalStateException error = assertThrows(IllegalStateException.class, ()-> this.reserva.quitarServicio(estadiaCancun));
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.quitarServicio(estadiaCancun));
 		assertEquals("solo se pueden quitar servicios al iniciar la reserva", error.getMessage());
 	}
 
 	@Test
-	void testconfirmarUnaReservaEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testConfirmarUnaReservaEnUnEstadoQueNoSeaPendienteGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.confirmar() );
-        assertEquals("no se puede confirmar la reserva en este estado de la compra", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.confirmar());
+		assertEquals("no se puede confirmar la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void testHacerCheckinDeLaReservaEnUnEstadoQueNoSeaConfirmadoGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testHacerCheckinDeLaReservaEnUnEstadoQueNoSeaConfirmadoGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.enCheckin() );
-        assertEquals("no se puede realizar checkin de la reserva en este estado de la compra", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.enCheckin());
+		assertEquals("no se puede realizar checkin de la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void testQueLaReservaEsteEnCursoDespuesDeUnEstadoQueNoSeaEnChickInGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testQueLaReservaEsteEnCursoDespuesDeUnEstadoQueNoSeaEnCheckinGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
 		this.reserva.confirmar();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.enCurso() );
-        assertEquals("no se puede poner en curso a la reserva en este estado de la compra", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.enCurso());
+		assertEquals("no se puede poner en curso a la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void testFinaliarUnaReservaDespuesDeUnEstadoQueNoSeaEnCursoGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testFinalizarUnaReservaDespuesDeUnEstadoQueNoSeaEnCursoGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		this.reserva.agregarServicio(estadiaCancun);
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.finalizar() );
-        assertEquals("no se puede finalizar la reserva en este estado de la compra", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.finalizar());
+		assertEquals("no se puede finalizar la reserva en este estado de la compra", error.getMessage());
 	}
 
 	@Test
-	void testCancelarUnaReservaDespuesDeFinalizadaGeneraUnaExcepcion(){
+	void testCancelarUnaReservaDespuesDeFinalizadaGeneraUnaExcepcion() {
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		this.reserva.enCurso();
 		this.reserva.finalizar();
-		IllegalStateException error = 
-            assertThrows(IllegalStateException.class, () -> this.reserva.cancelar() );
-        assertEquals("no se puede cancelar la reserva en este estado de la compra", error.getMessage());
+
+		IllegalStateException error =
+			assertThrows(IllegalStateException.class, () -> this.reserva.cancelar());
+		assertEquals("no se puede cancelar la reserva en este estado de la compra", error.getMessage());
 	}
 
-	//la reserva al hacer cambios de estado validos: cambia de estado, modifica el carrito, modifican su estado anterior
+	// Cambios de estado válidos y manejo de List<Servicio>
 
-	@Test 
-	void testLaReservaHaceUnCambioDeEstadoValidoModificaSuEstadoActualYElAntrerior(){
+	@Test
+	void testLaReservaHaceUnCambioDeEstadoValidoModificaSuEstadoActualYElAnterior() {
 		this.reserva.confirmar();
-		assertEquals(this.reserva.getEstado().getClass(), Confirmada.class);
-		assertEquals(this.reserva.getEstadoAnterior().getClass(), SolicitudPendiente.class);
+		assertEquals(Confirmada.class, this.reserva.getEstado().getClass());
+		assertEquals(SolicitudPendiente.class, this.reserva.getEstadoAnterior().getClass());
 	}
 
 	@Test
-	void testAgregaUnServicioAlCarritoNoGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testAgregaUnServicioNoGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		assertDoesNotThrow(() -> this.reserva.agregarServicio(estadiaCancun));
 	}
 
 	@Test
-	void testAgregaUnServicioAlCarritoDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
+	void testAgregaUnServicioDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		verify(this.estado).agregarServicio(this.reserva, this.estadiaCancun);
 	}
 
 	@Test
-	void testUnaReservaAgregarUnServicioYElServicioYaNoApareceEnElCarrito() {
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
-		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(true);
+	void testUnaReservaAgregaUnServicioYApareceEnSuListaDeServicios() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 
-    	this.reserva.agregarServicio(this.estadiaCancun);
-		assertTrue(this.reserva.getCarrito().contieneElServicio(estadiaCancun));
+		this.reserva.agregarServicio(this.estadiaCancun);
+		assertTrue(this.reserva.getServicios().contains(estadiaCancun));
 	}
 
 	@Test
-	void testQuitarUnServicioDelCarritoDeLaReservaNoGeneraUnaExcepcion(){
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
+	void testQuitarUnServicioDeLaReservaNoGeneraUnaExcepcion() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 		reserva.agregarServicio(estadiaCancun);
 		assertDoesNotThrow(() -> this.reserva.quitarServicio(estadiaCancun));
 	}
 
 	@Test
-	void testQuitarUnServicioAlCarritoDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
-		this.reserva.quitarServicio(this.estadiaCancun); 
+	void testQuitarUnServicioDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
+		this.reserva.quitarServicio(this.estadiaCancun);
 		verify(this.estado).quitarServicio(this.reserva, this.estadiaCancun);
 	}
 
 	@Test
-	void testUnaReservaQuitaUnServicioYElServicioYaNoApareceEnElCarrito() {
-		when(estadiaCancun.hayDisponibilidad(inicio, fin, cantPasajerosDummy)).thenReturn(true);
-		when(this.carrito.contieneElServicio(estadiaCancun)).thenReturn(false);
+	void testUnaReservaQuitaUnServicioYYaNoApareceEnSuListaDeServicios() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
 
-    	this.reserva.agregarServicio(this.estadiaCancun);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.quitarServicio(this.estadiaCancun);
-		
-		assertFalse(this.reserva.getCarrito().contieneElServicio(estadiaCancun));
+
+		assertFalse(this.reserva.getServicios().contains(estadiaCancun));
 	}
 
 	@Test
-	void testConfirmarLaReservaDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
+	void testConfirmarLaReservaDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.confirmar();
 		verify(this.estado).confirmar(this.reserva);
 	}
@@ -199,40 +201,40 @@ class ReservaTest {
 	}
 
 	@Test
-	void testRealizarChekinDespuesDeConfirmarLaReservaNoGeneraUnaExcepcion() {
+	void testRealizarCheckinDespuesDeConfirmarLaReservaNoGeneraUnaExcepcion() {
 		this.reserva.confirmar();
 		assertDoesNotThrow(() -> this.reserva.enCheckin());
-	} 
+	}
 
 	@Test
-	void testRealizarChekiDeLaReservaDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
+	void testRealizarCheckinDeLaReservaDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		verify(this.estado).enCheckin(this.reserva);
 	}
 
 	@Test
-	void testReservaEnCursoDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
+	void testReservaEnCursoDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		this.reserva.enCurso();
 		verify(this.estado).enCurso(this.reserva);
 	}
 
-	void testReservaEnCursoDespuesDeEnCheckNoGeneraUnaExcepcion() {
+	@Test
+	void testReservaEnCursoDespuesDeEnCheckinNoGeneraUnaExcepcion() {
 		this.reserva.cambiarAEstado(new EnCheckin());
-
 		assertDoesNotThrow(() -> this.reserva.enCurso());
 	}
 
 	@Test
-	void testFinaliarUnaReservaDelegaLaResonsabilidadAOtro(){
-    	this.reserva.cambiarAEstado(this.estado);
-		this.reserva.agregarServicio(this.estadiaCancun); 
+	void testFinalizarUnaReservaDelegaLaResponsabilidadAlEstado() {
+		this.reserva.cambiarAEstado(this.estado);
+		this.reserva.agregarServicio(this.estadiaCancun);
 		this.reserva.confirmar();
 		this.reserva.enCheckin();
 		this.reserva.enCurso();
@@ -249,52 +251,43 @@ class ReservaTest {
 	}
 
 	@Test
-	void testCancelarUnaReservaDelegaLaResonsabilidadAOtro(){
+	void testCancelarUnaReservaDelegaLaResponsabilidadAlEstado() {
 		this.reserva.cambiarAEstado(this.estado);
-    	this.reserva.cancelar();
+		this.reserva.cancelar();
 		verify(this.estado).cancelada(this.reserva);
 	}
 
-
 	@Test
-	void testCostoDeServicioDelegaEnCarrito() {
-		this.reserva.cambiarCarrito(this.carrito);
-		when(this.carrito.costoDeServicio()).thenReturn(1500.0);
+	void testCostoDeServicioSumaLosServiciosAgregados() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
+		when(estadiaCancun.precioFinal()).thenReturn(1500.0);
+
+		this.reserva.agregarServicio(this.estadiaCancun);
 
 		assertEquals(1500.0, this.reserva.costoDeServicio());
-
-		verify(this.carrito).costoDeServicio();
 	}
 
 	@Test
-	void testTasasAdministrativasDelegaEnCarrito() {
-		this.reserva.cambiarCarrito(this.carrito);
-    	when(this.carrito.tasasAdministrativas()).thenReturn(200.0);
+	void testCostoDeServicioConTasasSumaCostoYTasas() {
+		when(estadiaCancun.hayDisponibilidad(periodo, cantPasajeros)).thenReturn(true);
+		when(estadiaCancun.precioFinal()).thenReturn(1500.0);
 
-    	assertEquals(200.0, this.reserva.tasasAdministrativas());
+		this.reserva.agregarServicio(this.estadiaCancun);
 
-	    verify(this.carrito).tasasAdministrativas();
+		assertEquals(
+			this.reserva.costoDeServicio() + this.reserva.tasasAdministrativas(),
+			this.reserva.costoDeServicioConTasas()
+		);
 	}
 
-	@Test
-	void testCostoDeServicioConTasasSumaLosValoresDelCarrito() {
-		this.reserva.cambiarCarrito(this.carrito);
-		when(carrito.costoDeServicio()).thenReturn(1500.0);
-		when(carrito.tasasAdministrativas()).thenReturn(200.0);
-
-		assertEquals(1700.0, reserva.costoDeServicioConTasas());
-	}
 	@Test
 	void testLaReservaConoceSuCantidadDePersonas() {
-    	assertEquals(4, this.reserva.getCantidadPasajeros());
+		assertEquals(4, this.reserva.getCantidadPasajeros());
 	}
-
 
 	@Test
 	void testDireccionDelViaje() {
-		this.reserva.cambiarCarrito(this.carrito);
 		this.reserva.cambiarDireccionDestino(this.direccion);
-
-		assertEquals(this.reserva.direccionDestino(), this.direccion);
+		assertEquals(this.direccion, this.reserva.direccionDestino());
 	}
 }

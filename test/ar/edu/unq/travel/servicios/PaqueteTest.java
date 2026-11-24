@@ -12,9 +12,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ar.edu.unq.travel.categoria.*;
-import ar.edu.unq.travel.servicios.Paquete;
-import ar.edu.unq.travel.servicios.ServicioIndividual;
+import ar.edu.unq.travel.PeriodoDeTiempo;
+import ar.edu.unq.travel.categoria.Categoria;
 
 public class PaqueteTest {
 
@@ -23,6 +22,7 @@ public class PaqueteTest {
 	private ServicioIndividual trasladoAH;
 	
 	private Map<LocalDate, Integer> map;
+	private PeriodoDeTiempo periodo;
 
 	private Categoria unaCategoria;
 	
@@ -31,25 +31,24 @@ public class PaqueteTest {
 	
 	@BeforeEach
 	void setUp() {
-		//DOC
+		// DOC
 		this.noche = mock(ServicioIndividual.class);
 		this.excursion = mock(ServicioIndividual.class);
 		this.trasladoAH = mock(ServicioIndividual.class);
 		this.paqueteTravel = mock(Paquete.class);
 		this.unaCategoria = mock(Categoria.class);
-		this.map = new HashMap<LocalDate,Integer>();
-		this.map.put(LocalDate.of(2004,2,10),1);
+		this.map = new HashMap<LocalDate, Integer>();
+		this.map.put(LocalDate.of(2004, 2, 10), 1);
+		this.periodo = new PeriodoDeTiempo(LocalDate.of(2004, 2, 10), LocalDate.of(2004, 2, 15));
 		
-		//SUT
-		this.paqueteDePaquetes = new Paquete ("nombre","descripcion",map,10,unaCategoria);
+		// SUT
+		this.paqueteDePaquetes = new Paquete("nombre", "descripcion", map, 10, unaCategoria);
 	}
 
 	@Test
-	void precioFinal()  {
+	void precioFinal() {
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(excursion);
-
-		paqueteTravel.agregarItem(trasladoAH);
 		paqueteDePaquetes.agregarItem(paqueteTravel);
 
 		when(noche.precioBase()).thenReturn(1200.00);
@@ -61,7 +60,7 @@ public class PaqueteTest {
 	}
 
 	@Test 
-	void precioBase(){
+	void precioBase() {
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(excursion);
 
@@ -74,17 +73,17 @@ public class PaqueteTest {
 	}
 
 	@Test 
-	void descuentoDelPaquete(){
+	void descuentoDelPaquete() {
 		assertEquals(10, paqueteDePaquetes.getDescuento());
 	}
 
 	@Test 
-	void serviciosDelPaquete(){
+	void serviciosDelPaquete() {
 		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
 	}
 
 	@Test
-	void listaDeServicios(){
+	void listaDeServicios() {
 		paqueteDePaquetes.agregarItem(excursion);
 		paqueteDePaquetes.quitarItem(excursion);
 
@@ -92,130 +91,126 @@ public class PaqueteTest {
 	}
 
 	@Test
-	void cambiarDescuento(){
+	void cambiarDescuento() {
 		paqueteDePaquetes.setDescuento(20);
 
-		assertTrue(paqueteDePaquetes.getServicios().isEmpty());
+		assertEquals(20, paqueteDePaquetes.getDescuento());
 	}
 
 	@Test
-    void hayDisponibilidad() {
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
-
-        when(noche.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
-        when(excursion.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
-        when(paqueteTravel.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
-
-        assertTrue(paqueteDePaquetes.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2));
-        verify(noche).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
-        verify(excursion).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
-        verify(paqueteTravel).hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2);
-    }
-
-    @Test
-    void noHayDisponibilidad() {
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-
-        when(noche.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(true);
-        when(excursion.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2)).thenReturn(false);
-
-        assertFalse(paqueteDePaquetes.hayDisponibilidad(LocalDate.of(2004,2,10), LocalDate.of(2004,2,15), 2));
-    }
-
-	@Test
-    void decrementarCupo() {
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
-
-        paqueteDePaquetes.decrementarCupo(LocalDate.of(2004,2,10), 2);
-
-        verify(noche).decrementarCupo(LocalDate.of(2004,2,10), 2);
-        verify(excursion).decrementarCupo(LocalDate.of(2004,2,10), 2);
-        verify(paqueteTravel).decrementarCupo(LocalDate.of(2004,2,10), 2);
-    }
-
-	@Test
-	void icrementarCupo(){
+	void hayDisponibilidad() {
 		paqueteDePaquetes.agregarItem(noche);
 		paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
 
-		paqueteDePaquetes.incrementarCupo(LocalDate.of(2004,2,10),2);
+		when(noche.hayDisponibilidad(periodo, 2)).thenReturn(true);
+		when(excursion.hayDisponibilidad(periodo, 2)).thenReturn(true);
+		when(paqueteTravel.hayDisponibilidad(periodo, 2)).thenReturn(true);
 
-		verify(noche).incrementarCupo(LocalDate.of(2004,2,10),2);
-		verify(excursion).incrementarCupo(LocalDate.of(2004,2,10),2);
-		verify(paqueteTravel).incrementarCupo(LocalDate.of(2004,2,10),2);
+		assertTrue(paqueteDePaquetes.hayDisponibilidad(periodo, 2));
+		verify(noche).hayDisponibilidad(periodo, 2);
+		verify(excursion).hayDisponibilidad(periodo, 2);
+		verify(paqueteTravel).hayDisponibilidad(periodo, 2);
 	}
 
+	@Test
+	void noHayDisponibilidad() {
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+
+		when(noche.hayDisponibilidad(periodo, 2)).thenReturn(true);
+		when(excursion.hayDisponibilidad(periodo, 2)).thenReturn(false);
+
+		assertFalse(paqueteDePaquetes.hayDisponibilidad(periodo, 2));
+	}
 
 	@Test
-    void contieneCategoria() {
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
+	void decrementarCupo() {
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
 
-        when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
-        when(excursion.contieneCategoria(unaCategoria)).thenReturn(true);
+		paqueteDePaquetes.decrementarCupo(LocalDate.of(2004, 2, 10), 2);
 
-        assertTrue(paqueteDePaquetes.contieneCategoria(unaCategoria));
-        verify(noche).contieneCategoria(unaCategoria);
-        verify(excursion).contieneCategoria(unaCategoria);
-    }
-
-    @Test
-    void noContieneCategoria() {
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
-
-        when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
-        when(excursion.contieneCategoria(unaCategoria)).thenReturn(false);
-        when(paqueteTravel.contieneCategoria(unaCategoria)).thenReturn(false);
-
-        assertFalse(paqueteDePaquetes.contieneCategoria(unaCategoria));
-        verify(noche).contieneCategoria(unaCategoria);
-        verify(excursion).contieneCategoria(unaCategoria);
-        verify(paqueteTravel).contieneCategoria(unaCategoria);
-    }
-
+		verify(noche).decrementarCupo(LocalDate.of(2004, 2, 10), 2);
+		verify(excursion).decrementarCupo(LocalDate.of(2004, 2, 10), 2);
+		verify(paqueteTravel).decrementarCupo(LocalDate.of(2004, 2, 10), 2);
+	}
 
 	@Test
-    void recolectarServiciosIndividuales() {
-        Set<Servicio> resultado = new HashSet<>();
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
+	void icrementarCupo() {
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
 
-        paqueteDePaquetes.recolectarServiciosIndividuales(resultado);
+		paqueteDePaquetes.incrementarCupo(LocalDate.of(2004, 2, 10), 2);
 
-        verify(noche).recolectarServiciosIndividuales(resultado);
-        verify(excursion).recolectarServiciosIndividuales(resultado);
-        verify(paqueteTravel).recolectarServiciosIndividuales(resultado);
-    }
-
-	@Test
-    void esDeProveedor() {
-        Proveedor unProveedor = mock(Proveedor.class);
-
-        assertFalse(paqueteDePaquetes.esDeProveedor(unProveedor));
-    }
+		verify(noche).incrementarCupo(LocalDate.of(2004, 2, 10), 2);
+		verify(excursion).incrementarCupo(LocalDate.of(2004, 2, 10), 2);
+		verify(paqueteTravel).incrementarCupo(LocalDate.of(2004, 2, 10), 2);
+	}
 
 	@Test
-    void agregarProveedoresA() {
-        Set<Proveedor> proveedores = new HashSet<>();
-        paqueteDePaquetes.agregarItem(noche);
-        paqueteDePaquetes.agregarItem(excursion);
-        paqueteDePaquetes.agregarItem(paqueteTravel);
+	void contieneCategoria() {
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
 
-        paqueteDePaquetes.agregarProveedoresA(proveedores);
+		when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
+		when(excursion.contieneCategoria(unaCategoria)).thenReturn(true);
 
-        verify(noche).agregarProveedoresA(proveedores);
-        verify(excursion).agregarProveedoresA(proveedores);
-        verify(paqueteTravel).agregarProveedoresA(proveedores);
-    }
+		assertTrue(paqueteDePaquetes.contieneCategoria(unaCategoria));
+		verify(noche).contieneCategoria(unaCategoria);
+		verify(excursion).contieneCategoria(unaCategoria);
+	}
 
+	@Test
+	void noContieneCategoria() {
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
+
+		when(noche.contieneCategoria(unaCategoria)).thenReturn(false);
+		when(excursion.contieneCategoria(unaCategoria)).thenReturn(false);
+		when(paqueteTravel.contieneCategoria(unaCategoria)).thenReturn(false);
+
+		assertFalse(paqueteDePaquetes.contieneCategoria(unaCategoria));
+		verify(noche).contieneCategoria(unaCategoria);
+		verify(excursion).contieneCategoria(unaCategoria);
+		verify(paqueteTravel).contieneCategoria(unaCategoria);
+	}
+
+	@Test
+	void recolectarServiciosIndividuales() {
+		Set<Servicio> resultado = new HashSet<>();
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
+
+		paqueteDePaquetes.recolectarServiciosIndividuales(resultado);
+
+		verify(noche).recolectarServiciosIndividuales(resultado);
+		verify(excursion).recolectarServiciosIndividuales(resultado);
+		verify(paqueteTravel).recolectarServiciosIndividuales(resultado);
+	}
+
+	@Test
+	void esDeProveedor() {
+		Proveedor unProveedor = mock(Proveedor.class);
+
+		assertFalse(paqueteDePaquetes.esDeProveedor(unProveedor));
+	}
+
+	@Test
+	void agregarProveedoresA() {
+		Set<Proveedor> proveedores = new HashSet<>();
+		paqueteDePaquetes.agregarItem(noche);
+		paqueteDePaquetes.agregarItem(excursion);
+		paqueteDePaquetes.agregarItem(paqueteTravel);
+
+		paqueteDePaquetes.agregarProveedoresA(proveedores);
+
+		verify(noche).agregarProveedoresA(proveedores);
+		verify(excursion).agregarProveedoresA(proveedores);
+		verify(paqueteTravel).agregarProveedoresA(proveedores);
+	}
 }
-

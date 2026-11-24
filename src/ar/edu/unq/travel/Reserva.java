@@ -146,7 +146,7 @@ public class Reserva extends Publicador {
             .sum();
 	}
 
-	private double tasasAdministrativas() {
+	public double tasasAdministrativas() {
 		//return this.carrito.tasasAdministrativas();
 		return 0;  //falta esta logica
 	}

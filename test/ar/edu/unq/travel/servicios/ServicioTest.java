@@ -1,8 +1,6 @@
 package ar.edu.unq.travel.servicios;
 
-
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.categoria.Categoria;
 
 class ServicioTest {
@@ -22,111 +20,111 @@ class ServicioTest {
 	private Categoria unaCategoria;
 	private Map<LocalDate, Integer> map;
 	private Proveedor proveedor;
-	private Map<LocalDate, Integer> cuposDisponiblesMock = mock();
 	
 	@BeforeEach
 	void setUp() {
 		this.unaCategoria = mock(Categoria.class);
-		this.map = new HashMap<LocalDate,Integer>();
-		this.map.put(LocalDate.of(2004,2,10),1);
+		this.map = new HashMap<LocalDate, Integer>();
+		this.map.put(LocalDate.of(2004, 2, 10), 1);
 		this.proveedor = mock(Proveedor.class);
-		
-		
 
-		//al ser clase abstracta instancio sus dos clases hijas 
-		//testeo los metodos heredados y no repeto codigo ni test
-//String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor
-		this.noche = new ServicioIndividual("Noche de hotel central", 10,"descripcion", map,1, unaCategoria,proveedor);
-		//String nombre, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int descuento, Categoria categoria
-		this.paqueteTravel = new Paquete ("Pack escapada urbana","descripcion",map,10, unaCategoria);
+		this.noche = new ServicioIndividual("Noche de hotel central", 10, "descripcion", map, 1, unaCategoria, proveedor);
+		this.paqueteTravel = new Paquete("Pack escapada urbana", "descripcion", new HashMap<>(map), 10, unaCategoria);
 	}
 
 	@Test 
-	void noEsNombreDelServicio(){
+	void noEsNombreDelServicio() {
 		assertNotEquals("paqueteDePaquetes", noche.getNombre());
 	}
 
 	@Test 
-	void descripcionDelServicio(){
+	void descripcionDelServicio() {
 		assertEquals("descripcion", paqueteTravel.getDescripcion());
 	}
 
 	@Test 
-	void cambiarNombreDelServicio(){
+	void cambiarNombreDelServicio() {
 		noche.setNombre("Dia de hotel central");
 		assertNotEquals("Noche de hotel central", noche.getNombre());
 		assertEquals("Dia de hotel central", noche.getNombre());
 	}
 
 	@Test 
-	void cambiarDescripcionDelServicio(){
+	void cambiarDescripcionDelServicio() {
 		paqueteTravel.setDescripcion("muy completo");
 		assertEquals("muy completo", paqueteTravel.getDescripcion());
 	}
 
 	@Test
-	void getCuposDisponibles(){
+	void getCuposDisponibles() {
 		Map<LocalDate, Integer> esperado = new HashMap<>();
-        esperado.put(LocalDate.of(2004, 2, 10), 1);
+		esperado.put(LocalDate.of(2004, 2, 10), 1);
 		
-		assertEquals(paqueteTravel.getCuposDisponibles(), esperado);
+		assertEquals(esperado, paqueteTravel.getCuposDisponibles());
 	}
 
 	@Test
-	void setCuposDisponibles(){
+	void setCuposDisponibles() {
 		Map<LocalDate, Integer> esperado = new HashMap<>();
-        esperado.put(LocalDate.of(2004, 2, 10), 1);
-		esperado.put(LocalDate.of(2000,11,20),2);
-		noche.setCuposDisponibles(LocalDate.of(2000,11,20),2);
+		esperado.put(LocalDate.of(2004, 2, 10), 1);
+		esperado.put(LocalDate.of(2000, 11, 20), 2);
+
+		noche.setCuposDisponibles(LocalDate.of(2000, 11, 20), 2);
+
 		assertEquals(esperado, noche.getCuposDisponibles());
 	}
 
 	@Test
-	void confirmar(){
-        noche.setCuposDisponibles(LocalDate.of(2004, 2, 1), 10);
-        noche.setCuposDisponibles(LocalDate.of(2004, 2, 2), 10);
-        noche.setCuposDisponibles(LocalDate.of(2004, 2, 3), 10);
-
-        Map<LocalDate, Integer> mapaEsperado = new HashMap<>();
-		mapaEsperado.put(LocalDate.of(2004,2,10),1);
-        mapaEsperado.put(LocalDate.of(2004, 2, 1), 7);
-        mapaEsperado.put(LocalDate.of(2004, 2, 2), 7);
-        mapaEsperado.put(LocalDate.of(2004, 2, 3), 7);
-
-        noche.confirmar(LocalDate.of(2004, 2, 1), LocalDate.of(2004, 2, 3), 3);
-		assertEquals(mapaEsperado, noche.getCuposDisponibles());
-	}
-
-
-	@Test
-	void cancelar(){
+	void confirmar() {
 		noche.setCuposDisponibles(LocalDate.of(2004, 2, 1), 10);
-        noche.setCuposDisponibles(LocalDate.of(2004, 2, 2), 10);
-        noche.setCuposDisponibles(LocalDate.of(2004, 2, 3), 10);
+		noche.setCuposDisponibles(LocalDate.of(2004, 2, 2), 10);
+		noche.setCuposDisponibles(LocalDate.of(2004, 2, 3), 10);
 
 		Map<LocalDate, Integer> mapaEsperado = new HashMap<>();
-		mapaEsperado.put(LocalDate.of(2004,2,10),1);
-        mapaEsperado.put(LocalDate.of(2004, 2, 1), 10);
-        mapaEsperado.put(LocalDate.of(2004, 2, 2), 10);
-        mapaEsperado.put(LocalDate.of(2004, 2, 3), 10);
+		mapaEsperado.put(LocalDate.of(2004, 2, 10), 1);
+		mapaEsperado.put(LocalDate.of(2004, 2, 1), 7);
+		mapaEsperado.put(LocalDate.of(2004, 2, 2), 7);
+		mapaEsperado.put(LocalDate.of(2004, 2, 3), 7);
 
-		noche.confirmar(LocalDate.of(2004,2,1), LocalDate.of(2004,2,3),3);
-		noche.cancelar(LocalDate.of(2004,2,1) ,LocalDate.of(2004,2,3),3);
+		PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2004, 2, 1), LocalDate.of(2004, 2, 3));
+		noche.confirmar(periodo, 3);
+
 		assertEquals(mapaEsperado, noche.getCuposDisponibles());
 	}
 
-
 	@Test
-	void cuposDisponiblesEnPeriodo(){
-		when(cuposDisponiblesMock.entrySet()).thenReturn(Collections.emptySet());
+	void cancelar() {
+		noche.setCuposDisponibles(LocalDate.of(2004, 2, 1), 10);
+		noche.setCuposDisponibles(LocalDate.of(2004, 2, 2), 10);
+		noche.setCuposDisponibles(LocalDate.of(2004, 2, 3), 10);
 
-        int resultado = noche.cuposDisponiblesEnPeriodo(
-            LocalDate.of(2026, 11, 10),
-            LocalDate.of(2026, 11, 20)
-        );
+		Map<LocalDate, Integer> mapaEsperado = new HashMap<>();
+		mapaEsperado.put(LocalDate.of(2004, 2, 10), 1);
+		mapaEsperado.put(LocalDate.of(2004, 2, 1), 10);
+		mapaEsperado.put(LocalDate.of(2004, 2, 2), 10);
+		mapaEsperado.put(LocalDate.of(2004, 2, 3), 10);
 
-        assertEquals(0, resultado);
+		PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2004, 2, 1), LocalDate.of(2004, 2, 3));
+		noche.confirmar(periodo, 3);
+		noche.cancelar(periodo, 3);
+
+		assertEquals(mapaEsperado, noche.getCuposDisponibles());
 	}
 
+	@Test
+	void cuposDisponiblesEnPeriodo() {
+		PeriodoDeTiempo periodoSinCupos = new PeriodoDeTiempo(
+			LocalDate.of(2026, 11, 10),
+			LocalDate.of(2026, 11, 20)
+		);
 
+		assertEquals(0, noche.cuposDisponiblesEnPeriodo(periodoSinCupos));
+
+		PeriodoDeTiempo periodoConCupos = new PeriodoDeTiempo(
+			LocalDate.of(2004, 2, 9),
+			LocalDate.of(2004, 2, 11)
+		);
+
+		assertEquals(1, noche.cuposDisponiblesEnPeriodo(periodoConCupos));
+	}
 }
