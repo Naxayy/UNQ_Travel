@@ -21,7 +21,7 @@ public class CriterioDisponibilidadTest {
 
     @BeforeEach
     public void setUp() {
-        PeriodoDeTiempo periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 10),LocalDate.of(2026, 11, 15));
+        periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 10),LocalDate.of(2026, 11, 15));
         criterio = new CriterioDisponibilidad(periodo, 2);
         servicio = mock(Servicio.class);
     }

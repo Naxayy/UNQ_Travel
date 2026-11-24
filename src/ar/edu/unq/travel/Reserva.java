@@ -40,6 +40,7 @@ public class Reserva extends Publicador {
 		this.periodoDeTiempo = periodoDeTiempo;
 		this.direccionDestino = destino;
 		this.lista = new ArrayList<>();
+		this.cantidadDePasajeros = personas;
 	}
 
 	public Direccion getDireccion() {
