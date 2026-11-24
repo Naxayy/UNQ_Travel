@@ -11,118 +11,99 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.servicios.Servicio;
 
 public class ReporteServiciosMasReservadosTest {
 
-    private ReporteServiciosMasReservados reporte;
-    private Reserva reserva;
-    private LocalDate desde;
-    private Servicio servicio;
-    private LocalDate hasta;
-    private Estado estado;
+    private PeriodoDeTiempo periodo;
+    private Estado activa;
+    private Estado inactiva;
 
     @BeforeEach
-    void setUp() {
-        this.reserva = mock(Reserva.class);
-        servicio = mock(Servicio.class);
-        estado = mock(Estado.class);
+    public void setUp() {
+        periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 1), LocalDate.of(2026, 11, 30));
 
-        desde = LocalDate.of(2026, 1, 1);
-        hasta = LocalDate.of(2026, 1, 31);
-
-        when(reserva.getServicios()).thenReturn(List.of(servicio));
-        when(servicio.getNombre()).thenReturn("Hotel");
-    }
-
-
-    @Test
-    public void testOrdenaServiciosDeMayorAMenorCantidadYAceptaVisitor() {
-        LocalDate desde = LocalDate.of(2026, 11, 1);
-        LocalDate hasta = LocalDate.of(2026, 11, 30);
-
-        Servicio menosVendido = mock(Servicio.class);
-        when(menosVendido.getNombre()).thenReturn("Excursion");
-
-        Servicio masVendido = mock(Servicio.class);
-        when(masVendido.getNombre()).thenReturn("Vuelo");
-
-        Estado activa = mock(Estado.class);
+        activa = mock(Estado.class);
         when(activa.ocupaCupo()).thenReturn(true);
 
-        Reserva r1 = mock(Reserva.class);
-        when(r1.getEstado()).thenReturn(activa);
-        when(r1.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 2));
-        when(r1.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 4));
-        when(r1.getCantidadPasajeros()).thenReturn(1);
-        when(r1.getServicios()).thenReturn(List.of(menosVendido));
+        inactiva = mock(Estado.class);
+        when(inactiva.ocupaCupo()).thenReturn(false);
+    }
 
-        Reserva r2 = mock(Reserva.class);
-        when(r2.getEstado()).thenReturn(activa);
-        when(r2.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 5));
-        when(r2.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 8));
-        when(r2.getCantidadPasajeros()).thenReturn(4);
-        when(r2.getServicios()).thenReturn(List.of(masVendido));
-
-        ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(r1, r2), desde, hasta);
-
-        assertEquals(2, reporte.getDatos().size());
-        assertEquals("Vuelo", reporte.getDatos().get(0).getNombre());
-        assertEquals("Excursion", reporte.getDatos().get(1).getNombre());
-
-        Visitor visitor = mock(Visitor.class);
-        when(visitor.visitServiciosMasReservados(reporte)).thenReturn("ok");
-        assertEquals("ok", reporte.accept(visitor));
-        verify(visitor).visitServiciosMasReservados(reporte);
+    private Reserva mockReserva(Estado estado, LocalDate inicio, LocalDate fin, int pasajeros, List<Servicio> servicios) {
+        Reserva reserva = mock(Reserva.class);
+        when(reserva.getEstado()).thenReturn(estado);
+        when(reserva.getPeridoDeTiempo()).thenReturn(new PeriodoDeTiempo(inicio, fin));
+        when(reserva.fechaDeInicio()).thenReturn(inicio);
+        when(reserva.fechaFin()).thenReturn(fin);
+        when(reserva.getCantidadPasajeros()).thenReturn(pasajeros);
+        when(reserva.getServicios()).thenReturn(servicios);
+        return reserva;
     }
 
     @Test
-    void testReservaDentroDelPeriodoYEstadoQueOcupaCupoEsValida() {
+    public void testGetDatosOrdenaServiciosDeMayorAMenorCantidad() {
+        Servicio excursion = mock(Servicio.class);
+        when(excursion.getNombre()).thenReturn("Excursión");
+        when(excursion.precioFinal()).thenReturn(500.0);
 
-        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 1, 10));
-        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 1, 20));
-        when(reserva.getEstado()).thenReturn(estado);
-        when(reserva.getEstado().ocupaCupo()).thenReturn(true);
+        Servicio hotel = mock(Servicio.class);
+        when(hotel.getNombre()).thenReturn("Hotel Sol");
+        when(hotel.precioFinal()).thenReturn(1500.0);
 
-        ReporteServiciosMasReservados reporte =
-            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
+        Reserva r1 = mockReserva(activa, LocalDate.of(2026, 11, 5), LocalDate.of(2026, 11, 7), 2, List.of(excursion));
+        Reserva r2 = mockReserva(activa, LocalDate.of(2026, 11, 10), LocalDate.of(2026, 11, 12), 5, List.of(hotel));
+
+        ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(r1, r2), periodo);
+        List<DatoServicio> datos = reporte.getDatos();
+
+        assertEquals(2, datos.size());
+        assertEquals("Hotel Sol", datos.get(0).getNombre());
+        assertEquals(5, datos.get(0).getCantidad());
+        assertEquals("Excursión", datos.get(1).getNombre());
+        assertEquals(2, datos.get(1).getCantidad());
+    }
+
+    @Test
+    public void testIncluyeReservasConSuperposicionParcialEnPeriodo() {
+        Servicio hotel = mock(Servicio.class);
+        when(hotel.getNombre()).thenReturn("Hotel Sol");
+        when(hotel.precioFinal()).thenReturn(1500.0);
+
+        Reserva parcial = mockReserva(activa, LocalDate.of(2026, 10, 28), LocalDate.of(2026, 11, 2), 3, List.of(hotel));
+
+        ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(parcial), periodo);
 
         assertEquals(1, reporte.getDatos().size());
-        assertEquals("Hotel", reporte.getDatos().get(0).getNombre());
+        assertEquals("Hotel Sol", reporte.getDatos().get(0).getNombre());
+        assertEquals(3, reporte.getDatos().get(0).getCantidad());
     }
 
     @Test
-    void testReservaFueraDelPeriodoNoEsValida() {
-        Estado estadoMock = mock(Estado.class);
-        when(estadoMock.ocupaCupo()).thenReturn(true);
-        when(reserva.getEstado()).thenReturn(estadoMock);
+    public void testIgnoraReservasInactivasYFueraDePeriodo() {
+        Servicio hotel = mock(Servicio.class);
+        when(hotel.getNombre()).thenReturn("Hotel Sol");
 
-        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 2, 10));
-        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 2, 20));
+        Reserva cancelada = mockReserva(inactiva, LocalDate.of(2026, 11, 5), LocalDate.of(2026, 11, 7), 2, List.of(hotel));
+        Reserva fueraDePeriodo = mockReserva(activa, LocalDate.of(2026, 12, 1), LocalDate.of(2026, 12, 5), 4, List.of(hotel));
 
-        ReporteServiciosMasReservados reporte =
-            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
+        ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(cancelada, fueraDePeriodo), periodo);
 
         assertTrue(reporte.getDatos().isEmpty());
     }
 
     @Test
-    void testReservaConEstadoQueNoOcupaCupoNoEsValida() {
-        Estado estadoMock = mock(Estado.class);
-        when(estadoMock.ocupaCupo()).thenReturn(false);
-        when(reserva.getEstado()).thenReturn(estadoMock);
+    public void testAcceptDelegaEnVisitor() {
+        Visitor visitor = mock(Visitor.class);
+        ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(), periodo);
+        when(visitor.visitServiciosMasReservados(reporte)).thenReturn("reporte-servicios");
 
-        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 1, 10));
-        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 1, 20));
+        String resultado = reporte.accept(visitor);
 
-        // Configurar el estado para que no ocupe cupo
-        // Ver aclaración debajo.
-
-        ReporteServiciosMasReservados reporte =
-            new ReporteServiciosMasReservados(List.of(reserva), desde, hasta);
-
-        assertTrue(reporte.getDatos().isEmpty());
+        assertEquals("reporte-servicios", resultado);
+        verify(visitor).visitServiciosMasReservados(reporte);
     }
 }

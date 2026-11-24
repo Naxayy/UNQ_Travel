@@ -7,12 +7,13 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.ArgumentMatchers.anySet;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Catalogo;
+import ar.edu.unq.travel.PeriodoDeTiempo;
 import ar.edu.unq.travel.Reserva;
 import ar.edu.unq.travel.categoria.Categoria;
 import ar.edu.unq.travel.ciclo.Estado;
@@ -22,75 +23,103 @@ public class DatoCupoTest {
 
     private Categoria alojamiento;
     private Catalogo catalogo;
-    private LocalDate desde;
-    private LocalDate hasta;
+    private PeriodoDeTiempo periodo;
 
     @BeforeEach
     public void setUp() {
         alojamiento = mock(Categoria.class);
         when(alojamiento.getNombre()).thenReturn("Alojamiento");
+
         catalogo = mock(Catalogo.class);
-        desde = LocalDate.of(2026, 11, 1);
-        hasta = LocalDate.of(2026, 11, 10);
+        periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 1), LocalDate.of(2026, 11, 30));
+
+        when(catalogo.cuposDisponibles(alojamiento, periodo)).thenReturn(10);
+    }
+
+    private Servicio mockServicioIndividual(boolean perteneceACategoria) {
+        Servicio servicio = mock(Servicio.class);
+        when(servicio.contieneCategoria(alojamiento)).thenReturn(perteneceACategoria);
+        doAnswer(invocation -> {
+            Set<Servicio> individuales = invocation.getArgument(0);
+            individuales.add(servicio);
+            return null;
+        }).when(servicio).recolectarServiciosIndividuales(any());
+        return servicio;
     }
 
     @Test
-    public void testGetCategoriaYLibresDelegaEnCategoriaYCatalogo() {
-        when(catalogo.cuposDisponibles(alojamiento, desde, hasta)).thenReturn(15);
-        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(), desde, hasta);
+    public void testGetCategoriaYGetLibres() {
+        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(), periodo);
 
         assertEquals("Alojamiento", dato.getCategoria());
-        assertEquals(15, dato.getLibres());
+        assertEquals(10, dato.getLibres());
     }
 
     @Test
-    public void testCalculaReservadosYTotalesConSolapamientoDeFechas() {
-        Servicio hotel = mock(Servicio.class);
-        when(hotel.contieneCategoria(alojamiento)).thenReturn(true);
-        doAnswer(invocation -> {
-            Set<Servicio> set = invocation.getArgument(0);
-            set.add(hotel);
-            return null;
-        }).when(hotel).recolectarServiciosIndividuales(anySet());
+    public void testGetReservadosYGetTotalesConReservaActivaEnPeriodo() {
+        Estado activa = mock(Estado.class);
+        when(activa.ocupaCupo()).thenReturn(true);
 
-        Estado confirmada = mock(Estado.class);
-        when(confirmada.ocupaCupo()).thenReturn(true);
+        Servicio hotel = mockServicioIndividual(true);
+        Servicio traslado = mockServicioIndividual(false);
 
-        // Reserva del 8 al 12 de noviembre: solo 3 días (8, 9 y 10) caen dentro de [desde, hasta]
+        // Del 05/11 al 07/11 inclusive = 3 días * 2 pasajeros * 1 servicio de categoría = 6
         Reserva reserva = mock(Reserva.class);
-        when(reserva.getEstado()).thenReturn(confirmada);
-        when(reserva.getFechaInicio()).thenReturn(LocalDate.of(2026, 11, 8));
-        when(reserva.getFechaFin()).thenReturn(LocalDate.of(2026, 11, 12));
+        when(reserva.getEstado()).thenReturn(activa);
+        when(reserva.fechaDeInicio()).thenReturn(LocalDate.of(2026, 11, 5));
+        when(reserva.fechaFin()).thenReturn(LocalDate.of(2026, 11, 7));
         when(reserva.getCantidadPasajeros()).thenReturn(2);
-        when(reserva.getServicios()).thenReturn(List.of(hotel));
+        when(reserva.getServicios()).thenReturn(List.of(hotel, traslado));
 
-        when(catalogo.cuposDisponibles(alojamiento, desde, hasta)).thenReturn(10);
+        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(reserva), periodo);
 
-        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(reserva), desde, hasta);
-
-        // 1 servicio * 2 personas * 3 días = 6 reservados
         assertEquals(6, dato.getReservados());
         assertEquals(16, dato.getTotales());
     }
 
     @Test
-    public void testIgnoraReservasQueNoOcupanCupoOFueraDePeriodo() {
-        Estado cancelada = mock(Estado.class);
-        when(cancelada.ocupaCupo()).thenReturn(false);
+    public void testRecortaDiasCuandoLaReservaSuperponeParcialmenteElPeriodo() {
+        Estado activa = mock(Estado.class);
+        when(activa.ocupaCupo()).thenReturn(true);
 
-        Reserva reservaCancelada = mock(Reserva.class);
-        when(reservaCancelada.getEstado()).thenReturn(cancelada);
+        Servicio hotel = mockServicioIndividual(true);
 
-        Estado confirmada = mock(Estado.class);
-        when(confirmada.ocupaCupo()).thenReturn(true);
+        // Empieza el 30/10 y termina el 02/11 -> solo cuenta 01/11 y 02/11 (2 días)
+        Reserva reserva = mock(Reserva.class);
+        when(reserva.getEstado()).thenReturn(activa);
+        when(reserva.fechaDeInicio()).thenReturn(LocalDate.of(2026, 10, 30));
+        when(reserva.fechaFin()).thenReturn(LocalDate.of(2026, 11, 2));
+        when(reserva.getCantidadPasajeros()).thenReturn(3);
+        when(reserva.getServicios()).thenReturn(List.of(hotel));
 
-        Reserva reservaFueraDeFecha = mock(Reserva.class);
-        when(reservaFueraDeFecha.getEstado()).thenReturn(confirmada);
-        when(reservaFueraDeFecha.getFechaInicio()).thenReturn(LocalDate.of(2026, 12, 1));
-        when(reservaFueraDeFecha.getFechaFin()).thenReturn(LocalDate.of(2026, 12, 5));
+        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(reserva), periodo);
 
-        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(reservaCancelada, reservaFueraDeFecha), desde, hasta);
+        assertEquals(6, dato.getReservados());
+    }
+
+    @Test
+    public void testIgnoraReservasInactivasYFueraDePeriodo() {
+        Estado inactiva = mock(Estado.class);
+        when(inactiva.ocupaCupo()).thenReturn(false);
+
+        Estado activa = mock(Estado.class);
+        when(activa.ocupaCupo()).thenReturn(true);
+
+        Servicio hotel = mockServicioIndividual(true);
+
+        Reserva cancelada = mock(Reserva.class);
+        when(cancelada.getEstado()).thenReturn(inactiva);
+
+        Reserva fueraDeFecha = mock(Reserva.class);
+        when(fueraDeFecha.getEstado()).thenReturn(activa);
+        when(fueraDeFecha.fechaDeInicio()).thenReturn(LocalDate.of(2026, 12, 1));
+        when(fueraDeFecha.fechaFin()).thenReturn(LocalDate.of(2026, 12, 5));
+        when(fueraDeFecha.getCantidadPasajeros()).thenReturn(2);
+        when(fueraDeFecha.getServicios()).thenReturn(List.of(hotel));
+
+        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(cancelada, fueraDeFecha), periodo);
 
         assertEquals(0, dato.getReservados());
+        assertEquals(10, dato.getTotales());
     }
 }
