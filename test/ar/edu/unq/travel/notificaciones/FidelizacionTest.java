@@ -12,23 +12,11 @@ import ar.edu.unq.travel.ciclo.Estado;
 
 public class FidelizacionTest {
 
-    private Reserva reserva;
     private Fidelizacion fidelizacion;
 
     @BeforeEach
     public void setUp() {
-        reserva = mock(Reserva.class);
-        fidelizacion = new Fidelizacion(reserva);
-    }
-
-    @Test
-    public void testGetYSetReserva() {
-        assertEquals(reserva, fidelizacion.getReserva());
-
-        Reserva nuevaReserva = mock(Reserva.class);
-        fidelizacion.setReserva(nuevaReserva);
-
-        assertEquals(nuevaReserva, fidelizacion.getReserva());
+        fidelizacion = new Fidelizacion();
     }
 
     @Test

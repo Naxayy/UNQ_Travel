@@ -20,7 +20,7 @@ public class NotificadorDeEmail implements Observador {
     }
 
     public void enviarMail(){
-        //mail.enviarMail(this.direccionDestino, "Actualización de reserva", "Su reserva ha sido actualizada a " + observable.getEstado().toString() + ".", adjunto);
+        mail.enviarMail(this.direccionDestino, "Actualización de reserva", "Su reserva ha sido actualizada a " + reserva.getEstado().toString() + ".", adjunto);
     }
 
     public void setReserva(Reserva reserva){

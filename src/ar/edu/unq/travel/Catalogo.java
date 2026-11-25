@@ -20,7 +20,8 @@ public class Catalogo {
     }
 
     public List<Servicio> busqueda(CriterioBusqueda condicion) {
-        this.setCondicion(condicion);        return items.stream().filter(item -> condicion.satisface(item)).toList();
+        this.setCondicion(condicion);        
+        return items.stream().filter(item -> condicion.satisface(item)).toList();
     }
 
     public List<Servicio> getItems() {
