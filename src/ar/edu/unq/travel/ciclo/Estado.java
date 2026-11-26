@@ -30,11 +30,6 @@ public abstract class Estado {
 		throw new IllegalStateException("solo se pueden quitar servicios al iniciar la reserva");
 	}
 
-	//
-	public boolean ocupaCupo() {
-        return true;
-    }
-
 	//notificaciones
     public void visitarGeneradorDeVoucher(GeneradorDeVoucher generador){};
 

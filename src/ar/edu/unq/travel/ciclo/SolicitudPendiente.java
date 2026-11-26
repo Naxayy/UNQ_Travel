@@ -31,9 +31,4 @@ public class SolicitudPendiente extends Estado {
 		Cancelada cancelada = new Cancelada();
 		reserva.cambiarAEstado(cancelada);
 	}
-
-	@Override
-	public boolean ocupaCupo() {
-		return false;
-	}
 }

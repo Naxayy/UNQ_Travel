@@ -48,10 +48,6 @@ public class DatoCupo {
     }
 
     private int reservadosEnReserva(Reserva reserva) {
-        if (!estaActiva(reserva)) {
-            return 0;
-        }
-
         int dias = contarDiasEnPeriodo(reserva);
 
         if (dias <= 0) {
@@ -69,10 +65,6 @@ public class DatoCupo {
         return individuales.stream()
                 .mapToInt(servicio -> servicio.contieneCategoria(this.categoria) ? 1 : 0)
                 .sum();
-    }
-
-    private boolean estaActiva(Reserva reserva) {
-        return reserva.getEstado().ocupaCupo();
     }
 
     private int contarDiasEnPeriodo(Reserva reserva) {
