@@ -21,6 +21,7 @@ import ar.edu.unq.travel.ciclo.Estado;
 import ar.edu.unq.travel.ciclo.SolicitudPendiente;
 import ar.edu.unq.travel.notificaciones.Observador;
 import ar.edu.unq.travel.pagos.MetodoDePago;
+import ar.edu.unq.travel.servicios.Servicio;
 import ar.edu.unq.travel.servicios.ServicioIndividual;
 import ar.edu.unq.travel.traslados.Direccion;
 import ar.edu.unq.travel.traslados.Traslado;
@@ -65,6 +66,20 @@ class ReservaTest {
 			assertThrows(IllegalStateException.class, () -> this.reserva.agregarServicio(estadiaCancun));
 		assertEquals("solo se pueden agregar servicios al iniciar la reserva", error.getMessage());
 	}
+
+	@Test
+    void testAgregarAlCarritoAgregaServicioCuandoHayDisponibilidad()
+            throws Exception {
+
+        when(estadiaCancun.hayDisponibilidad(periodo, 2)).thenReturn(true);
+
+        reserva.cambiarPeriodoDeTiempo(periodo);
+        reserva.cantidadDePasajeros(2);
+
+        reserva.agregarAlCarrito(estadiaCancun);
+
+        assertTrue(this.reserva.getServicios().contains(estadiaCancun));
+    }
 
 	@Test
 	void testQuitarUnServicioEnOtroEstadoQueNoSeaPendienteGeneraUnaExcepcion() {
@@ -140,6 +155,8 @@ class ReservaTest {
 		assertEquals(Confirmada.class, this.reserva.getEstado().getClass());
 		assertEquals(SolicitudPendiente.class, this.reserva.getEstadoAnterior().getClass());
 	}
+
+
 
 	@Test
 	void testAgregaUnServicioNoGeneraUnaExcepcion() {
@@ -284,6 +301,14 @@ class ReservaTest {
 	void testLaReservaConoceSuCantidadDePersonas() {
 		assertEquals(4, this.reserva.getCantidadPasajeros());
 	}
+
+	@Test
+    void testCantidadDePasajerosModificaLaCantidad() {
+
+        reserva.cantidadDePasajeros(5);
+
+        assertEquals(5, reserva.getCantidadPasajeros());
+    }
 
 	@Test
 	void testDireccionDelViaje() {
