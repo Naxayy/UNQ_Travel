@@ -14,8 +14,8 @@ public abstract class MetodoDePago {
     public abstract void reservarFondos();
 
     public abstract void ejecutarTransaccion();
-
-    public abstract String codigoTransaccion();
     
     public abstract void notificarResultado();
+
+    //public abstract String codigoTransaccion();
 }
