@@ -15,8 +15,6 @@ public class ServicioIndividual extends Servicio{
 	private int codigo;
 	private List<AtributoDinamico> atributosDinamicos = new ArrayList<AtributoDinamico>();
 	private Categoria categoria;
-	
-	//Cambiar atributos metodos ??
 	private Proveedor proveedor;
 	
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria, Proveedor proveedor) {
@@ -28,10 +26,13 @@ public class ServicioIndividual extends Servicio{
 	}
 
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria,  Proveedor proveedor, AtributoDinamico atributo) {
-		this(nombre,precioBase,descripcion,cuposDisponibles,codigo,categoria,proveedor);
+		super(nombre,precioBase,descripcion,cuposDisponibles);
+		this.codigo = codigo;
+		this.precioBase = precioBase;
+		this.categoria = categoria;
+		this.proveedor = proveedor;
 		this.agregarAtributo(atributo);
-
-		}
+	}
 
 	@Override
 	public boolean contieneCategoria(Categoria categoria) {
