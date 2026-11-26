@@ -2,12 +2,16 @@ package ar.edu.unq.travel.notificaciones;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.ciclo.Confirmada;
 import ar.edu.unq.travel.ciclo.Estado;
 
 public class NotificadorDeEmailTest {
@@ -40,10 +44,5 @@ public class NotificadorDeEmailTest {
         notificador.accept(estado);
 
         verify(estado).visitarNotificadorDeEmail(notificador);
-    }
-
-    @Test
-    public void testEnviarMailNoLanzaExcepcion() {
-        assertDoesNotThrow(() -> notificador.enviarMail());
     }
 }

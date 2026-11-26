@@ -54,11 +54,6 @@ public class FinalizadaTest {
     }
 
     @Test
-    public void testOcupaCupoDevuelveTrue() {
-        assertTrue(estado.ocupaCupo());
-    }
-
-    @Test
     public void testMontoDevuelveCero() {
         assertEquals(0.0, estado.monto(reserva));
     }

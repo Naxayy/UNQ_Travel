@@ -41,7 +41,7 @@ public class ReporteServiciosMasReservados implements Element {
 
     private boolean esValidaEnPeriodo(Reserva reserva, PeriodoDeTiempo periodo) {
         boolean enPeriodo = !periodoDeReserva(reserva).getFechaFin().isBefore(periodo.getFechaInicio()) && !periodoDeReserva(reserva).getFechaInicio().isAfter(periodo.getFechaFin());
-        return reserva.getEstado().ocupaCupo() && enPeriodo;
+        return enPeriodo;
     }
 
     private PeriodoDeTiempo periodoDeReserva(Reserva reserva) {

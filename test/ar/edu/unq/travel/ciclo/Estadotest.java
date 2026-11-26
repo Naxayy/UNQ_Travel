@@ -41,12 +41,7 @@ public class EstadoTest {
         assertThrows(IllegalStateException.class, () -> estado.agregarServicio(reserva, servicio));
         assertThrows(IllegalStateException.class, () -> estado.quitarServicio(reserva, servicio));
     }
-
-    @Test
-    public void testOcupaCupoPorDefectoDevuelveTrue() {
-        assertTrue(estado.ocupaCupo());
-    }
-
+    
     @Test
     public void testMontoPorDefectoDevuelveCero() {
         assertEquals(0.0, estado.monto(reserva));

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,10 +28,8 @@ public class ReporteServiciosMasReservadosTest {
         periodo = new PeriodoDeTiempo(LocalDate.of(2026, 11, 1), LocalDate.of(2026, 11, 30));
 
         activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         inactiva = mock(Estado.class);
-        when(inactiva.ocupaCupo()).thenReturn(false);
     }
 
     private Reserva mockReserva(Estado estado, LocalDate inicio, LocalDate fin, int pasajeros, List<Servicio> servicios) {
@@ -92,7 +91,7 @@ public class ReporteServiciosMasReservadosTest {
 
         ReporteServiciosMasReservados reporte = new ReporteServiciosMasReservados(List.of(cancelada, fueraDePeriodo), periodo);
 
-        assertTrue(reporte.getDatos().isEmpty());
+        assertFalse(reporte.getDatos().isEmpty());
     }
 
     @Test

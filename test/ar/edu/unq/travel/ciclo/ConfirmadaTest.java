@@ -9,6 +9,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import ar.edu.unq.travel.Reserva;
+import ar.edu.unq.travel.notificaciones.GeneradorDeVoucher;
+import ar.edu.unq.travel.notificaciones.NotificadorDeEmail;
 
 public class ConfirmadaTest {
 
@@ -20,17 +22,21 @@ public class ConfirmadaTest {
         estado = new Confirmada();
         reserva = mock(Reserva.class);
     }
-
-    @Test
-    public void testOcupaCupoDevuelveTrue() {
-        assertTrue(estado.ocupaCupo());
-    }
-
+    
     @Test
     public void testEnCheckinCambiaEstadoAEnCheckin() {
         estado.enCheckin(reserva);
 
         verify(reserva).cambiarAEstado(any(EnCheckin.class));
+    }
+
+    @Test
+    public void testVisitarNotificadorDeEmail() {
+        NotificadorDeEmail notificador = mock(NotificadorDeEmail.class);
+
+        estado.visitarNotificadorDeEmail(notificador);
+
+        verify(notificador).enviarMail();
     }
 
     @Test

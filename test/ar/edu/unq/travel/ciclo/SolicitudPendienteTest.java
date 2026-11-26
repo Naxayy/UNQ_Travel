@@ -35,11 +35,6 @@ public class SolicitudPendienteTest {
 		verify(this.reserva).agregarAlCarrito(estadiaCancun);	
 	}
 
-	@Test 
-	void testElServicioNoOcuopaNingunCuopo(){
-			assertFalse(estado.ocupaCupo());
-	}
-
 	@Test
 	void testQuitarServicioLeDelegaLaResponsabilidadAReserva(){
 		this.estado.quitarServicio(this.reserva, this.estadiaCancun);

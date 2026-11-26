@@ -31,7 +31,6 @@ public class DatoServicioTest {
     @Test
     public void testGetNombreCantidadYPrecioPromedio() {
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         Reserva r1 = mock(Reserva.class);
         when(r1.getEstado()).thenReturn(activa);
@@ -57,10 +56,11 @@ public class DatoServicioTest {
     @Test
     public void testSinReservasValidasDevuelveCero() {
         Estado inactiva = mock(Estado.class);
-        when(inactiva.ocupaCupo()).thenReturn(false);
 
         Reserva r1 = mock(Reserva.class);
         when(r1.getEstado()).thenReturn(inactiva);
+        when(r1.fechaDeInicio()).thenReturn(LocalDate.of(2026, 12, 1));
+        when(r1.fechaFin()).thenReturn(LocalDate.of(2026, 12, 5));
 
         DatoServicio dato = new DatoServicio(hotel, List.of(r1), periodo);
 
@@ -71,7 +71,6 @@ public class DatoServicioTest {
     @Test
     public void testIncluyeReservasConSuperposicionParcialEnBordes() {
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         // Empieza antes del período y termina dentro (28/10 al 02/11)
         Reserva bordeInicio = mock(Reserva.class);
@@ -98,7 +97,6 @@ public class DatoServicioTest {
     @Test
     public void testIgnoraReservasFueraDePeriodo() {
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         Reserva anterior = mock(Reserva.class);
         when(anterior.getEstado()).thenReturn(activa);

@@ -26,7 +26,7 @@ public class ServicioIndividual extends Servicio{
 	}
 
 	public ServicioIndividual(String nombre, double precioBase, String descripcion, Map<LocalDate, Integer> cuposDisponibles, int codigo, Categoria categoria,  Proveedor proveedor, AtributoDinamico atributo) {
-		super(nombre,precioBase,descripcion,cuposDisponibles);
+		super(nombre,descripcion,cuposDisponibles);
 		this.codigo = codigo;
 		this.precioBase = precioBase;
 		this.categoria = categoria;

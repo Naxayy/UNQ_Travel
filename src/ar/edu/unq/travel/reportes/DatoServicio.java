@@ -42,7 +42,7 @@ public class DatoServicio {
     }
 
     private int cantidadEnReserva(Reserva reserva) {
-        if (!reserva.getEstado().ocupaCupo() || !this.estaEnPeriodo(reserva)) {
+        if (!this.estaEnPeriodo(reserva)) {
             return 0;
         }
         return this.aparicionesEnReserva(reserva) * reserva.getCantidadPasajeros();

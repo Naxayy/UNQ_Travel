@@ -55,11 +55,6 @@ public class EnCursoTest {
     }
 
     @Test
-    public void testOcupaCupoDevuelveTrue() {
-        assertTrue(estado.ocupaCupo());
-    }
-
-    @Test
     public void testTransicionesInvalidasLanzanExcepcion() {
         assertThrows(IllegalStateException.class, () -> estado.enCheckin(reserva));
         assertThrows(IllegalStateException.class, () -> estado.enCurso(reserva));

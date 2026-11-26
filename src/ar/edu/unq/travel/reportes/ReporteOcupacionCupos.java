@@ -15,10 +15,10 @@ public class ReporteOcupacionCupos implements Element {
 
     public ReporteOcupacionCupos(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, PeriodoDeTiempo periodo) {
         this.datos = new ArrayList<>();
-        agregarCategorias(catalogo, reservas, categorias, periodo);
+        this.agregarCategorias(catalogo, reservas, categorias, periodo);
     } 
     
-    private agregarCategorias(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, PeriodoDeTiempo periodo){
+    private void agregarCategorias(Catalogo catalogo, List<Reserva> reservas, List<Categoria> categorias, PeriodoDeTiempo periodo){
         for (Categoria categoria : categorias) {
             this.datos.add(this.crearCupo(categoria, catalogo, reservas, periodo));
         }

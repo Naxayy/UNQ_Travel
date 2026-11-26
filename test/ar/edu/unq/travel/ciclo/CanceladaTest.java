@@ -27,11 +27,6 @@ public class CanceladaTest {
     }
 
     @Test
-    public void testOcupaCupoDevuelveFalse() {
-        assertFalse(estado.ocupaCupo());
-    }
-
-    @Test
     public void testVisitarGeneradorDeVoucherGeneraVoucher() {
         GeneradorDeVoucher generador = mock(GeneradorDeVoucher.class);
 

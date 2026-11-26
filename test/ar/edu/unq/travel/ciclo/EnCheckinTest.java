@@ -49,11 +49,6 @@ public class EnCheckinTest {
     }
 
     @Test
-    public void testOcupaCupoDevuelveTrue() {
-        assertTrue(estado.ocupaCupo());
-    }
-
-    @Test
     public void testTransicionInvalidaLanzaExcepcion() {
         assertThrows(IllegalStateException.class, () -> estado.enCheckin(reserva));
     }

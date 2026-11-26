@@ -24,11 +24,6 @@ public class MetodoDePagoTest {
             }
 
             @Override
-            public String codigoTransaccion() {
-                return "TX-001";
-            }
-
-            @Override
             public void notificarResultado() {
             }
         });

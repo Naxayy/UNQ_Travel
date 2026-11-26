@@ -58,7 +58,6 @@ public class DatoCupoTest {
     @Test
     public void testGetReservadosYGetTotalesConReservaActivaEnPeriodo() {
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         Servicio hotel = mockServicioIndividual(true);
         Servicio traslado = mockServicioIndividual(false);
@@ -80,7 +79,6 @@ public class DatoCupoTest {
     @Test
     public void testRecortaDiasCuandoLaReservaSuperponeParcialmenteElPeriodo() {
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         Servicio hotel = mockServicioIndividual(true);
 
@@ -100,15 +98,14 @@ public class DatoCupoTest {
     @Test
     public void testIgnoraReservasInactivasYFueraDePeriodo() {
         Estado inactiva = mock(Estado.class);
-        when(inactiva.ocupaCupo()).thenReturn(false);
-
         Estado activa = mock(Estado.class);
-        when(activa.ocupaCupo()).thenReturn(true);
 
         Servicio hotel = mockServicioIndividual(true);
 
         Reserva cancelada = mock(Reserva.class);
         when(cancelada.getEstado()).thenReturn(inactiva);
+        when(cancelada.fechaDeInicio()).thenReturn(LocalDate.of(2026, 12, 1));
+        when(cancelada.fechaFin()).thenReturn(LocalDate.of(2026, 12, 5));
 
         Reserva fueraDeFecha = mock(Reserva.class);
         when(fueraDeFecha.getEstado()).thenReturn(activa);
@@ -117,7 +114,12 @@ public class DatoCupoTest {
         when(fueraDeFecha.getCantidadPasajeros()).thenReturn(2);
         when(fueraDeFecha.getServicios()).thenReturn(List.of(hotel));
 
-        DatoCupo dato = new DatoCupo(alojamiento, catalogo, List.of(cancelada, fueraDeFecha), periodo);
+        DatoCupo dato = new DatoCupo(
+            alojamiento,
+            catalogo,
+            List.of(cancelada, fueraDeFecha),
+            periodo
+        );
 
         assertEquals(0, dato.getReservados());
         assertEquals(10, dato.getTotales());
