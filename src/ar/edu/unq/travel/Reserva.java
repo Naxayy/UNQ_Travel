@@ -178,5 +178,9 @@ public class Reserva extends Publicador {
 		this.direccionDestino = direccionNueva;
 	}
 
+	public void cantidadDePasajeros(int nuevaCantidad){
+		this.cantidadDePasajeros = nuevaCantidad;
+	}
+
 }
  
