@@ -7,11 +7,6 @@ public class Cancelada extends Estado {
     public Cancelada() {}
 
     @Override
-    public boolean ocupaCupo() {
-        return false;
-    }
-
-    @Override
 	public void visitarGeneradorDeVoucher(GeneradorDeVoucher generador){
 		generador.generarVoucher();
 	}
