@@ -17,5 +17,5 @@ public abstract class MetodoDePago {
     
     public abstract void notificarResultado();
 
-    //public abstract String codigoTransaccion();
+    public abstract String codigoTransaccion();
 }
